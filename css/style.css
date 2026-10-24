@@ -1,0 +1,1992 @@
+/* ==========================================================================
+   蔚蓝共生计划 (Blue Symbiosis) - 样式表
+   风格：浅蓝色与深蓝色简笔画手绘风格 (Hand-Drawn Doodle & Sketch Aesthetic)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Noto+Sans+SC:wght@400;500;700;900&family=Patrick+Hand&display=swap');
+
+:root {
+  /* 核心色系：浅蓝与深蓝 */
+  --c-dark-navy: #091e3a;
+  --c-navy: #0f3a60;
+  --c-deep-blue: #1b4965;
+  --c-ocean-blue: #0284c7;
+  --c-vibrant-blue: #0ea5e9;
+  --c-sky-blue: #38bdf8;
+  --c-light-cyan: #7dd3fc;
+  --c-soft-blue: #bae6fd;
+  --c-ice-blue: #e0f2fe;
+  --c-foam-white: #f0f9ff;
+  --c-pure-white: #ffffff;
+  
+  /* 点缀与指示色 */
+  --c-eco-green: #10b981;
+  --c-alert-amber: #f59e0b;
+  --c-sonar-cyan: #06b6d4;
+  --c-coral: #f43f5e;
+  
+  /* 简笔画手绘描边与阴影 */
+  --doodle-border: 2.5px solid var(--c-dark-navy);
+  --doodle-border-thick: 3.5px solid var(--c-dark-navy);
+  --doodle-shadow: 5px 5px 0px var(--c-dark-navy);
+  --doodle-shadow-sm: 3px 3px 0px var(--c-dark-navy);
+  --doodle-shadow-lg: 8px 8px 0px var(--c-dark-navy);
+  --doodle-shadow-hover: 2px 2px 0px var(--c-dark-navy);
+  
+  /* 手绘不规则圆角 */
+  --sketch-radius-1: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --sketch-radius-2: 20px 255px 20px 255px / 255px 20px 255px 20px;
+  --sketch-radius-card: 18px 24px 16px 22px / 22px 16px 24px 18px;
+  --sketch-radius-pill: 255px 255px 255px 255px / 50px 50px 50px 50px;
+  
+  /* 字体设置 */
+  --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-doodle: 'Patrick Hand', 'Caveat', cursive, 'Noto Sans SC', sans-serif;
+  --font-doodle-en: 'Caveat', cursive, sans-serif;
+}
+
+/* 全局重置与手绘纸张背景 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--c-foam-white);
+  color: var(--c-dark-navy);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(var(--c-soft-blue) 1px, transparent 1px),
+    radial-gradient(var(--c-ice-blue) 1px, var(--c-foam-white) 1px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+/* 装饰性手绘背景气泡与微塑料颗粒 */
+.bg-doodles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-doodle {
+  position: absolute;
+  opacity: 0.18;
+  animation: floatSlow 14s ease-in-out infinite alternate;
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-22px) rotate(4deg); }
+  100% { transform: translateY(-40px) rotate(-4deg); }
+}
+
+/* 顶部悬浮 NFC 状态药丸与全局导航 */
+.nfc-floating-bar {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--c-pure-white);
+  border: var(--doodle-border);
+  box-shadow: var(--doodle-shadow);
+  border-radius: var(--sketch-radius-pill);
+  padding: 8px 18px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(10px);
+}
+
+.nfc-floating-bar:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: var(--doodle-shadow-lg);
+}
+
+.nfc-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--c-navy);
+}
+
+.nfc-pulse-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--c-eco-green);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseEco 2s infinite;
+}
+
+@keyframes pulseEco {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 9px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.nfc-chip-id {
+  font-family: var(--font-doodle-en);
+  font-size: 1.15rem;
+  color: var(--c-ocean-blue);
+  background: var(--c-ice-blue);
+  padding: 2px 10px;
+  border-radius: 8px;
+  border: 1.5px dashed var(--c-ocean-blue);
+  letter-spacing: 0.5px;
+}
+
+.quick-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+  border-left: 2px dashed var(--c-soft-blue);
+  padding-left: 10px;
+}
+
+.tool-icon-btn {
+  background: var(--c-ice-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  color: var(--c-dark-navy);
+}
+
+.tool-icon-btn:hover {
+  background: var(--c-sky-blue);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+/* 容器与页面布局 */
+.main-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 85px 20px 60px 20px;
+}
+
+/* 移动端视图模拟框开关 */
+body.mobile-frame-mode {
+  background-color: #0b1a2e;
+  padding: 30px 10px;
+}
+
+body.mobile-frame-mode .main-wrapper {
+  max-width: 440px;
+  background: var(--c-foam-white);
+  border-radius: 44px;
+  border: 7px solid var(--c-dark-navy);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 0 10px #1e293b;
+  padding: 40px 16px 40px 16px;
+  margin: 20px auto;
+  position: relative;
+}
+
+body.mobile-frame-mode .nfc-floating-bar {
+  position: sticky;
+  top: 10px;
+  transform: none;
+  left: 0;
+  margin: 0 auto 20px auto;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* 通用简笔画卡片与框 */
+.doodle-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border);
+  box-shadow: var(--doodle-shadow);
+  border-radius: var(--sketch-radius-card);
+  padding: 26px;
+  position: relative;
+  margin-bottom: 34px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.doodle-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--doodle-shadow-lg);
+}
+
+/* 简笔画标题与下划线 */
+.section-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.section-tag {
+  display: inline-block;
+  background: var(--c-ice-blue);
+  color: var(--c-deep-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: var(--sketch-radius-pill);
+  padding: 4px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  position: relative;
+  display: inline-block;
+  letter-spacing: -0.5px;
+}
+
+.doodle-underline {
+  display: block;
+  width: 120%;
+  margin: 4px auto 0 auto;
+  transform: translateX(-8%);
+  height: 12px;
+}
+
+.section-desc {
+  max-width: 680px;
+  margin: 10px auto 0 auto;
+  color: var(--c-deep-blue);
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   HERO 区域：海报主题与思维风暴蓝图
+   ========================================================================== */
+.hero-section {
+  background: linear-gradient(180deg, #d8f1fc 0%, #edf8fd 100%);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow-lg);
+  padding: 36px 32px 30px 32px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+
+.brand-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo-doodle {
+  width: 48px;
+  height: 48px;
+  background: var(--c-pure-white);
+  border: var(--doodle-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--doodle-shadow-sm);
+}
+
+.brand-name-wrap h1 {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  line-height: 1.2;
+}
+
+.brand-name-wrap .en-sub {
+  font-family: var(--font-doodle-en);
+  font-size: 1.3rem;
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+}
+
+.hero-hot-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hot-tag {
+  background: var(--c-pure-white);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--c-navy);
+}
+
+/* 主视觉海报图与手绘互动网格 */
+.hero-visual-container {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 28px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+@media (max-width: 900px) {
+  .hero-visual-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-sketch-board {
+  position: relative;
+  background: var(--c-pure-white);
+  border: var(--doodle-border);
+  border-radius: var(--sketch-radius-1);
+  box-shadow: var(--doodle-shadow);
+  overflow: hidden;
+  padding: 6px;
+}
+
+.hero-sketch-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+
+.hero-sketch-board:hover .hero-sketch-img {
+  transform: scale(1.015);
+}
+
+.board-stamp {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px dashed var(--c-ocean-blue);
+  border-radius: 12px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-doodle);
+  font-size: 1.1rem;
+  color: var(--c-navy);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.06);
+}
+
+.hero-manifesto-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.manifesto-quote-box {
+  background: var(--c-pure-white);
+  border: var(--doodle-border);
+  border-radius: var(--sketch-radius-2);
+  padding: 22px;
+  box-shadow: var(--doodle-shadow-sm);
+  position: relative;
+}
+
+.manifesto-quote-box::before {
+  content: "“";
+  font-family: var(--font-doodle-en);
+  font-size: 4.5rem;
+  color: var(--c-light-cyan);
+  position: absolute;
+  top: -15px;
+  left: 14px;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.manifesto-quote {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--c-dark-navy);
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 8px;
+}
+
+.manifesto-author {
+  font-size: 0.9rem;
+  color: var(--c-deep-blue);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.hero-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.hero-stat-item {
+  background: var(--c-pure-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 14px;
+  padding: 12px 10px;
+  text-align: center;
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+}
+
+.hero-stat-num {
+  font-family: var(--font-doodle-en);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--c-ocean-blue);
+  line-height: 1.1;
+}
+
+.hero-stat-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--c-navy);
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   模块 1: NFC碰一碰产品感应区 (Product Selector & Tap Simulator)
+   ========================================================================== */
+.nfc-simulator-box {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 26px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.nfc-tap-action-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.nfc-tip-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--c-pure-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: var(--sketch-radius-pill);
+  padding: 6px 18px;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.nfc-wave-svg {
+  width: 24px;
+  height: 24px;
+  color: var(--c-ocean-blue);
+  animation: nfcPing 1.8s infinite;
+}
+
+@keyframes nfcPing {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.btn-simulate-tap {
+  background: var(--c-sky-blue);
+  color: var(--c-dark-navy);
+  border: var(--doodle-border);
+  border-radius: var(--sketch-radius-pill);
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: var(--doodle-shadow);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-simulate-tap:hover {
+  background: var(--c-vibrant-blue);
+  color: var(--c-pure-white);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: var(--doodle-shadow-lg);
+}
+
+.btn-simulate-tap:active {
+  transform: translateY(2px);
+  box-shadow: var(--doodle-shadow-hover);
+}
+
+/* 5种不同文创产品卡片滚动列 */
+.products-scroll-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.product-item-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border);
+  border-radius: 18px;
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0px var(--c-dark-navy);
+  border-color: var(--c-ocean-blue);
+}
+
+.product-item-card.active {
+  background: #f0f9ff;
+  border: 3.5px solid var(--c-ocean-blue);
+  box-shadow: 6px 6px 0px var(--c-dark-navy);
+  transform: translateY(-4px);
+}
+
+.product-item-card.active::before {
+  content: "✓ 当前识别产品";
+  position: absolute;
+  top: -12px;
+  left: 12px;
+  background: var(--c-ocean-blue);
+  color: var(--c-pure-white);
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 2px 10px;
+  border-radius: 10px;
+  border: 1.5px solid var(--c-dark-navy);
+}
+
+.product-thumb-box {
+  width: 100%;
+  height: 125px;
+  background: var(--c-ice-blue);
+  border: 2px dashed var(--c-sky-blue);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-icon-doodle {
+  width: 76px;
+  height: 76px;
+  transition: transform 0.3s;
+}
+
+.product-item-card:hover .product-icon-doodle {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.plastic-code-sticker {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--c-pure-white);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 6px;
+  font-family: var(--font-doodle-en);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  color: var(--c-dark-navy);
+}
+
+.product-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+  margin-bottom: 4px;
+}
+
+.product-plastic-type {
+  font-size: 0.84rem;
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.product-origin-source {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   模块 2: 材质档案与微观显微镜深度解析 (Material DNA & Microscope)
+   ========================================================================== */
+.material-detail-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 26px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 950px) {
+  .material-detail-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.material-main-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 28px;
+  position: relative;
+}
+
+.plastic-id-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  border-bottom: 2px dashed var(--c-soft-blue);
+  padding-bottom: 16px;
+}
+
+.plastic-title-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.plastic-resin-badge {
+  width: 58px;
+  height: 58px;
+  border: 3px solid var(--c-dark-navy);
+  border-radius: 50%;
+  background: var(--c-ice-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--doodle-shadow-sm);
+}
+
+.plastic-resin-badge .num {
+  font-family: var(--font-doodle-en);
+  font-size: 1.4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--c-dark-navy);
+}
+
+.plastic-resin-badge .symbol {
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--c-ocean-blue);
+}
+
+.plastic-meta h3 {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+}
+
+.plastic-meta p {
+  font-size: 0.92rem;
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+}
+
+.degrade-years-pill {
+  background: #fef2f2;
+  border: 2px solid #ef4444;
+  color: #b91c1c;
+  padding: 4px 12px;
+  border-radius: var(--sketch-radius-pill);
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* 塑料前生今世对比条 */
+.transformation-pipeline {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0;
+  background: var(--c-foam-white);
+  border: 2px dashed var(--c-soft-blue);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+@media (max-width: 600px) {
+  .transformation-pipeline {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .pipeline-arrow {
+    transform: rotate(90deg);
+    margin: 4px auto;
+  }
+}
+
+.pipeline-step {
+  text-align: center;
+}
+
+.pipeline-icon-wrap {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 6px auto;
+  background: var(--c-pure-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.pipeline-step h4 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+}
+
+.pipeline-step p {
+  font-size: 0.74rem;
+  color: #64748b;
+}
+
+.pipeline-arrow {
+  color: var(--c-ocean-blue);
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+/* 物理特性与微塑料危害解析 */
+.plastic-features-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+@media (max-width: 550px) {
+  .plastic-features-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-box {
+  background: var(--c-ice-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.feature-box h5 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.feature-box p {
+  font-size: 0.82rem;
+  color: var(--c-deep-blue);
+  line-height: 1.45;
+}
+
+/* 右侧：交互式微观显微镜 (Interactive Microscope) */
+.microscope-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.microscope-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.microscope-header h4 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.micro-view-screen {
+  width: 100%;
+  height: 220px;
+  background: #091e3a;
+  border: 3px solid var(--c-dark-navy);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.6);
+  cursor: crosshair;
+}
+
+.micro-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.micro-reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px;
+  height: 110px;
+  border: 2px dashed rgba(56, 189, 248, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: reticleSpin 20s linear infinite;
+}
+
+@keyframes reticleSpin {
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.micro-reticle::before, .micro-reticle::after {
+  content: "";
+  position: absolute;
+  background: rgba(56, 189, 248, 0.6);
+}
+
+.micro-reticle::before {
+  top: 50%;
+  left: -15px;
+  right: -15px;
+  height: 1px;
+}
+
+.micro-reticle::after {
+  left: 50%;
+  top: -15px;
+  bottom: -15px;
+  width: 1px;
+}
+
+.micro-controls {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.micro-slider-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.micro-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background: var(--c-ice-blue);
+  border: 1.5px solid var(--c-dark-navy);
+  outline: none;
+}
+
+.micro-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--c-sky-blue);
+  border: 2px solid var(--c-dark-navy);
+  cursor: pointer;
+  box-shadow: 1px 1px 0px var(--c-dark-navy);
+}
+
+.micro-info-text {
+  font-size: 0.8rem;
+  color: var(--c-deep-blue);
+  background: var(--c-ice-blue);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--c-dark-navy);
+  margin-top: 6px;
+}
+
+/* ==========================================================================
+   模块 3: 三大核心战略流程 (The 3 Pillars of Blue Symbiosis)
+   ========================================================================== */
+.strategy-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 920px) {
+  .strategy-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pillar-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--doodle-shadow-lg);
+}
+
+.pillar-num-stamp {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  background: var(--c-sky-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  padding: 2px 14px;
+  font-family: var(--font-doodle-en);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.pillar-icon-box {
+  width: 60px;
+  height: 60px;
+  background: var(--c-ice-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: var(--doodle-shadow-sm);
+}
+
+.pillar-card h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  margin-bottom: 8px;
+}
+
+.pillar-subtitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--c-ocean-blue);
+  margin-bottom: 12px;
+}
+
+.pillar-desc {
+  font-size: 0.88rem;
+  color: var(--c-deep-blue);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.pillar-points {
+  list-style: none;
+  border-top: 1.5px dashed var(--c-soft-blue);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pillar-points li {
+  font-size: 0.82rem;
+  color: var(--c-dark-navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pillar-points li::before {
+  content: "✔";
+  color: var(--c-ocean-blue);
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   模块 4: 海洋塑料踪迹手绘地图 (Ocean Plastic Traceability Map)
+   ========================================================================== */
+.ocean-trace-container {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 26px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 950px) {
+  .ocean-trace-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trace-map-board {
+  background: #edf8fd;
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-svg-canvas {
+  width: 100%;
+  height: 400px;
+  background: #e1f5fe;
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 14px;
+  display: block;
+}
+
+.trace-info-panel {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trace-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 2px dashed var(--c-soft-blue);
+  padding-bottom: 12px;
+}
+
+.trace-info-header h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+}
+
+.salvage-boat-badge {
+  background: var(--c-ice-blue);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 8px;
+  font-family: var(--font-doodle-en);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-navy);
+  padding: 2px 8px;
+}
+
+.trace-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.trace-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  border-bottom: 1px dashed var(--c-ice-blue);
+  padding-bottom: 6px;
+}
+
+.trace-label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.trace-value {
+  color: var(--c-dark-navy);
+  font-weight: 800;
+}
+
+.salvage-log-box {
+  background: var(--c-foam-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: auto;
+}
+
+.salvage-log-box h5 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--c-ocean-blue);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.salvage-log-box p {
+  font-size: 0.8rem;
+  color: var(--c-deep-blue);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   模块 5: 专属 NFT 数字护照与 3D 翻转卡片 (NFT Digital Passport)
+   ========================================================================== */
+.passport-section-wrapper {
+  margin-bottom: 40px;
+}
+
+.passport-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .passport-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 3D 翻转卡片容器 */
+.card-3d-scene {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.passport-card-inner {
+  width: 100%;
+  height: 520px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.passport-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.passport-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: var(--doodle-border-thick);
+  border-radius: 26px;
+  box-shadow: var(--doodle-shadow-lg);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 护照正面 */
+.passport-front {
+  background: linear-gradient(135deg, #091e3a 0%, #0f3a60 65%, #0284c7 100%);
+  color: var(--c-pure-white);
+  border-color: #38bdf8;
+  box-shadow: 8px 8px 0px #091e3a;
+}
+
+.passport-top-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px dashed rgba(255, 255, 255, 0.3);
+  padding-bottom: 12px;
+}
+
+.passport-title-wrap h4 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.passport-title-wrap .sub {
+  font-family: var(--font-doodle-en);
+  font-size: 0.95rem;
+  color: var(--c-light-cyan);
+}
+
+.passport-chip-doodle {
+  width: 40px;
+  height: 30px;
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  border: 1.5px solid #ffffff;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.passport-product-dna {
+  margin: 18px 0;
+  text-align: center;
+}
+
+.dna-icon-circle {
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  margin: 0 auto 12px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passport-prod-name {
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.passport-hash-pill {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 3px 12px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--c-sky-blue);
+}
+
+.passport-impact-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.metric-cell {
+  text-align: center;
+}
+
+.metric-cell .num {
+  font-family: var(--font-doodle-en);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #38bdf8;
+  line-height: 1;
+}
+
+.metric-cell .label {
+  font-size: 0.72rem;
+  color: #bae6fd;
+  margin-top: 3px;
+}
+
+.passport-front-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  border-top: 1.5px dashed rgba(255, 255, 255, 0.2);
+  padding-top: 10px;
+}
+
+.flip-hint {
+  font-size: 0.78rem;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 护照背面 */
+.passport-back {
+  background: var(--c-foam-white);
+  color: var(--c-dark-navy);
+  transform: rotateY(180deg);
+  border-color: var(--c-dark-navy);
+}
+
+.passport-back-header {
+  text-align: center;
+  border-bottom: 2px dashed var(--c-soft-blue);
+  padding-bottom: 12px;
+}
+
+.passport-back-header h4 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+}
+
+.passport-chain-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
+  font-size: 0.82rem;
+}
+
+.chain-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted #cbd5e1;
+  padding-bottom: 4px;
+}
+
+.qr-signature-box {
+  background: var(--c-pure-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.mock-qr-code {
+  width: 70px;
+  height: 70px;
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 8px;
+  padding: 3px;
+  background: #ffffff;
+}
+
+.qr-instructions h5 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+}
+
+.qr-instructions p {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* 护照右侧操作区 */
+.passport-actions-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.passport-hero-intro {
+  background: var(--c-pure-white);
+  border: var(--doodle-border);
+  border-radius: var(--sketch-radius-card);
+  padding: 22px;
+  box-shadow: var(--doodle-shadow-sm);
+}
+
+.passport-hero-intro h3 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  margin-bottom: 8px;
+}
+
+.passport-hero-intro p {
+  font-size: 0.95rem;
+  color: var(--c-deep-blue);
+  line-height: 1.6;
+}
+
+.action-buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-doodle-primary {
+  background: var(--c-ocean-blue);
+  color: var(--c-pure-white);
+  border: var(--doodle-border);
+  border-radius: var(--sketch-radius-pill);
+  padding: 14px 24px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--doodle-shadow);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-doodle-primary:hover {
+  background: #026ca3;
+  transform: translateY(-2px);
+  box-shadow: var(--doodle-shadow-lg);
+}
+
+.btn-doodle-secondary {
+  background: var(--c-pure-white);
+  color: var(--c-dark-navy);
+  border: var(--doodle-border);
+  border-radius: var(--sketch-radius-pill);
+  padding: 12px 24px;
+  font-size: 0.98rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--doodle-shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.btn-doodle-secondary:hover {
+  background: var(--c-ice-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--doodle-shadow);
+}
+
+/* ==========================================================================
+   模块 6: AI打捞船声波护渔互动小游戏 (Interactive Sonar Mini-Game)
+   ========================================================================== */
+.game-section-box {
+  background: linear-gradient(180deg, #d8f1fc 0%, #edf8fd 100%);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 26px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.game-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.game-scores-wrap {
+  display: flex;
+  gap: 12px;
+}
+
+.score-badge {
+  background: var(--c-pure-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.score-badge .val {
+  font-family: var(--font-doodle-en);
+  font-size: 1.25rem;
+  color: var(--c-ocean-blue);
+  margin-left: 4px;
+}
+
+.game-controls-help {
+  font-size: 0.82rem;
+  color: var(--c-deep-blue);
+  background: var(--c-pure-white);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1.5px dashed var(--c-ocean-blue);
+}
+
+.game-canvas-container {
+  width: 100%;
+  height: 380px;
+  background: #092644;
+  border: var(--doodle-border-thick);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+#salvageCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.game-touch-controls {
+  display: none;
+  margin-top: 14px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .game-touch-controls {
+    display: grid;
+  }
+}
+
+.btn-game-touch {
+  background: var(--c-pure-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 14px;
+  padding: 12px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.btn-game-touch:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0;
+}
+
+/* ==========================================================================
+   模块 7: 生态闭环账单与反哺流动 (Revenue Feedback Fund)
+   ========================================================================== */
+.fund-tracker-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 28px;
+  margin-bottom: 40px;
+}
+
+.fund-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  align-items: center;
+}
+
+@media (max-width: 850px) {
+  .fund-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fund-pie-visual {
+  background: var(--c-foam-white);
+  border: 2px dashed var(--c-soft-blue);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.fund-pie-chart-wrap {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 16px auto;
+}
+
+.fund-split-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.fund-split-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.fund-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.fund-calculator-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.calc-slider-card {
+  background: var(--c-ice-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.calc-results-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.calc-res-item {
+  background: var(--c-pure-white);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+}
+
+.calc-res-num {
+  font-family: var(--font-doodle-en);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--c-ocean-blue);
+}
+
+.calc-res-lbl {
+  font-size: 0.75rem;
+  color: var(--c-navy);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   模块 8: 生态特权与艺术展预约 (Eco Privileges & Booking)
+   ========================================================================== */
+.perks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .perks-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.perk-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: var(--doodle-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.perk-badge-corner {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #fef08a;
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 8px;
+  padding: 2px 10px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #854d0e;
+}
+
+.perk-card h3 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  margin-bottom: 6px;
+}
+
+.perk-card .place-tag {
+  font-size: 0.85rem;
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.perk-card p {
+  font-size: 0.88rem;
+  color: var(--c-deep-blue);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.btn-book-perk {
+  background: var(--c-ice-blue);
+  color: var(--c-dark-navy);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: var(--sketch-radius-pill);
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+  transition: all 0.2s;
+}
+
+.btn-book-perk:hover {
+  background: var(--c-sky-blue);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--c-dark-navy);
+}
+
+/* ==========================================================================
+   页脚简笔画海浪与致谢
+   ========================================================================== */
+.footer-section {
+  text-align: center;
+  padding: 50px 20px 20px 20px;
+  position: relative;
+  background: linear-gradient(180deg, transparent 0%, #d8f1fc 100%);
+  border-top: 3px dashed var(--c-soft-blue);
+}
+
+.footer-waves-svg {
+  width: 100%;
+  max-width: 700px;
+  height: 60px;
+  margin: 0 auto 20px auto;
+  display: block;
+}
+
+.footer-creatures-doodle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.footer-creature-item {
+  width: 50px;
+  height: 50px;
+  animation: floatSlow 8s ease-in-out infinite alternate;
+}
+
+.footer-manifesto-text {
+  max-width: 650px;
+  margin: 0 auto 16px auto;
+  font-size: 0.95rem;
+  color: var(--c-deep-blue);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.copyright-text {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-family: var(--font-doodle-en);
+}
+
+/* ==========================================================================
+   通用弹窗 (Modal) 与海报分享卡
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(9, 30, 58, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+  animation: modalFadeIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content-box {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: var(--sketch-radius-card);
+  box-shadow: 12px 12px 0px var(--c-dark-navy);
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  position: relative;
+  animation: modalZoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalZoom {
+  from { transform: scale(0.85); }
+  to { transform: scale(1); }
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 50%;
+  background: var(--c-ice-blue);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  transition: all 0.2s;
+}
+
+.btn-close-modal:hover {
+  background: var(--c-coral);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+/* 表单样式 */
+.doodle-form-group {
+  margin-bottom: 16px;
+}
+
+.doodle-form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+  margin-bottom: 6px;
+}
+
+.doodle-input {
+  width: 100%;
+  background: var(--c-foam-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--c-dark-navy);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.doodle-input:focus {
+  background: #ffffff;
+  border-color: var(--c-ocean-blue);
+  box-shadow: 2px 2px 0px var(--c-ocean-blue);
+}
+
+/* 分享海报生成卡预览 */
+.poster-preview-card {
+  background: linear-gradient(180deg, #edf8fd 0%, #d8f1fc 100%);
+  border: 3px solid var(--c-dark-navy);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  margin: 16px 0;
+  box-shadow: 4px 4px 0px var(--c-dark-navy);
+  position: relative;
+}
+
+.poster-preview-card h3 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+}
+
+.poster-preview-card .poster-quote {
+  font-size: 0.85rem;
+  color: var(--c-deep-blue);
+  margin: 8px 0;
+}

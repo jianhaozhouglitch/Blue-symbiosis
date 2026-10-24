@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蔚蓝共生计划 · 未来海洋微塑料治理与文创交互档案</title>
+  <meta name="description" content="蔚蓝共生计划：结合AI无人打捞船与海洋空间站源头治理微塑料，通过NFC芯片碰一碰实现海洋回收塑料溯源与NFT数字护照确权。">
+  <!-- 样式表 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 背景漂浮简笔画装饰物 -->
+  <div class="bg-doodles-container">
+    <svg class="floating-doodle" style="top: 10%; left: 4%; width: 60px;" viewBox="0 0 100 100">
+      <path d="M 20,50 Q 50,20 80,50 Q 50,80 20,50 Z" fill="none" stroke="#0ea5e9" stroke-width="3"/>
+    </svg>
+    <svg class="floating-doodle" style="top: 35%; right: 5%; width: 70px; animation-delay: -3s;" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,6"/>
+    </svg>
+    <svg class="floating-doodle" style="top: 70%; left: 8%; width: 80px; animation-delay: -6s;" viewBox="0 0 100 100">
+      <path d="M 10,50 Q 30,20 50,50 T 90,50" fill="none" stroke="#7dd3fc" stroke-width="4"/>
+    </svg>
+  </div>
+
+  <!-- 顶部悬浮 NFC 状态药丸与全局导航 -->
+  <header class="nfc-floating-bar" id="nfcTopBar">
+    <div class="nfc-status-pill">
+      <span class="nfc-pulse-dot"></span>
+      <span id="nfcStatusText">NFC芯片已触碰识别</span>
+      <span class="nfc-chip-id" id="currentNfcChipId">CHIP-NFC-8849-HDPE</span>
+    </div>
+    <div class="quick-tools">
+      <button class="tool-icon-btn" id="btnAudioToggle" title="切换海浪背景原声" aria-label="音频切换">
+        <span>🔇</span>
+      </button>
+      <button class="tool-icon-btn" id="btnMobileModeToggle" title="切换手机模拟模式" aria-label="手机模拟切换">
+        <span>📱</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 主容器 -->
+  <main class="main-wrapper">
+
+    <!-- ==========================================================================
+         HERO 区域：海报主题与思维风暴蓝图
+         ========================================================================== -->
+    <section class="hero-section" id="heroSection">
+      <div class="hero-banner-top">
+        <div class="brand-badge-group">
+          <div class="brand-logo-doodle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0f3a60" stroke-width="2.5">
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="brand-name-wrap">
+            <h1>蔚蓝共生计划</h1>
+            <div class="en-sub">BLUE SYMBIOIS · OCEAN RESCUE INITIATIVE</div>
+          </div>
+        </div>
+        <div class="hero-hot-tags">
+          <span class="hot-tag">#AI智能打捞</span>
+          <span class="hot-tag">#微塑料循环重塑</span>
+          <span class="hot-tag">#NFC数字物联</span>
+          <span class="hot-tag">#NFT数字护照</span>
+        </div>
+      </div>
+
+      <div class="hero-visual-container">
+        <!-- 手绘主图看板 -->
+        <div class="hero-sketch-board">
+          <img src="assets/images/hero_sketch.jpg" alt="蔚蓝共生计划手绘蓝图：海洋空间站与AI打捞船" class="hero-sketch-img">
+          <div class="board-stamp">
+            <span>✦ 官方捕捞认证</span>
+            <strong>VERIFIED-2026</strong>
+          </div>
+        </div>
+
+        <!-- 战略理念与三大指标 -->
+        <div class="hero-manifesto-card">
+          <div class="manifesto-quote-box">
+            <p class="manifesto-quote">
+              “不卖惨，也不搞道德绑架。我们用科技与商业的力量，让环保变成一场好玩、有品位、可炫耀的高级生活方式。”
+            </p>
+            <div class="manifesto-author">
+              <span>✦</span> 蔚蓝共生计划发起团队 · 简笔画思维海报宣言
+            </div>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat-item">
+              <div class="hero-stat-num">1.28M</div>
+              <div class="hero-stat-label">已巡航净海水域 (m²)</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-num">42.6T</div>
+              <div class="hero-stat-label">拦截微塑料与废弃物</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-num">100%</div>
+              <div class="hero-stat-label">声波护鱼零误伤率</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 1: NFC碰一碰产品体验区 (Interactive NFC Tap & Product Switcher)
+         ========================================================================== -->
+    <section class="nfc-simulator-box" id="nfcSelectorSection">
+      <div class="nfc-tap-action-header">
+        <div class="nfc-tip-badge">
+          <svg class="nfc-wave-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 8a6 6 0 0 1 12 0"/>
+            <path d="M3 6a10 10 0 0 1 18 0"/>
+            <path d="M9 10a2 2 0 0 1 6 0"/>
+          </svg>
+          <div>
+            <strong>碰一碰感应区：</strong>
+            <span>在购买的文创产品上轻触手机，立即点亮对应海洋塑料身份证</span>
+          </div>
+        </div>
+        <button class="btn-simulate-tap" id="btnSimulateNfc" title="切换模拟不同文创产品">
+          <span>📱 模拟手机碰一碰切换</span>
+        </button>
+      </div>
+
+      <!-- 5种文创产品列表 -->
+      <div class="products-scroll-grid" id="productsScrollGrid">
+        <!-- 由 JavaScript 动态填充 -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 2: 塑料材质微观与溯源档案 (Material DNA & Microscope)
+         ========================================================================== -->
+    <section class="section-header" id="materialSectionHeader">
+      <span class="section-tag">MATERIAL ARCHIVE</span>
+      <h2 class="section-title">
+        这件文创产品使用了什么海洋塑料？
+        <svg class="doodle-underline" viewBox="0 0 200 12" fill="none">
+          <path d="M 2 8 Q 50 2 100 8 T 198 8" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </h2>
+      <p class="section-desc">
+        每一件文创都源于海洋打捞的真实塑料残片。通过独家声学超声波清洗与低温造粒技术，将环境杀手转化为先锋设计。
+      </p>
+    </section>
+
+    <div class="material-detail-container" id="materialDetailContainer">
+      <!-- 左侧：材质档案卡片 -->
+      <div class="material-main-card">
+        <div class="plastic-id-header">
+          <div class="plastic-title-group">
+            <div class="plastic-resin-badge">
+              <span class="num" id="plasticBadgeNum">2</span>
+              <span class="symbol" id="plasticBadgeSymbol">HDPE</span>
+            </div>
+            <div class="plastic-meta">
+              <h3 id="plasticTitle">HDPE (高密度聚乙烯)</h3>
+              <p>海洋回收聚合物档案 · 国际通用树脂代码</p>
+            </div>
+          </div>
+          <div class="degrade-years-pill" id="plasticDegradeYears">
+            自然降解约 500 年
+          </div>
+        </div>
+
+        <!-- 塑料前世今生流程管道 -->
+        <div class="transformation-pipeline">
+          <div class="pipeline-step">
+            <div class="pipeline-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0f3a60" stroke-width="2">
+                <path d="M3 6h18M8 6V4h8v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+              </svg>
+            </div>
+            <h4>打捞前形态</h4>
+            <p id="sourceFormDesc">东海破损工业浮漂残片</p>
+          </div>
+
+          <div class="pipeline-arrow">➔</div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </div>
+            <h4>再生纯化工序</h4>
+            <p id="processFlowDesc">超声清洗 + 240℃ 造粒</p>
+          </div>
+
+          <div class="pipeline-arrow">➔</div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h4>文创终极形态</h4>
+            <p id="finalProductDesc">「深海漫游者」潮玩公仔</p>
+          </div>
+        </div>
+
+        <!-- 物理特性与生态危害 -->
+        <div class="plastic-features-list" id="plasticFeatureList">
+          <!-- JS 动态填充 -->
+        </div>
+
+        <div style="margin-top: 18px; background: #fff1f2; border: 2px solid #fda4af; border-radius: 14px; padding: 14px;">
+          <h5 style="color: #be123c; font-size: 0.9rem; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+            <span>⚠️</span> 微塑料危害防范警示：
+          </h5>
+          <p id="plasticDangerDesc" style="color: #881337; font-size: 0.82rem; line-height: 1.5;">
+            在波浪撞击与紫外线暴晒下破碎成 100~500μm 粗糙颗粒，极易吸附海洋持久性有机污染物（POPs），并被底层甲壳类动物误食。
+          </p>
+        </div>
+      </div>
+
+      <!-- 右侧：交互式微观显微镜 -->
+      <div class="microscope-card">
+        <div class="microscope-header">
+          <h4>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            微观分子显微镜
+          </h4>
+          <span style="font-size: 0.8rem; font-weight: 700; color: #0284c7;" id="microZoomVal">100x</span>
+        </div>
+
+        <div class="micro-view-screen">
+          <canvas id="microscopeCanvas" class="micro-canvas"></canvas>
+          <div class="micro-reticle"></div>
+        </div>
+
+        <div class="micro-controls">
+          <div class="micro-slider-wrap">
+            <span>放大倍率</span>
+            <input type="range" min="1" max="4" step="0.2" value="1" class="micro-slider" id="microZoomSlider">
+            <span>400x 纳米级</span>
+          </div>
+          <div class="micro-info-text">
+            💡 <strong>显微提示：</strong>滑动滑块观察高分子聚合物网状结构。通过超声波纯化，已完全去除附着微藻与重金属毒素，分子链重新结晶。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         模块 3: 三大核心战略流程 (The 3 Pillars of Blue Symbiosis)
+         ========================================================================== -->
+    <section class="section-header" id="strategySectionHeader">
+      <span class="section-tag">CIRCULAR BLUEPRINT</span>
+      <h2 class="section-title">
+        蔚蓝共生：未来微塑料治理三步曲
+        <svg class="doodle-underline" viewBox="0 0 200 12" fill="none">
+          <path d="M 2 8 Q 50 2 100 8 T 198 8" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </h2>
+      <p class="section-desc">
+        将枯燥的环保行动打造成具备自生血能力的科技闭环：打捞 ➔ 潮品 ➔ 确权 ➔ 反哺。
+      </p>
+    </section>
+
+    <div class="strategy-pillars-grid">
+      <!-- 战略 1 -->
+      <div class="pillar-card">
+        <span class="pillar-num-stamp">STEP 01</span>
+        <div class="pillar-icon-box">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#091e3a" stroke-width="2.5">
+            <path d="M2 20a2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1"/>
+            <path d="M4 17l2-10h12l2 10"/>
+            <path d="M12 7v5"/>
+          </svg>
+        </div>
+        <h3>AI 打捞，源头治理</h3>
+        <div class="pillar-subtitle">海洋空间站 + AI视觉无人打捞船</div>
+        <p class="pillar-desc">
+          在海面上部署“海洋空间站”，一旦卫星与多光谱遥感发现垃圾带，系统立即调动搭载AI视觉算法的无人巡航船出海，进行纳米级精准捕捞。
+        </p>
+        <ul class="pillar-points">
+          <li>特定 45kHz 声波驱赶游近的海豚、鱼群与海龟</li>
+          <li>零误伤海洋生物，保护脆弱水体生物链</li>
+          <li>微气泡浮选纳米微塑料滤网</li>
+        </ul>
+      </div>
+
+      <!-- 战略 2 -->
+      <div class="pillar-card">
+        <span class="pillar-num-stamp">STEP 02</span>
+        <div class="pillar-icon-box">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#091e3a" stroke-width="2.5">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h3>垃圾变潮牌，反哺补贴</h3>
+        <div class="pillar-subtitle">微塑料高溢价文创 · 自循环商业</div>
+        <p class="pillar-desc">
+          打捞的微塑料交由循环设计团队，重新解构为高端潮玩、机能服饰与艺术品。销售收益的 65% 直接反哺回海洋治理基金，实现自我造血。
+        </p>
+        <ul class="pillar-points">
+          <li>不仅环保，更是极具审美的先锋艺术品</li>
+          <li>每一分钱收益公开透明链上溯源</li>
+          <li>打破传统“公益依赖捐赠”的不可持续困境</li>
+        </ul>
+      </div>
+
+      <!-- 战略 3 -->
+      <div class="pillar-card">
+        <span class="pillar-num-stamp">STEP 03</span>
+        <div class="pillar-icon-box">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#091e3a" stroke-width="2.5">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <line x1="7" y1="8" x2="17" y2="8"/>
+            <line x1="7" y1="12" x2="17" y2="12"/>
+            <line x1="7" y1="16" x2="12" y2="16"/>
+          </svg>
+        </div>
+        <h3>数字确权，沉浸体验</h3>
+        <div class="pillar-subtitle">NFC碰碰识别 + NFT专属数字护照</div>
+        <p class="pillar-desc">
+          消费者购买产品后，使用手机触碰 NFC 芯片，即可在链上生成专属数字护照。在海洋踪迹地图上打卡拯救海域，解锁高校实验室与多感官艺术展特权。
+        </p>
+        <ul class="pillar-points">
+          <li>唯一下链防伪 Hash 与微塑料身份证</li>
+          <li>“海洋塑料踪迹地图”一键朋友圈打卡炫耀</li>
+          <li>线下多感官体验展 VIP 通行特权</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         模块 4: 海洋塑料踪迹手绘地图 (Ocean Plastic Traceability Map)
+         ========================================================================== -->
+    <section class="section-header" id="mapSectionHeader">
+      <span class="section-tag">OCEAN GIS TRACE</span>
+      <h2 class="section-title">
+        海洋塑料踪迹手绘地图
+        <svg class="doodle-underline" viewBox="0 0 200 12" fill="none">
+          <path d="M 2 8 Q 50 2 100 8 T 198 8" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </h2>
+      <p class="section-desc">
+        点击地图中的定位图钉，查看该批次海洋塑料的 AI 打捞坐标、母舰编号及海洋生态救助日志。
+      </p>
+    </section>
+
+    <div class="ocean-trace-container">
+      <!-- 手绘矢量海图 -->
+      <div class="trace-map-board" id="oceanTraceMapContainer">
+        <!-- 由 map.js 动态绘制 -->
+      </div>
+
+      <!-- 右侧：打捞日志详情 -->
+      <div class="trace-info-panel">
+        <div class="trace-info-header">
+          <h3 id="tracePointTitle">东海舟山渔场监测点</h3>
+          <span class="salvage-boat-badge" id="traceBoatBadge">AI-Orca 07 号捕捞巡航艇</span>
+        </div>
+
+        <div class="trace-detail-list">
+          <div class="trace-row">
+            <span class="trace-label">打捞地理坐标：</span>
+            <span class="trace-value" id="traceCoordVal">30.12° N, 122.35° E</span>
+          </div>
+          <div class="trace-row">
+            <span class="trace-label">捕获塑料重量：</span>
+            <span class="trace-value" id="traceWeightVal">142.8 kg</span>
+          </div>
+          <div class="trace-row">
+            <span class="trace-label">作业深度：</span>
+            <span class="trace-value" id="traceDepthVal">水深 28 米 (近海浮标与包装)</span>
+          </div>
+          <div class="trace-row">
+            <span class="trace-label">特定声波事件：</span>
+            <span class="trace-value" id="traceSonarVal">成功发射声波 24 次，驱散近海海龟与幼鱼群</span>
+          </div>
+          <div class="trace-row">
+            <span class="trace-label">碳足迹减免：</span>
+            <span class="trace-value" id="traceCarbonVal">2.45 kg CO₂e</span>
+          </div>
+        </div>
+
+        <div class="salvage-log-box">
+          <h5><span>📜</span> AI 航海巡捞日志：</h5>
+          <p id="traceLogDesc">
+            该批次塑料由【AI-Orca 07 号捕捞巡航艇】在【东海舟山渔场监测点】精准打捞。该区域洋流交汇密集，系统通过特征声波保护了周边鱼群，所捕捞的高密度聚乙烯已进入文创生产线。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         模块 5: 专属 NFT 数字护照与 3D 翻转卡片 (NFT Digital Passport)
+         ========================================================================== -->
+    <section class="passport-section-wrapper" id="passportSection">
+      <div class="section-header">
+        <span class="section-tag">NFT PASSPORT</span>
+        <h2 class="section-title">
+          您的专属 NFT “数字护照”
+          <svg class="doodle-underline" viewBox="0 0 200 12" fill="none">
+            <path d="M 2 8 Q 50 2 100 8 T 198 8" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </h2>
+        <p class="section-desc">
+          每一次碰一碰，都在蔚蓝共生联盟链上写入专属数字资产。点击卡片可 3D 翻转查看区块链数字指纹与专属特权凭证！
+        </p>
+      </div>
+
+      <div class="passport-layout-grid">
+        <!-- 3D 翻转卡片 -->
+        <div class="card-3d-scene">
+          <div class="passport-card-inner" id="passportCardInner">
+            <!-- 正面 -->
+            <div class="passport-face passport-front">
+              <div class="passport-top-badge">
+                <div class="passport-title-wrap">
+                  <h4>BLUE SYMBIOSIS PASSPORT</h4>
+                  <div class="sub">海洋拯救者数字护照 · 限量确权版</div>
+                </div>
+                <div class="passport-chip-doodle"></div>
+              </div>
+
+              <div class="passport-product-dna">
+                <div class="dna-icon-circle">
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                    <path d="M2 12h20"/>
+                  </svg>
+                </div>
+                <h3 class="passport-prod-name" id="passportProdTitle">「深海漫游者」机能潮玩公仔</h3>
+                <span class="passport-hash-pill" id="passportTokenHash">0x8849...B10A</span>
+              </div>
+
+              <div class="passport-impact-metrics">
+                <div class="metric-cell">
+                  <div class="num" id="passportRescueNum">38 尾幼龟幼鱼</div>
+                  <div class="label">免受塑料割伤幼灵</div>
+                </div>
+                <div class="metric-cell">
+                  <div class="num" id="passportCarbonNum">2.45 kg CO₂e</div>
+                  <div class="label">已减免全生命周期碳排</div>
+                </div>
+              </div>
+
+              <div class="passport-front-footer">
+                <div>确权日期: <span id="passportCertDate">2026.09.18</span></div>
+                <div class="flip-hint">
+                  <span>↻ 点击翻转背面</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 背面 -->
+            <div class="passport-face passport-back">
+              <div class="passport-back-header">
+                <h4>蔚蓝共生防伪确权验证</h4>
+                <div style="font-size: 0.78rem; color: #64748b;">NFC CRYPTOGRAPHIC ZERO-KNOWLEDGE PROOF</div>
+              </div>
+
+              <div class="passport-chain-details">
+                <div class="chain-item">
+                  <span>存证网络：</span>
+                  <strong>BlueSymbiosis Eco-Chain</strong>
+                </div>
+                <div class="chain-item">
+                  <span>材质纯度：</span>
+                  <strong style="color: #0284c7;">99.4% 海洋打捞再生</strong>
+                </div>
+                <div class="chain-item">
+                  <span>材质代码：</span>
+                  <strong id="passportPlasticBadge">♴ HDPE</strong>
+                </div>
+                <div class="chain-item">
+                  <span>智能合约：</span>
+                  <span style="font-family: monospace; font-size: 0.72rem;">0x71E98...4F881A</span>
+                </div>
+              </div>
+
+              <div class="qr-signature-box">
+                <div class="mock-qr-code">
+                  <svg width="100%" height="100%" viewBox="0 0 60 60">
+                    <rect width="60" height="60" fill="#ffffff" />
+                    <rect x="4" y="4" width="16" height="16" fill="#091e3a" />
+                    <rect x="8" y="8" width="8" height="8" fill="#ffffff" />
+                    <rect x="40" y="4" width="16" height="16" fill="#091e3a" />
+                    <rect x="44" y="8" width="8" height="8" fill="#ffffff" />
+                    <rect x="4" y="40" width="16" height="16" fill="#091e3a" />
+                    <rect x="8" y="44" width="8" height="8" fill="#ffffff" />
+                    <rect x="26" y="8" width="8" height="8" fill="#091e3a" />
+                    <rect x="26" y="26" width="16" height="16" fill="#0284c7" />
+                    <rect x="44" y="44" width="12" height="12" fill="#091e3a" />
+                  </svg>
+                </div>
+                <div class="qr-instructions">
+                  <h5>VIP 线下展扫码入场凭据</h5>
+                  <p>凭此二维码可免费兑换线下多感官体验展入场门票及专属伴手礼。</p>
+                </div>
+              </div>
+
+              <div style="text-align: center; font-size: 0.75rem; color: #64748b; margin-top: 10px;">
+                AI 巡航艇长电子签章：Captain Orca-AI #07
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 护照权益与操作 -->
+        <div class="passport-actions-card">
+          <div class="passport-hero-intro">
+            <h3>环保，是您最有品位的社交资产</h3>
+            <p>
+              每一件文创都拥有全球唯一的数字指纹。我们拒绝“廉价道德绑架”，通过数字确权技术，让每一次对海洋微塑料的治理都成为您可以永久珍藏、随心分享并享受高端文化特权的身份凭据。
+            </p>
+          </div>
+
+          <div class="action-buttons-group">
+            <button class="btn-doodle-primary" id="btnSharePoster">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+              <span>生成微信朋友圈打卡海报</span>
+            </button>
+
+            <button class="btn-doodle-secondary" id="btnFlipPassport">
+              <span>↻ 翻转卡片查看链上二维码与特权</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 6: AI打捞船声波护渔互动小游戏 (Interactive Sonar Mini-Game)
+         ========================================================================== -->
+    <section class="game-section-box" id="gameSection">
+      <div class="game-top-bar">
+        <div>
+          <h3 style="font-size: 1.35rem; font-weight: 900; color: #091e3a; display: flex; align-items: center; gap: 8px;">
+            <span>🕹️</span> AI 打捞船声波护渔大作战
+          </h3>
+          <p style="font-size: 0.85rem; color: #1b4965;">
+            移动打捞船收集漂浮微塑料与废弃物；按下空格键或点击屏幕发射特定声波驱离小鱼！
+          </p>
+        </div>
+
+        <div class="game-scores-wrap">
+          <div class="score-badge">
+            净海量: <span class="val" id="gamePlasticsVal">0g</span>
+          </div>
+          <div class="score-badge">
+            保护海洋幼灵: <span class="val" id="gameFishVal">0尾</span>
+          </div>
+          <button class="btn-doodle-primary" id="btnStartGame" style="padding: 6px 16px; font-size: 0.88rem;">
+            <span>▶ 启动 AI 巡航打捞</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="game-canvas-container">
+        <canvas id="salvageCanvas"></canvas>
+      </div>
+
+      <!-- 移动端虚拟操作手柄 -->
+      <div class="game-touch-controls">
+        <button class="btn-game-touch" id="btnGameLeft">◀ 船只左移</button>
+        <button class="btn-game-touch" id="btnGameSonar" style="background: #38bdf8; color: #091e3a;">📡 发射 45kHz 声波</button>
+        <button class="btn-game-touch" id="btnGameRight">船只右移 ▶</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 7: 生态闭环账单与反哺流动 (Revenue Feedback Fund)
+         ========================================================================== -->
+    <section class="fund-tracker-card" id="fundSection">
+      <div class="section-header" style="margin-bottom: 20px;">
+        <span class="section-tag">COMMERCIAL CIRCULARITY</span>
+        <h2 class="section-title">
+          让环保成为一门好生意：反哺流动公示
+          <svg class="doodle-underline" viewBox="0 0 200 12" fill="none">
+            <path d="M 2 8 Q 50 2 100 8 T 198 8" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </h2>
+        <p class="section-desc">
+          销售每一件文创产品的利润，均实时按比例自动转入海洋治理基金，让商业造血永不停歇。
+        </p>
+      </div>
+
+      <div class="fund-grid">
+        <div class="fund-pie-visual">
+          <div class="fund-pie-chart-wrap">
+            <svg width="180" height="180" viewBox="0 0 36 36">
+              <!-- 65% 海洋治理反哺 -->
+              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none" stroke="#0284c7" stroke-width="3.8" stroke-dasharray="65, 100" />
+              <!-- 20% 循环工业研发 -->
+              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none" stroke="#38bdf8" stroke-width="3.8" stroke-dasharray="20, 100" stroke-dashoffset="-65" />
+              <!-- 15% 空间站运维 -->
+              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none" stroke="#10b981" stroke-width="3.8" stroke-dasharray="15, 100" stroke-dashoffset="-85" />
+              <text x="18" y="20.5" text-anchor="middle" font-size="6" font-family="'Caveat', cursive" font-weight="bold" fill="#091e3a">65%</text>
+            </svg>
+          </div>
+
+          <div class="fund-split-list">
+            <div class="fund-split-item">
+              <span><span class="fund-dot" style="background:#0284c7;"></span> 65% 直接反哺深海AI巡航打捞补贴</span>
+              <span>核心治理</span>
+            </div>
+            <div class="fund-split-item">
+              <span><span class="fund-dot" style="background:#38bdf8;"></span> 20% 微塑料降解与材料重塑研发</span>
+              <span>科技创新</span>
+            </div>
+            <div class="fund-split-item">
+              <span><span class="fund-dot" style="background:#10b981;"></span> 15% 海洋空间站卫星水质遥感系统维护</span>
+              <span>基础设施</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 交互式个人反哺影响力计算器 -->
+        <div class="fund-calculator-box">
+          <div class="calc-slider-card">
+            <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.95rem; margin-bottom: 8px;">
+              <span>您拥有的文创产品数量：</span>
+              <strong id="fundItemsCount" style="color: #0284c7; font-size: 1.2rem;">3 件</strong>
+            </div>
+            <input type="range" min="1" max="10" value="3" class="micro-slider" id="fundItemsSlider">
+            
+            <div class="calc-results-row">
+              <div class="calc-res-item">
+                <div class="calc-res-num" id="fundTotalDonation">¥204</div>
+                <div class="calc-res-lbl">注入深海清洁基金</div>
+              </div>
+              <div class="calc-res-item">
+                <div class="calc-res-num" id="fundTotalPlastic">1.26 kg</div>
+                <div class="calc-res-lbl">直接消减海洋微塑料</div>
+              </div>
+              <div class="calc-res-item">
+                <div class="calc-res-num" id="fundBoatHours">4.5 小时</div>
+                <div class="calc-res-lbl">支持AI无人船续航时间</div>
+              </div>
+              <div class="calc-res-item">
+                <div class="calc-res-num" style="color: #10b981;">100%</div>
+                <div class="calc-res-lbl">链上透明无损审计</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 8: 生态特权中心 (Offline Multi-Sensory Art Exhibition & Eco-Lab Booking)
+         ========================================================================== -->
+    <section class="section-header" id="perksSectionHeader">
+      <span class="section-tag">EXCLUSIVE PRIVILEGES</span>
+      <h2 class="section-title">
+        持证人尊享：线下沉浸特权预约
+        <svg class="doodle-underline" viewBox="0 0 200 12" fill="none">
+          <path d="M 2 8 Q 50 2 100 8 T 198 8" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </h2>
+      <p class="section-desc">
+        购买产品即享会员特权，不仅是一件衣服或潮玩，更能解锁亲临现场的多感官震撼体验。
+      </p>
+    </section>
+
+    <div class="perks-grid">
+      <!-- 特权 1 -->
+      <div class="perk-card">
+        <span class="perk-badge-corner">✦ 免费名额已开放</span>
+        <h3>线下多感官艺术展</h3>
+        <div class="place-tag">📍 蔚蓝共生沉浸式艺术中心 · 嗅闻泥土与治愈地球</div>
+        <p>
+          戴上沉浸式多感官设备，在光影与真实雨林香氛中，亲身体验从“白色塑料荒漠”到“泥土芬芳与被治愈地球”的震撼旅程。
+        </p>
+        <button class="btn-book-perk" id="btnBookExhibition">
+          <span>🎟️ 凭 NFT 护照免费预约观展</span>
+        </button>
+      </div>
+
+      <!-- 特权 2 -->
+      <div class="perk-card">
+        <span class="perk-badge-corner">✦ 极客开放日</span>
+        <h3>高校联合环保科技实验室探访</h3>
+        <div class="place-tag">📍 清华/同济海洋降解高分子重点实验室</div>
+        <p>
+          与一线海洋环境科学家面对面，亲手操作电子显微镜观察纳米微塑料降解过程，并参与下一代微塑料捕捞声学算法研讨。
+        </p>
+        <button class="btn-book-perk" id="btnBookLab">
+          <span>🔬 预约实验室 VIP 研学名额</span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       页脚简笔画海浪与致谢
+       ========================================================================== -->
+  <footer class="footer-section">
+    <svg class="footer-waves-svg" viewBox="0 0 800 60" fill="none">
+      <path d="M 0,30 Q 100,5 200,30 T 400,30 T 600,30 T 800,30 L 800,60 L 0,60 Z" fill="#bae6fd" opacity="0.6"/>
+      <path d="M 0,40 Q 100,15 200,40 T 400,40 T 600,40 T 800,40" stroke="#0284c7" stroke-width="2.5" fill="none"/>
+    </svg>
+
+    <div class="footer-creatures-doodle">
+      <!-- 水母简笔画 -->
+      <svg class="footer-creature-item" viewBox="0 0 50 50">
+        <path d="M 12,24 Q 25,10 38,24 Z" fill="#7dd3fc" stroke="#091e3a" stroke-width="2"/>
+        <path d="M 16,24 Q 18,36 16,44 M 25,24 Q 26,38 24,45 M 34,24 Q 32,36 34,44" stroke="#091e3a" stroke-width="2" fill="none"/>
+      </svg>
+      <!-- 小海龟简笔画 -->
+      <svg class="footer-creature-item" style="animation-delay: -2s;" viewBox="0 0 50 50">
+        <ellipse cx="25" cy="25" rx="14" ry="10" fill="#bae6fd" stroke="#091e3a" stroke-width="2"/>
+        <circle cx="42" cy="25" r="4.5" fill="#ffffff" stroke="#091e3a" stroke-width="1.5"/>
+        <path d="M 16,16 L 10,12 M 34,16 L 40,12 M 16,34 L 10,38 M 34,34 L 40,38" stroke="#091e3a" stroke-width="2"/>
+      </svg>
+      <!-- 小鱼简笔画 -->
+      <svg class="footer-creature-item" style="animation-delay: -4s;" viewBox="0 0 50 50">
+        <path d="M 10,25 Q 25,14 40,25 Q 25,36 10,25 Z" fill="#38bdf8" stroke="#091e3a" stroke-width="2"/>
+        <path d="M 10,25 L 2,18 L 2,32 Z" fill="#7dd3fc" stroke="#091e3a" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <p class="footer-manifesto-text">
+      “让每一次触碰，都成为可追溯的海洋守护之旅。”<br>
+      蔚蓝共生计划致力于将海洋微塑料从环境污染源转化为具备艺术价值的数字时尚物联文创。
+    </p>
+
+    <div class="copyright-text">
+      © 2026 BLUE SYMBIOSIS INITIATIVE · ALL OCEAN PLASTICS VERIFIED VIA NFC
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       通用弹窗：微信朋友圈分享海报卡
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalSharePoster">
+    <div class="modal-content-box">
+      <button class="btn-close-modal" aria-label="关闭弹窗">×</button>
+      
+      <div style="text-align: center; margin-bottom: 12px;">
+        <span class="section-tag">SOCIAL CURRENCY</span>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: #091e3a;">我的蔚蓝共生打卡海报</h3>
+        <p style="font-size: 0.85rem; color: #64748b;">长按保存或截图，炫耀您的专属微塑料拯救贡献</p>
+      </div>
+
+      <div class="poster-preview-card">
+        <div style="font-size: 0.82rem; font-weight: 800; color: #0284c7; letter-spacing: 1px;">
+          ✦ BLUE SYMBIOSIS VERIFIED CITIZEN ✦
+        </div>
+        <h3 id="posterProdName" style="margin: 8px 0;">「深海漫游者」机能潮玩公仔</h3>
+        <div style="font-size: 0.9rem; font-weight: 800; color: #0f3a60;">
+          材质身份：<span id="posterResinCode" style="color: #0284c7;">♴ HDPE</span>
+        </div>
+        
+        <p class="poster-quote" id="posterRescue">
+          保护 38 尾幼龟与底栖石斑鱼免受塑料割伤
+        </p>
+
+        <div style="background: #ffffff; border: 2px dashed #091e3a; border-radius: 12px; padding: 10px; margin: 12px 0; font-size: 0.8rem; text-align: left;">
+          <div>📍 打捞海域：<span id="posterOrigin">东海舟山渔场监测点</span></div>
+          <div>⛓️ 链上唯一存证：<span id="posterTokenHash" style="font-family: monospace;">0x8849...B10A</span></div>
+          <div>🛡️ 防伪 NFC 状态：已碰一碰认证通过</div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1.5px dashed #7dd3fc; padding-top: 10px;">
+          <div style="text-align: left;">
+            <div style="font-size: 0.85rem; font-weight: 900; color: #091e3a;">扫码认识微塑料治理</div>
+            <div style="font-size: 0.72rem; color: #64748b;">用科技让海洋更蓝</div>
+          </div>
+          <div style="width: 50px; height: 50px; background: #fff; border: 1.5px solid #091e3a; border-radius: 6px; padding: 2px;">
+            <svg width="100%" height="100%" viewBox="0 0 24 24" fill="#091e3a">
+              <path d="M2 2h8v8H2zm2 2v4h4V4zm10-2h8v8h-8zm2 2v4h4V4zM2 14h8v8H2zm2 2v4h4v-4zm14-2h4v4h-4zm-4 4h4v4h-4zm4 0h4v4h-4z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-doodle-primary" style="width: 100%; margin-top: 12px;" onclick="alert('📸 海报已生成，可直接截屏分享至朋友圈！')">
+        <span>📸 点击一键保存打卡海报</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       通用弹窗：线下特权预约
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalBooking">
+    <div class="modal-content-box">
+      <button class="btn-close-modal" aria-label="关闭弹窗">×</button>
+      
+      <div style="text-align: center; margin-bottom: 16px;">
+        <span class="section-tag">VIP BOOKING</span>
+        <h3 id="bookingModalTitle" style="font-size: 1.3rem; font-weight: 900; color: #091e3a;">
+          预约线下沉浸式体验
+        </h3>
+        <p style="font-size: 0.85rem; color: #64748b;">持文创 NFC 芯片免费通行 · 无需额外购票</p>
+      </div>
+
+      <form id="bookingForm">
+        <input type="hidden" id="bookingEventName" value="">
+        
+        <div class="doodle-form-group">
+          <label for="bookingUserName">护照持有者姓名 / 昵称：</label>
+          <input type="text" id="bookingUserName" class="doodle-input" placeholder="例如：蔚蓝探索者" required>
+        </div>
+
+        <div class="doodle-form-group">
+          <label for="bookingPhone">手机号 (用于接收通行二维码短信)：</label>
+          <input type="tel" id="bookingPhone" class="doodle-input" placeholder="138 **** 8888" required>
+        </div>
+
+        <div class="doodle-form-group">
+          <label for="bookingDate">期望预约日期：</label>
+          <input type="date" id="bookingDate" class="doodle-input" value="2026-11-01" required>
+        </div>
+
+        <div class="doodle-form-group">
+          <label>核验方式：</label>
+          <div style="background: #e0f2fe; border: 1.5px solid #091e3a; border-radius: 10px; padding: 10px; font-size: 0.82rem;">
+            📱 入场时，请向迎宾人员出示包含 NFC 芯片的文创实体产品，碰一碰即可自动闸机放行。
+          </div>
+        </div>
+
+        <button type="submit" class="btn-doodle-primary" style="width: 100%; margin-top: 10px;">
+          <span>✓ 确认生成电子入场通行券</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 脚本引入 -->
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
