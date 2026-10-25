@@ -120,7 +120,7 @@
           </svg>
           <div>
             <strong>碰一碰感应区：</strong>
-            <span>在购买的文创产品上轻触手机，立即点亮对应海洋塑料身份证</span>
+            <span>点击下方任意文创卡片，即可直达其专有 2 级物联介绍页面（手机识别 NFC 标签后亦自动直达）</span>
           </div>
         </div>
         <button class="btn-simulate-tap" id="btnSimulateNfc" title="切换模拟不同文创产品">
@@ -538,6 +538,10 @@
             <button class="btn-doodle-secondary" id="btnFlipPassport">
               <span>↻ 翻转卡片查看链上二维码与特权</span>
             </button>
+
+            <a href="product.html?id=prod-hdpe" class="btn-doodle-primary" id="btnPassportDedicatedLink" style="background: #0284c7; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;" title="进入该文创产品的专有 2 级介绍页">
+              <span>📖 查看该文创专有 2 级档案页面 (含 NFC 完整特权) ➔</span>
+            </a>
           </div>
         </div>
       </div>
@@ -847,6 +851,7 @@
   </div>
 
   <!-- 脚本引入 -->
+  <script src="js/products-data.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/game.js"></script>
   <script src="js/map.js"></script>

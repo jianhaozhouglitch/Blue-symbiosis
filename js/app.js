@@ -3,7 +3,8 @@
    包括 NFC 切换模拟、材质深度解析、显微镜、3D护照翻转、预约系统与海报生成
    ========================================================================== */
 
-const PRODUCTS_DATA = [
+// 全局文创产品体系：优先采用 js/products-data.js
+var PRODUCTS_DATA = (typeof window !== 'undefined' && window.PRODUCTS_DATA) ? window.PRODUCTS_DATA : [
   {
     id: 'prod-hdpe',
     name: '「深海漫游者」机能潮玩公仔',
@@ -150,13 +151,15 @@ class AppManager {
     this.updateProductView(0);
   }
 
-  // 渲染 5 种文创产品列表
+  // 渲染 5 种文创产品列表（点击整个卡片区域直达专有 2 级介绍页）
   renderProductsList() {
     const container = document.getElementById('productsScrollGrid');
     if (!container) return;
 
-    container.innerHTML = PRODUCTS_DATA.map((item, idx) => `
-      <div class="product-item-card ${idx === 0 ? 'active' : ''}" data-idx="${idx}" id="prodCard-${idx}">
+    const data = (window.PRODUCTS_DATA && window.PRODUCTS_DATA.length) ? window.PRODUCTS_DATA : PRODUCTS_DATA;
+
+    container.innerHTML = data.map((item, idx) => `
+      <a href="product.html?id=${item.id}" class="product-item-card ${idx === 0 ? 'active' : ''}" data-idx="${idx}" id="prodCard-${idx}" title="点击直达「${item.name}」专有 2 级介绍页">
         <div class="product-thumb-box">
           ${this.getProductDoodleSvg(item.resinCode)}
           <div class="plastic-code-sticker">${item.codeSymbol}</div>
@@ -166,15 +169,17 @@ class AppManager {
           <span>●</span> ${item.plasticName.split('(')[0]}
         </div>
         <div class="product-origin-source">${item.originLocation.slice(0, 22)}...</div>
-      </div>
+        <div class="product-card-arrow-indicator">
+          <span>进入专属物联介绍页 ➔</span>
+        </div>
+      </a>
     `).join('');
 
-    // 绑定点击切换
+    // 绑定卡片点击音效
     const cards = container.querySelectorAll('.product-item-card');
     cards.forEach(card => {
       card.addEventListener('click', () => {
-        const idx = parseInt(card.getAttribute('data-idx'));
-        this.selectProduct(idx);
+        window.blueAudio && window.blueAudio.playTapSound();
       });
     });
   }
@@ -315,7 +320,20 @@ class AppManager {
     if (elPassportDate) elPassportDate.textContent = prod.certDate;
     if (elPassportPlastic) elPassportPlastic.textContent = prod.codeSymbol;
 
-    // 4. 重绘微观显微镜
+    // 4. 同步更新专有 2 级页面跳转按钮链接
+    const elHeaderToDedicated = document.getElementById('btnHeaderToDedicated');
+    if (elHeaderToDedicated) {
+      elHeaderToDedicated.href = `product.html?id=${prod.id}`;
+      elHeaderToDedicated.setAttribute('title', `直达「${prod.name}」专有 2 级介绍页`);
+    }
+
+    const elPassportDedicatedLink = document.getElementById('btnPassportDedicatedLink');
+    if (elPassportDedicatedLink) {
+      elPassportDedicatedLink.href = `product.html?id=${prod.id}`;
+      elPassportDedicatedLink.setAttribute('title', `直达「${prod.name}」专有 2 级介绍页`);
+    }
+
+    // 5. 重绘微观显微镜
     this.drawMicroscope();
   }
 

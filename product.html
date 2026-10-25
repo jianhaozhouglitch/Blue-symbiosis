@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文创专属物联档案 · 蔚蓝共生计划</title>
+  <meta name="description" content="每一个文创产品都拥有专属的2级物联页面，写入NFC芯片后轻触手机即可秒级直达材质溯源、3D护照与免票特权。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+  <!-- 装饰性手绘背景气泡 -->
+  <div class="bg-doodles-container">
+    <div class="floating-doodle" style="top: 8%; left: 4%;">
+      <svg width="45" height="45" viewBox="0 0 100 100" fill="none" stroke="#0284c7" stroke-width="3">
+        <circle cx="50" cy="50" r="40"/>
+        <path d="M 35 35 Q 50 15 65 35" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="floating-doodle" style="top: 35%; right: 5%; animation-delay: -3s;">
+      <svg width="55" height="55" viewBox="0 0 100 100" fill="none" stroke="#0ea5e9" stroke-width="3">
+        <path d="M 20 50 Q 50 20 80 50 T 20 50 Z"/>
+      </svg>
+    </div>
+    <div class="floating-doodle" style="bottom: 15%; left: 8%; animation-delay: -6s;">
+      <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="#38bdf8" stroke-width="3">
+        <circle cx="50" cy="50" r="30"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       顶部全局快捷导航条
+       ========================================================================== -->
+  <header class="product-top-nav">
+    <a href="index.html" class="nav-brand-left" title="返回蔚蓝共生主站">
+      <div class="nav-brand-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#091e3a" stroke-width="2.5">
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="nav-brand-text">
+        <h1>蔚蓝共生计划</h1>
+        <div class="nav-badge">NFC IOT EXCLUSIVE ARCHIVE · <span id="navCurrentProdName">文创档案</span></div>
+      </div>
+    </a>
+
+    <!-- 5 种文创快速切换导航 Pills -->
+    <nav class="nav-center-switcher" aria-label="文创产品快速切换">
+      <a href="product.html?id=prod-hdpe" class="nav-prod-pill active" data-id="prod-hdpe">♴ 漫游者潮玩</a>
+      <a href="product.html?id=prod-pet" class="nav-prod-pill" data-id="prod-pet">♳ 涌浪机能包</a>
+      <a href="product.html?id=prod-pp" class="nav-prod-pill" data-id="prod-pp">♵ 浮游随行杯</a>
+      <a href="product.html?id=prod-ldpe" class="nav-prod-pill" data-id="prod-ldpe">♴ 海风云朵灯</a>
+      <a href="product.html?id=prod-micro" class="nav-prod-pill" data-id="prod-micro">♹ 微塑料吊坠</a>
+    </nav>
+
+    <div class="nav-actions-right">
+      <button class="btn-nav-action" id="btnToggleAudio" title="开启/关闭深海氛围音效">🔈 开启环境音效</button>
+      <button class="btn-nav-action btn-nav-primary" id="btnHeaderCopyNfc" title="复制专属链接写入NFC标签">📱 复制NFC链接</button>
+      <a href="index.html" class="btn-nav-action">← 返回主展</a>
+    </div>
+  </header>
+
+  <!-- 主布局 -->
+  <main class="detail-main-layout">
+
+    <!-- ==========================================================================
+         模块 1: NFC 碰一碰即时识别横幅 (NFC Verified Tap Banner)
+         ========================================================================== -->
+    <section class="nfc-tap-banner" id="nfcVerifiedBanner">
+      <div class="nfc-banner-glow"></div>
+      <div class="nfc-banner-info">
+        <div class="nfc-radar-pulse">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 8a6 6 0 0 1 12 0"/>
+            <path d="M3 6a10 10 0 0 1 18 0"/>
+            <path d="M9 10a2 2 0 0 1 6 0"/>
+          </svg>
+        </div>
+        <div class="nfc-status-texts">
+          <h2>
+            <span>📱 NFC 芯片碰一碰识别已激活</span>
+            <span class="chip-tag-online">● 官方认证数字孪生档案</span>
+          </h2>
+          <p>
+            硬件芯片 UID: <strong id="bannerNfcChipId" style="font-family: monospace; color: #0284c7;">CHIP-NFC-8849-HDPE</strong>
+            · 确权哈希: <span id="bannerTokenHash" style="font-family: monospace;">0x8849...B10A</span>
+            · 认证时间戳: <span id="bannerVerifyTime">2026.09.18 14:30:25 UTC</span>
+          </p>
+        </div>
+      </div>
+      <div class="nfc-banner-tools">
+        <a href="#nfcWriterToolbox" class="btn-nav-action" style="background: #fef08a;">🏷️ NFC 烧录教程</a>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 2: 产品主展示区 & 3D 护照翻转卡 (Product Hero & 3D Passport)
+         ========================================================================== -->
+    <section class="product-hero-grid">
+      <!-- 左侧：图文与规格 -->
+      <article class="product-hero-card">
+        <div class="product-badges-row">
+          <div class="resin-stamp-pill" id="heroResinStamp">♴ HDPE</div>
+          <div class="nfc-serial-chip-badge" id="heroChipBadge">CHIP-NFC-8849-HDPE</div>
+        </div>
+
+        <div class="hero-product-title-wrap">
+          <h1 id="heroProdTitle">「深海漫游者」机能潮玩公仔</h1>
+          <div class="hero-product-english" id="heroProdEn">DEEP SEA WANDERER · MECHA ART TOY</div>
+        </div>
+
+        <blockquote class="hero-tagline-quote" id="heroTagline">
+          “将深海漂浮的工业杀手，重塑为你书桌上永不熄灭的深潜探索者。”
+        </blockquote>
+
+        <!-- 视觉展示舞台 -->
+        <div class="hero-visual-stage">
+          <div id="heroVisualDoodle">
+            <!-- 动态填充产品手绘 SVG -->
+          </div>
+          <div class="visual-origin-floating-tag" id="heroOriginFloating">
+            📍 东海舟山渔场近海捕捞
+          </div>
+        </div>
+
+        <!-- 快速物理规格 -->
+        <div class="product-specs-quick-grid">
+          <div class="spec-quick-box">
+            <div class="spec-quick-label">物理尺寸与重量</div>
+            <div class="spec-quick-val" id="specDimensions">高 145mm × 宽 82mm · 180g</div>
+          </div>
+          <div class="spec-quick-box">
+            <div class="spec-quick-label">回收再生成分占比</div>
+            <div class="spec-quick-val" id="specMaterial">85% 海洋回收塑料 + 15% 矿物调质</div>
+          </div>
+          <div class="spec-quick-box">
+            <div class="spec-quick-label">安全标准与环保认证</div>
+            <div class="spec-quick-val" id="specSafety">ROHS / REACH 欧盟环保认证</div>
+          </div>
+          <div class="spec-quick-box">
+            <div class="spec-quick-label">内置 NFC 物联芯片</div>
+            <div class="spec-quick-val" id="specChipType">NTAG213 高频柔性抗金属芯片</div>
+          </div>
+        </div>
+
+        <!-- 快捷 NFC 链接操作条 -->
+        <div class="nfc-action-quick-box">
+          <div class="nfc-quick-title">
+            <span>🏷️ 当前文创产品专属 NFC 写入网址</span>
+            <span style="font-size: 0.72rem; color: #64748b;">(手机轻碰将直达本页)</span>
+          </div>
+          <div class="nfc-url-display-group">
+            <input type="text" class="nfc-url-input" id="nfcTargetUrlInput" readonly value="http://localhost:3000/product.html?id=prod-hdpe">
+            <button class="btn-copy-nfc-url" id="btnCopyNfcUrl">📋 复制链接写入标签</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 右侧：3D 交互式数字护照翻转卡 -->
+      <aside class="passport-column-wrap">
+        <div class="passport-card-3d-stage">
+          <div class="passport-flipper-box" id="passportFlipper" title="点击护照翻转正反面">
+            
+            <!-- 护照正面 -->
+            <div class="passport-face passport-front">
+              <div class="passport-header-line">
+                <div class="passport-emblem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#091e3a" stroke-width="2.5">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                  <span>OCEAN RESCUE PASSPORT</span>
+                </div>
+                <div class="passport-cert-seal">
+                  <span>OFFICIAL</span>
+                  <strong>VERIFIED</strong>
+                  <span>2026</span>
+                </div>
+              </div>
+
+              <div class="passport-mid-visual">
+                <div class="passport-prod-icon" id="passportDoodleIcon"></div>
+                <div class="passport-prod-headline" id="passportProdTitle">深海漫游者潮玩</div>
+                <div class="passport-chip-uid-strip" id="passportChipUid">UID: CHIP-NFC-8849-HDPE</div>
+              </div>
+
+              <div>
+                <div class="passport-foot-grid">
+                  <div class="passport-stat-item">
+                    <div class="p-stat-val" id="passportStatCarbon">2.45 kg</div>
+                    <div class="p-stat-lbl">碳排放节省</div>
+                  </div>
+                  <div class="passport-stat-item">
+                    <div class="p-stat-val" id="passportStatClean">120 m²</div>
+                    <div class="p-stat-lbl">海域滩涂净化</div>
+                  </div>
+                  <div class="passport-stat-item">
+                    <div class="p-stat-val" id="passportStatDate">2026.09.18</div>
+                    <div class="p-stat-lbl">官方打捞认证日</div>
+                  </div>
+                </div>
+                <div class="passport-flip-tip">
+                  <span>↻ 点击护照卡片翻转查看深海溯源数据</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 护照反面 -->
+            <div class="passport-face passport-back">
+              <div class="passport-header-line">
+                <div class="passport-emblem" style="color: #38bdf8;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                  <span>TRACEABILITY DEEP LOG</span>
+                </div>
+                <div class="passport-cert-seal">
+                  <span>GPS COORD</span>
+                  <strong>VERIFIED</strong>
+                </div>
+              </div>
+
+              <div class="passport-back-data-rows">
+                <div class="back-data-row">
+                  <span>数字档案流水编号</span>
+                  <span id="backPassSerial">BS-PASS-884902</span>
+                </div>
+                <div class="back-data-row">
+                  <span>不可篡改确权哈希</span>
+                  <span id="backTokenHash">0x8849c71a39d8820f1b0a</span>
+                </div>
+                <div class="back-data-row">
+                  <span>打捞海域精准经纬度</span>
+                  <span id="backCoordinates">30°15'22"N, 122°48'10"E</span>
+                </div>
+                <div class="back-data-row">
+                  <span>执行打捞 AI 巡航舰</span>
+                  <span id="backSalvageVessel">AI-Orca 07 号捕捞巡航艇</span>
+                </div>
+                <div class="back-data-row">
+                  <span>生物链挽救评估指标</span>
+                  <span id="backRescueIndex">保护 38 尾幼龟免受割伤</span>
+                </div>
+                <div class="back-data-row">
+                  <span>自动注入治理基金</span>
+                  <span id="backFundInfo">49.80 元定向支持声波护鱼</span>
+                </div>
+              </div>
+
+              <div class="passport-back-qr-row">
+                <div class="passport-back-qr-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#091e3a" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                    <rect x="14" y="14" width="3" height="3"/>
+                    <rect x="18" y="18" width="3" height="3"/>
+                  </svg>
+                </div>
+                <div class="passport-back-qr-desc">
+                  <h4>物联双胞胎已在线激活</h4>
+                  <p>轻触物理文创实体 NFC 芯片，即可随时在任意手机调取本数字护照。</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <button class="btn-nav-action" id="btnFlipPassport" style="align-self: center;">
+          🔄 翻转数字护照卡片
+        </button>
+      </aside>
+    </section>
+
+    <!-- ==========================================================================
+         模块 3: 物理 NFC 标签写入与操作工具箱 (NFC Tag Programmer Toolbox)
+         ========================================================================== -->
+    <section class="nfc-writer-panel" id="nfcWriterToolbox">
+      <div class="panel-header-badge">
+        <h2>
+          <span>🏷️ 如何将本页面链接写入文创产品的 NFC 标签？</span>
+        </h2>
+        <span class="panel-en-tag">PHYSICAL NFC TAG PROGRAMMING GUIDE</span>
+      </div>
+
+      <div class="nfc-writer-step-grid">
+        <div class="nfc-step-box">
+          <div class="nfc-step-num">STEP 01</div>
+          <h4>下载 NFC Tools 应用</h4>
+          <p>在手机应用商店（App Store 或 安卓各大应用市场）免费搜索下载<strong>「NFC Tools」</strong>。</p>
+        </div>
+        <div class="nfc-step-box">
+          <div class="nfc-step-num">STEP 02</div>
+          <h4>添加网址写入记录</h4>
+          <p>打开 App，点击<strong>「写 (Write)」➔「添加记录」➔ 选择「网址 / URL」</strong>选项。</p>
+        </div>
+        <div class="nfc-step-box">
+          <div class="nfc-step-num">STEP 03</div>
+          <h4>粘贴专属产品链接</h4>
+          <p>点击下方按钮复制本产品的专属链接，直接粘贴到 App 输入框中并保存。</p>
+        </div>
+        <div class="nfc-step-box">
+          <div class="nfc-step-num">STEP 04</div>
+          <h4>手机贴近标签烧录</h4>
+          <p>点击「写入」，将手机背部 NFC 感应区紧贴文创产品的 NFC 芯片，提示成功即完成！</p>
+        </div>
+      </div>
+
+      <!-- 交互式链接生成与扫码测试区 -->
+      <div class="nfc-write-interactive-card">
+        <div class="nfc-qr-test-box">
+          <div class="nfc-qr-canvas-holder">
+            <canvas id="nfcQrCanvas"></canvas>
+          </div>
+          <div>
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: #78350f;">手机扫码直达测试</h4>
+            <p style="font-size: 0.8rem; color: #92400e; margin-top: 2px;">
+              还未烧录标签？可直接使用手机相机扫描左侧二维码，立即预览手机端碰一碰效果！
+            </p>
+          </div>
+        </div>
+
+        <div class="nfc-custom-domain-setter">
+          <label for="customHostInput">
+            ⚙️ 如需在局域网真机调试或已上线域名，可在下方自定义域名/IP：
+          </label>
+          <div class="custom-domain-row">
+            <input type="text" id="customHostInput" placeholder="例如：http://192.168.1.100:3000 或 https://your-domain.com">
+            <button class="btn-copy-nfc-url" id="btnWebNfcWrite" title="仅限部分安卓Chrome浏览器">⚡ 原生烧录</button>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748b;">
+            当前生成的 NFC 写入目标完整网址：<span id="nfcUrlPreviewText" style="font-family: monospace; color: #0284c7;"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 4: 海洋塑料蜕变与溯源时空轴 (Transformation Timeline)
+         ========================================================================== -->
+    <section class="section-card-panel">
+      <div class="panel-header-badge">
+        <h2>
+          <span>🌊 从海洋污染残片到艺术文创的重生之旅</span>
+        </h2>
+        <span class="panel-en-tag">CIRCULAR LIFECYCLE TIMELINE</span>
+      </div>
+
+      <div class="transformation-flow-grid">
+        <div class="flow-step-card">
+          <div class="step-num-bubble">1</div>
+          <h3>海洋打捞源头</h3>
+          <p id="flowStep1Desc">东海舟山渔场近海捕捞。形态特征：近海风化撕裂的化工桶与深海浮漂硬质残片。</p>
+        </div>
+        <div class="flow-step-card">
+          <div class="step-num-bubble">2</div>
+          <h3>微观危险解构</h3>
+          <p id="flowStep2Desc">在波浪撞击与紫外线暴晒下破碎成 100~500μm 粗糙颗粒，极易吸附持久性有机污染物。</p>
+        </div>
+        <div class="flow-step-card">
+          <div class="step-num-bubble">3</div>
+          <h3>先锋工艺再造</h3>
+          <p id="flowStep3Desc">40kHz 超声波表面微藻洗涤 ➔ 240℃ 低温惰性造粒 ➔ 模块化高精密注塑。</p>
+        </div>
+        <div class="flow-step-card">
+          <div class="step-num-bubble">4</div>
+          <h3>终极文创形态</h3>
+          <p id="flowStep4Desc">「深海漫游者」机能潮玩公仔，具备高耐候性与无毒纯化指标，保护 38 尾幼龟免受割伤。</p>
+        </div>
+      </div>
+
+      <!-- 手绘设计与生产蓝图海报展示 -->
+      <div class="sketch-illustration-container">
+        <img src="assets/images/nfc_flow_sketch.jpg" alt="从海洋塑料到NFT数字物联文创的手绘闭环蓝图">
+        <div class="sketch-caption">
+          ✦ 官方手绘设计蓝图：CIRCULAR DESIGN & AUTHENTICITY JOURNEY（实体文创碰一碰数字孪生链路）
+        </div>
+      </div>
+
+      <!-- 设计故事阐释 -->
+      <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px;">
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f3a60; margin-bottom: 8px;">
+          ✦ 文创设计叙事与理念故事
+        </h3>
+        <p id="productDesignStoryText" style="font-size: 0.9rem; color: #475569; line-height: 1.7;">
+          在东海舟山渔场，每年有数以千计破损的风化渔业浮标被洋流撕碎。我们回收这些坚韧耐候的高密度聚乙烯，通过冷流研磨与无损造粒，保留了海洋浪花般的天然云石纹理。机能关节设计灵感源自未来深海空间站潜航服，头部内置发光冷凝舱，胸口嵌合 NFC 确权芯片。
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 5: 微观显微镜视界与物性解析 (Microscope & Features)
+         ========================================================================== -->
+    <section class="section-card-panel">
+      <div class="panel-header-badge">
+        <h2>
+          <span>🔬 微塑料显微镜视界与材料特性解析</span>
+        </h2>
+        <span class="panel-en-tag">POLARIZING MICROSCOPE SIMULATION</span>
+      </div>
+
+      <div class="microscope-and-features-grid">
+        <!-- 显微镜实时仿真 Canvas -->
+        <div class="microscope-box-wrap">
+          <div class="microscope-controls-bar">
+            <span style="font-weight: 800; font-size: 0.88rem; color: #38bdf8;">实时偏光显微镜成像系统</span>
+            <div class="micro-zoom-btns">
+              <button class="btn-micro-zoom" data-zoom="100">100X</button>
+              <button class="btn-micro-zoom active" data-zoom="400">400X</button>
+              <button class="btn-micro-zoom" data-zoom="1000">1000X</button>
+            </div>
+          </div>
+
+          <div class="micro-canvas-stage">
+            <canvas id="microscopeCanvas"></canvas>
+            <svg class="canvas-crosshair" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4"/>
+              <line x1="50" y1="10" x2="50" y2="90" stroke="#38bdf8" stroke-width="1"/>
+              <line x1="10" y1="50" x2="90" y2="50" stroke="#38bdf8" stroke-width="1"/>
+            </svg>
+          </div>
+
+          <div class="micro-desc-box" id="microscopeDesc">
+            <strong>微观形态透视：</strong>当前标本采自打捞批次。在 400x 偏光显微镜下，清晰可见聚合物结晶微区与海洋微生物附着冷流痕迹。
+          </div>
+        </div>
+
+        <!-- 材料特性列表 -->
+        <div class="features-list-wrap" id="productFeaturesList">
+          <!-- 动态填充 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 6: 持有者专属特权与荣誉证书生成 (Owner Privileges & Certificate)
+         ========================================================================== -->
+    <section class="section-card-panel">
+      <div class="panel-header-badge">
+        <h2>
+          <span>🎫 文创持有者专属数字特权 & 荣誉档案</span>
+        </h2>
+        <span class="panel-en-tag">HOLDER PRIVILEGES & HONOR CERTIFICATE</span>
+      </div>
+
+      <div class="owner-privilege-grid">
+        <!-- 展会 VIP 通行凭证 -->
+        <div class="vip-pass-card">
+          <div>
+            <div class="vip-pass-badge">★ NFC CHIP PRIVILEGE</div>
+            <div class="vip-pass-content">
+              <h3>2026 未来海洋空间站展 · VIP 免票通行凭证</h3>
+              <p>向现场闸机或工作人员轻触出示本包含 NFC 芯片的实体文创产品，即可快速通道免费入场参观全部展馆。</p>
+            </div>
+          </div>
+
+          <div class="vip-barcode-strip">
+            <div>
+              <div style="font-size: 0.7rem; color: #64748b;">绑定文创凭证：<strong id="vipPassProdName" style="color: #091e3a;">深海漫游者潮玩</strong></div>
+              <div style="font-size: 0.65rem; color: #94a3b8; font-family: monospace;" id="vipPassChipId">CHIP-NFC-8849-HDPE</div>
+              <div class="barcode-svg-wrap" style="margin-top: 4px;">
+                <svg viewBox="0 0 200 35" fill="#091e3a">
+                  <rect x="0" y="0" width="3" height="35"/>
+                  <rect x="6" y="0" width="2" height="35"/>
+                  <rect x="12" y="0" width="6" height="35"/>
+                  <rect x="22" y="0" width="2" height="35"/>
+                  <rect x="28" y="0" width="4" height="35"/>
+                  <rect x="36" y="0" width="2" height="35"/>
+                  <rect x="42" y="0" width="7" height="35"/>
+                  <rect x="53" y="0" width="3" height="35"/>
+                  <rect x="60" y="0" width="5" height="35"/>
+                  <rect x="69" y="0" width="2" height="35"/>
+                  <rect x="75" y="0" width="6" height="35"/>
+                  <rect x="85" y="0" width="3" height="35"/>
+                  <rect x="92" y="0" width="2" height="35"/>
+                  <rect x="98" y="0" width="6" height="35"/>
+                  <rect x="108" y="0" width="4" height="35"/>
+                  <rect x="116" y="0" width="2" height="35"/>
+                  <rect x="122" y="0" width="5" height="35"/>
+                  <rect x="131" y="0" width="3" height="35"/>
+                  <rect x="138" y="0" width="7" height="35"/>
+                  <rect x="149" y="0" width="2" height="35"/>
+                  <rect x="155" y="0" width="4" height="35"/>
+                  <rect x="163" y="0" width="6" height="35"/>
+                  <rect x="173" y="0" width="3" height="35"/>
+                  <rect x="180" y="0" width="5" height="35"/>
+                  <rect x="190" y="0" width="3" height="35"/>
+                </svg>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div class="pass-verify-ok">✓ 核验有效</div>
+              <div style="font-size: 0.65rem; color: #64748b; margin-top: 4px; font-family: monospace;" id="vipPassSerial">BS-PASS-884902</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 专属「海洋守护者」荣誉海报与证书生成器 -->
+        <div class="certificate-generator-box">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 900; color: #166534;">
+              📜 生成专属「海洋守护者」荣誉证书海报
+            </h3>
+            <p style="font-size: 0.8rem; color: #15803d; margin-top: 2px;">
+              输入您的昵称，将自动盖上蔚蓝共生计划官方印章，生成可保存至手机相册的高清海报！
+            </p>
+          </div>
+
+          <div class="cert-input-row">
+            <input type="text" class="cert-user-input" id="certUserNameInput" placeholder="输入持有者姓名或昵称" value="蔚蓝深潜守护者">
+            <button class="btn-generate-cert" id="btnGenCert">刷新海报</button>
+          </div>
+
+          <div class="cert-canvas-preview-wrap">
+            <canvas id="certCanvas"></canvas>
+          </div>
+
+          <a href="#" class="btn-download-cert" id="btnDownloadCert" download="蔚蓝共生计划_守护者荣誉证书.png">
+            💾 下载证书海报至手机相册
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         模块 7: 探索其他 4 款文创产品 (Other Creative Products)
+         ========================================================================== -->
+    <section class="section-card-panel">
+      <div class="panel-header-badge">
+        <h2>
+          <span>🛍️ 探索其他蔚蓝共生系列物联文创</span>
+        </h2>
+        <span class="panel-en-tag">OTHER RECYCLED CREATIVE EDITIONS</span>
+      </div>
+
+      <div class="other-products-grid" id="otherProductsGrid">
+        <!-- 由 JavaScript 动态渲染其他 4 款产品 -->
+      </div>
+    </section>
+
+    <!-- 底部返回与行动召唤 -->
+    <footer class="detail-bottom-footer">
+      <a href="index.html" class="btn-back-home">
+        ← 返回蔚蓝共生计划主展厅
+      </a>
+      <p style="font-size: 0.82rem; color: #64748b;">
+        蔚蓝共生计划 (Blue Symbiosis) · 未来海洋微塑料治理与文创交互系统 · NFC 物联技术确权
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- 引入共享数据与控制器脚本 -->
+  <script src="js/products-data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/product-detail.js"></script>
+</body>
+</html>

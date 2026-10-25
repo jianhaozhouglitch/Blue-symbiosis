@@ -1,0 +1,1342 @@
+/* ==========================================================================
+   蔚蓝共生计划 (Blue Symbiosis) - 文创专有 2 级页面专用样式表
+   深度契合 NFC 手机感应落地页体验、手绘简笔画与未来科技美学
+   ========================================================================== */
+
+/* 顶部导航条 */
+.product-top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(240, 249, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--doodle-border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav-brand-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--c-dark-navy);
+}
+
+.nav-brand-logo {
+  width: 36px;
+  height: 36px;
+  background: var(--c-ice-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.nav-brand-text h1 {
+  font-size: 1.1rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.nav-brand-text .nav-badge {
+  font-size: 0.72rem;
+  font-family: var(--font-doodle-en);
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-center-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px;
+}
+
+.nav-prod-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--c-pure-white);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--c-navy);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-prod-pill:hover {
+  background: var(--c-ice-blue);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.nav-prod-pill.active {
+  background: var(--c-ocean-blue);
+  color: var(--c-pure-white);
+  border-color: var(--c-dark-navy);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.nav-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-nav-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  background: var(--c-pure-white);
+  color: var(--c-dark-navy);
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-nav-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--c-dark-navy);
+}
+
+.btn-nav-primary {
+  background: var(--c-ocean-blue);
+  color: var(--c-pure-white);
+}
+
+/* 核心容器 */
+.detail-main-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 80px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ==========================================================================
+   NFC 识别落地横幅 (NFC Verified Hologram Banner)
+   ========================================================================== */
+.nfc-tap-banner {
+  background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 50%, #bae6fd 100%);
+  border: var(--doodle-border-thick);
+  border-radius: 20px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: var(--doodle-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.nfc-banner-glow {
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+  animation: pulseGlow 4s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  100% { transform: scale(1.08); opacity: 1; }
+}
+
+.nfc-banner-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 1;
+}
+
+.nfc-radar-pulse {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  background: var(--c-pure-white);
+  border: 2.5px solid var(--c-dark-navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+  flex-shrink: 0;
+}
+
+.nfc-radar-pulse svg {
+  width: 28px;
+  height: 28px;
+  color: var(--c-ocean-blue);
+  animation: nfcWavePing 2s infinite ease-out;
+}
+
+@keyframes nfcWavePing {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(0.9); }
+}
+
+.nfc-status-texts h2 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip-tag-online {
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1.5px solid #15803d;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nfc-status-texts p {
+  font-size: 0.85rem;
+  color: #475569;
+  margin-top: 3px;
+}
+
+.nfc-banner-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   产品主展示区 (Product Hero & 3D Passport)
+   ========================================================================== */
+.product-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* 左侧：产品图文与核心指标 */
+.product-hero-card {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--doodle-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.product-badges-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.resin-stamp-pill {
+  background: var(--c-ice-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-family: var(--font-doodle-en);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-ocean-blue);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.nfc-serial-chip-badge {
+  background: #fef08a;
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: #713f12;
+}
+
+.hero-product-title-wrap h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.hero-product-english {
+  font-family: var(--font-doodle-en);
+  font-size: 1.05rem;
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.hero-tagline-quote {
+  background: #f8fafc;
+  border-left: 4px solid var(--c-ocean-blue);
+  padding: 12px 16px;
+  border-radius: 4px 12px 12px 4px;
+  font-size: 0.95rem;
+  color: #334155;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* 巨大简笔画产品形象展示 */
+.hero-visual-stage {
+  background: radial-gradient(circle, #e0f2fe 0%, #ffffff 70%);
+  border: 2.5px dashed var(--c-sky-blue);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual-stage .hero-main-doodle {
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(4px 4px 0px rgba(9, 30, 58, 0.2));
+  animation: gentleBob 4s ease-in-out infinite alternate;
+}
+
+@keyframes gentleBob {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(-1deg); }
+}
+
+.visual-origin-floating-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--c-navy);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+/* 核心快速规格表格 */
+.product-specs-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.spec-quick-box {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.spec-quick-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.spec-quick-val {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+  margin-top: 2px;
+}
+
+/* 快捷 NFC 链接操作条 */
+.nfc-action-quick-box {
+  background: #f0f9ff;
+  border: 2px solid var(--c-ocean-blue);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nfc-quick-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--c-ocean-blue);
+}
+
+.nfc-url-display-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nfc-url-input {
+  flex: 1;
+  background: var(--c-pure-white);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: var(--c-dark-navy);
+  outline: none;
+}
+
+.btn-copy-nfc-url {
+  background: var(--c-ocean-blue);
+  color: var(--c-pure-white);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-nfc-url:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+}
+
+/* 右侧：3D 护照翻转卡与特权卡 */
+.passport-column-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.passport-card-3d-stage {
+  perspective: 1200px;
+  min-height: 480px;
+}
+
+.passport-flipper-box {
+  width: 100%;
+  height: 480px;
+  position: relative;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.passport-flipper-box.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.passport-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: var(--doodle-border-thick);
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--doodle-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* 护照正面 */
+.passport-front {
+  background: linear-gradient(145deg, #ffffff 0%, #e0f2fe 55%, #bae6fd 100%);
+}
+
+.passport-back {
+  background: linear-gradient(145deg, #091e3a 0%, #0f3a60 60%, #1b4965 100%);
+  color: #ffffff;
+  transform: rotateY(180deg);
+}
+
+.passport-header-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.passport-emblem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.passport-emblem svg {
+  width: 32px;
+  height: 32px;
+}
+
+.passport-emblem span {
+  font-family: var(--font-doodle-en);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.passport-cert-seal {
+  background: #ffffff;
+  border: 2px dashed #0284c7;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-8deg);
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #0284c7;
+  text-align: center;
+  line-height: 1.1;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.passport-mid-visual {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.passport-mid-visual .passport-prod-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+}
+
+.passport-prod-headline {
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-top: 10px;
+}
+
+.passport-chip-uid-strip {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #0369a1;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.passport-foot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 14px;
+  padding: 10px;
+  text-align: center;
+}
+
+.passport-stat-item .p-stat-val {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+}
+
+.passport-stat-item .p-stat-lbl {
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.passport-flip-tip {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0369a1;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* 护照反面样式 */
+.passport-back .passport-cert-seal {
+  background: #091e3a;
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+.passport-back-data-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.back-data-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  padding-bottom: 6px;
+}
+
+.back-data-row span:first-child {
+  color: #94a3b8;
+}
+
+.back-data-row span:last-child {
+  color: #f0f9ff;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.passport-back-qr-row {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.passport-back-qr-box {
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 8px;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.passport-back-qr-box svg {
+  width: 100%;
+  height: 100%;
+}
+
+.passport-back-qr-desc h4 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #38bdf8;
+}
+
+.passport-back-qr-desc p {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   模块 2: 海洋塑料蜕变与溯源时空轴 (Transformation Timeline)
+   ========================================================================== */
+.section-card-panel {
+  background: var(--c-pure-white);
+  border: var(--doodle-border-thick);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--doodle-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.panel-header-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px dashed #cbd5e1;
+  padding-bottom: 16px;
+}
+
+.panel-header-badge h2 {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--c-dark-navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-en-tag {
+  font-family: var(--font-doodle-en);
+  font-size: 0.95rem;
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+}
+
+.transformation-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  position: relative;
+}
+
+.flow-step-card {
+  background: #f8fafc;
+  border: var(--doodle-border);
+  border-radius: 16px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.flow-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0px var(--c-dark-navy);
+  background: #f0f9ff;
+}
+
+.step-num-bubble {
+  width: 28px;
+  height: 28px;
+  background: var(--c-ocean-blue);
+  color: var(--c-pure-white);
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.flow-step-card h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+}
+
+.flow-step-card p {
+  font-size: 0.82rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.sketch-illustration-container {
+  border: 2px dashed var(--c-sky-blue);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f0f9ff;
+  padding: 12px;
+  text-align: center;
+}
+
+.sketch-illustration-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid var(--c-dark-navy);
+}
+
+.sketch-caption {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #475569;
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   模块 3: 微观显微镜与物理物性解析 (Microscope & Specs)
+   ========================================================================== */
+.microscope-and-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.microscope-box-wrap {
+  background: #091e3a;
+  border: var(--doodle-border-thick);
+  border-radius: 20px;
+  padding: 20px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 6px 6px 0px var(--c-dark-navy);
+}
+
+.microscope-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.micro-zoom-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-micro-zoom {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid #38bdf8;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-micro-zoom.active,
+.btn-micro-zoom:hover {
+  background: #0284c7;
+  border-color: #ffffff;
+}
+
+.micro-canvas-stage {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: #020617;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid #38bdf8;
+}
+
+#microscopeCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.micro-desc-box {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+  line-height: 1.5;
+}
+
+/* 核心特性卡片列 */
+.features-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.product-feature-item {
+  background: #f8fafc;
+  border: var(--doodle-border);
+  border-radius: 14px;
+  padding: 14px 18px;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.product-feature-item h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--c-ocean-blue);
+  margin-bottom: 4px;
+}
+
+.product-feature-item p {
+  font-size: 0.84rem;
+  color: #475569;
+}
+
+/* ==========================================================================
+   模块 4: 持有者专属特权 (VIP Pass & Certificate Generator)
+   ========================================================================== */
+.owner-privilege-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* 展会 VIP 通行凭证 */
+.vip-pass-card {
+  background: linear-gradient(135deg, #091e3a 0%, #0369a1 100%);
+  border: var(--doodle-border-thick);
+  border-radius: 20px;
+  padding: 24px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 6px 6px 0px var(--c-dark-navy);
+  position: relative;
+  overflow: hidden;
+}
+
+.vip-pass-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f59e0b;
+  color: #000000;
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1.5px solid #000000;
+  align-self: flex-start;
+}
+
+.vip-pass-content h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin-top: 8px;
+}
+
+.vip-pass-content p {
+  font-size: 0.84rem;
+  color: #bae6fd;
+  margin-top: 4px;
+}
+
+.vip-barcode-strip {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #091e3a;
+}
+
+.barcode-svg-wrap svg {
+  height: 38px;
+}
+
+.pass-verify-ok {
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #15803d;
+}
+
+/* 证书生成器 */
+.certificate-generator-box {
+  background: #f0fdf4;
+  border: var(--doodle-border-thick);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 6px 6px 0px var(--c-dark-navy);
+}
+
+.cert-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.cert-user-input {
+  flex: 1;
+  background: #ffffff;
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  outline: none;
+}
+
+.btn-generate-cert {
+  background: #10b981;
+  color: #ffffff;
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+.btn-generate-cert:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+}
+
+/* 证书画布容器 */
+.cert-canvas-preview-wrap {
+  background: #ffffff;
+  border: 2px dashed #86efac;
+  border-radius: 12px;
+  padding: 8px;
+  text-align: center;
+}
+
+#certCanvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-download-cert {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0284c7;
+  color: #ffffff;
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-download-cert:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--c-dark-navy);
+}
+
+/* ==========================================================================
+   模块 5: 物理 NFC 标签烧录与写入教学工具箱 (NFC Tag Writer Modal & Drawer)
+   ========================================================================== */
+.nfc-writer-panel {
+  background: linear-gradient(135deg, #fefce8 0%, #ffffff 100%);
+  border: var(--doodle-border-thick);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--doodle-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nfc-writer-step-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.nfc-step-box {
+  background: #ffffff;
+  border: var(--doodle-border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nfc-step-num {
+  font-family: var(--font-doodle-en);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #b45309;
+}
+
+.nfc-step-box h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--c-dark-navy);
+}
+
+.nfc-step-box p {
+  font-size: 0.8rem;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.nfc-write-interactive-card {
+  background: #ffffff;
+  border: 2px dashed #f59e0b;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nfc-qr-test-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nfc-qr-canvas-holder {
+  background: #ffffff;
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.nfc-qr-canvas-holder canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.nfc-custom-domain-setter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.nfc-custom-domain-setter label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #78350f;
+}
+
+.custom-domain-row {
+  display: flex;
+  gap: 8px;
+}
+
+.custom-domain-row input {
+  flex: 1;
+  background: #f8fafc;
+  border: 1.5px solid var(--c-dark-navy);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  outline: none;
+}
+
+/* ==========================================================================
+   模块 6: 浏览其他 4 款文创卡片列 (Other Products Carousel)
+   ========================================================================== */
+.other-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.other-prod-card {
+  background: #ffffff;
+  border: var(--doodle-border);
+  border-radius: 16px;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--c-dark-navy);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+  transition: all 0.25s ease;
+}
+
+.other-prod-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0px var(--c-dark-navy);
+  border-color: var(--c-ocean-blue);
+}
+
+.other-prod-thumb {
+  width: 100%;
+  height: 100px;
+  background: var(--c-ice-blue);
+  border-radius: 10px;
+  border: 1.5px dashed var(--c-sky-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.other-prod-thumb svg {
+  width: 60px;
+  height: 60px;
+}
+
+.other-prod-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+.other-prod-resin {
+  font-size: 0.78rem;
+  color: var(--c-ocean-blue);
+  font-weight: 700;
+}
+
+/* 底部操作与返回 */
+.detail-bottom-footer {
+  text-align: center;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--c-dark-navy);
+  color: var(--c-pure-white);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: 14px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 4px 4px 0px var(--c-ocean-blue);
+  transition: all 0.2s ease;
+}
+
+.btn-back-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px var(--c-ocean-blue);
+}
+
+/* Toast 提示浮层 */
+.toast-notice {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--c-dark-navy);
+  color: #ffffff;
+  border: 2px solid #38bdf8;
+  border-radius: 12px;
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+  .product-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .transformation-flow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .microscope-and-features-grid {
+    grid-template-columns: 1fr;
+  }
+  .owner-privilege-grid {
+    grid-template-columns: 1fr;
+  }
+  .nfc-writer-step-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .other-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-center-switcher {
+    display: none;
+  }
+  .nfc-tap-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nfc-banner-tools {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .product-hero-card {
+    padding: 20px;
+  }
+  .hero-product-title-wrap h1 {
+    font-size: 1.55rem;
+  }
+  .product-specs-quick-grid {
+    grid-template-columns: 1fr;
+  }
+  .transformation-flow-grid {
+    grid-template-columns: 1fr;
+  }
+  .nfc-writer-step-grid {
+    grid-template-columns: 1fr;
+  }
+  .other-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .nfc-url-display-group {
+    flex-direction: column;
+  }
+  .btn-copy-nfc-url {
+    width: 100%;
+  }
+}

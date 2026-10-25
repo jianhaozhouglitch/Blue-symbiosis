@@ -575,6 +575,8 @@ body.mobile-frame-mode .nfc-floating-bar {
   box-shadow: 3px 3px 0px var(--c-dark-navy);
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: var(--c-dark-navy);
 }
 
 .product-item-card:hover {
@@ -663,6 +665,24 @@ body.mobile-frame-mode .nfc-floating-bar {
   color: #64748b;
   margin-top: 6px;
   line-height: 1.4;
+}
+
+.product-card-arrow-indicator {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1.5px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--c-ocean-blue);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.product-item-card:hover .product-card-arrow-indicator {
+  transform: translateX(4px);
+  color: var(--c-navy);
 }
 
 /* ==========================================================================

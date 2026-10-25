@@ -3,11 +3,27 @@ const http = require('http');
 const urls = [
   'http://localhost:3000/',
   'http://localhost:3000/css/style.css',
+  'http://localhost:3000/css/product.css',
+  'http://localhost:3000/js/products-data.js',
+  'http://localhost:3000/js/product-detail.js',
   'http://localhost:3000/js/app.js',
   'http://localhost:3000/js/audio.js',
   'http://localhost:3000/js/game.js',
   'http://localhost:3000/js/map.js',
-  'http://localhost:3000/assets/images/hero_sketch.jpg'
+  'http://localhost:3000/product.html',
+  'http://localhost:3000/product.html?id=prod-hdpe',
+  'http://localhost:3000/product.html?id=prod-pet',
+  'http://localhost:3000/product.html?id=prod-pp',
+  'http://localhost:3000/product.html?id=prod-ldpe',
+  'http://localhost:3000/product.html?id=prod-micro',
+  'http://localhost:3000/product-hdpe.html',
+  'http://localhost:3000/product-pet.html',
+  'http://localhost:3000/product-pp.html',
+  'http://localhost:3000/product-ldpe.html',
+  'http://localhost:3000/product-micro.html',
+  'http://localhost:3000/assets/images/hero_sketch.jpg',
+  'http://localhost:3000/assets/images/nfc_flow_sketch.jpg',
+  'http://localhost:3000/assets/images/map_passport_sketch.jpg'
 ];
 
 async function checkUrl(url) {
@@ -27,9 +43,12 @@ async function checkUrl(url) {
 }
 
 (async () => {
-  console.log('Testing server endpoints...');
+  console.log('Testing server endpoints for 2nd-level pages and NFC routes...');
+  let allOk = true;
   for (const url of urls) {
-    await checkUrl(url);
+    const ok = await checkUrl(url);
+    if (!ok) allOk = false;
   }
-  process.exit(0);
+  console.log(allOk ? 'All endpoints OK!' : 'Some endpoints failed!');
+  process.exit(allOk ? 0 : 1);
 })();
