@@ -1001,19 +1001,29 @@ body.mobile-frame-mode .nfc-floating-bar {
 }
 
 /* ==========================================================================
-   模块 3: 三大核心战略流程 (The 3 Pillars of Blue Symbiosis)
+   模块 3: 四大核心战略流程 (The 4 Pillars of Blue Symbiosis)
    ========================================================================== */
 .strategy-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   margin-bottom: 40px;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1120px) {
+  .strategy-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
   .strategy-pillars-grid {
     grid-template-columns: 1fr;
   }
+}
+
+body.mobile-frame-mode .strategy-pillars-grid {
+  grid-template-columns: 1fr;
 }
 
 .pillar-card {

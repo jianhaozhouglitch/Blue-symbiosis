@@ -63,6 +63,11 @@ class ProductDetailController {
     if (path.includes('pp')) return 'prod-pp';
     if (path.includes('ldpe')) return 'prod-ldpe';
     if (path.includes('micro')) return 'prod-micro';
+    if (path.includes('keycap')) return 'prod-keycap';
+    if (path.includes('coastline')) return 'prod-coastline';
+    if (path.includes('paracord')) return 'prod-paracord';
+    if (path.includes('core')) return 'prod-core';
+    if (path.includes('conch')) return 'prod-conch';
 
     // 默认展示第一款
     return 'prod-hdpe';
@@ -105,7 +110,7 @@ class ProductDetailController {
     if (elOriginFloating) elOriginFloating.textContent = `📍 ${prod.originLocation.split('(')[0]}`;
 
     if (elVisualStage) {
-      elVisualStage.innerHTML = window.getProductDoodleSvgCode(prod.resinCode);
+      elVisualStage.innerHTML = window.getProductDoodleSvgCode(prod.resinCode, prod.slug || prod.id);
       const svg = elVisualStage.querySelector('svg');
       if (svg) svg.classList.add('hero-main-doodle');
     }
@@ -187,7 +192,7 @@ class ProductDetailController {
     const elPClean = document.getElementById('passportStatClean');
     const elPDate = document.getElementById('passportStatDate');
 
-    if (elPProdIcon) elPProdIcon.innerHTML = window.getProductDoodleSvgCode(prod.resinCode);
+    if (elPProdIcon) elPProdIcon.innerHTML = window.getProductDoodleSvgCode(prod.resinCode, prod.slug || prod.id);
     if (elPTitle) elPTitle.textContent = prod.shortName;
     if (elPChip) elPChip.textContent = `UID: ${prod.nfcChipId}`;
     if (elPSaved) elPSaved.textContent = prod.carbonSaved;
@@ -325,7 +330,7 @@ class ProductDetailController {
     container.innerHTML = others.map(p => `
       <a href="product.html?id=${p.id}" class="other-prod-card" data-id="${p.id}">
         <div class="other-prod-thumb">
-          ${window.getProductDoodleSvgCode(p.resinCode)}
+          ${window.getProductDoodleSvgCode(p.resinCode, p.slug || p.id)}
         </div>
         <div class="other-prod-name">${p.name}</div>
         <div class="other-prod-resin">${p.codeSymbol} · ${p.degradeYears}</div>

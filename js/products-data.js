@@ -219,6 +219,221 @@ var PRODUCTS_DATA = [
     fundRatio: '20%',
     fundContribution: '67.00 元定向拨付至深海纳米微塑料滤网研发',
     mapIndex: 4
+  },
+  {
+    id: 'prod-keycap',
+    slug: 'keycap',
+    dedicatedFile: 'product-keycap.html',
+    name: '「深渊之晶」透光树脂定制键帽',
+    englishName: 'CRYSTAL OF ABYSS · TRANSLUCENT RESIN KEYCAP',
+    shortName: '深渊之晶键帽',
+    plasticName: 'MICRO (微塑料微粒) + 环氧树脂',
+    resinCode: 7,
+    codeSymbol: '♹ MICRO',
+    nfcChipId: 'CHIP-NFC-6618-KEYCAP',
+    degradeYears: '人类时间尺度内不可自然降解',
+    colorTheme: '#6366f1',
+    tagBg: '#e0e7ff',
+    originLocation: '东海北部冷水洋流带 (AI船高密纳米滤网捕集彩斑微粒)',
+    salvageCoordinates: '31°20\'45"N, 123°15\'30"E',
+    salvageSeaArea: '中国东海北部 · 大陆架外缘冷涡区 06 监测海域',
+    salvageVessel: 'AI-Ray 03 号纳米声学深滤勘测艇',
+    sourceForm: '色彩斑斓的风化微塑料颗粒（破碎硬胶碎屑与彩色发泡胶微珠）',
+    processFlow: '微气泡声学悬浮聚拢 ➔ 级联微米离心筛分 ➔ 航天级高透环氧树脂真空脱泡灌封 ➔ 嵌入微型抗电磁 NFC 芯片',
+    tokenHash: '0x6618e9a25b3f11c874ad',
+    certDate: '2026.10.18',
+    passId: 'BS-PASS-661807',
+    rescueIndex: '永久封存 65,000+ 颗微塑料，切断浮游生物链中毒链条',
+    carbonSaved: '1.85 kg CO₂e',
+    cleanArea: '180 m² 深海滤水面积',
+    dimensions: '标准 OEM / 原厂高度 R4 (ESC/F区) · 净重约 8.5g · 兼容十字轴体',
+    composition: '海洋回收微塑料微粒 + 航天级高透环氧树脂 + 纳米抗黄变涂层',
+    safetyCert: 'RoHS 欧盟电气环保标准 · REACH 高分子无毒认证 · SGS 防刮抗黄变认证',
+    chipType: 'NTAG213 超微型圆形抗金属抗电磁芯片 (直径 9mm，悬浮于键帽十字柱顶端)',
+    tagline: '每一次指尖敲击，都是来自深海 4000 米深渊的幽蓝回响。',
+    designStory: '在深海中，有机碎屑沉降被称为“海洋雪”，而微塑料颗粒的混入打破了自然的平衡。我们将捕集的彩斑微塑料封存于晶莹剔透的高透树脂键帽中，保留其受海浪拍击打磨的原始断面。透过键盘的背光，微塑料宛如星河在键上流淌，内置 NFC 芯片一碰即直达打捞水域原声与数字孪生凭证。',
+    features: [
+      { title: '深海海洋雪透光特效', desc: 'RGB 轴体灯光透过微塑料悬浮阵列，折射出波光粼粼的幽蓝深海漫反射光效。' },
+      { title: '微型抗干扰 NFC 嵌合', desc: '采用特制超小抗金属抗电磁线圈芯片，即便置于机械键盘金属定位板上也能敏锐感应。' },
+      { title: '永久隔绝微塑料危害', desc: '生物基高透树脂全密封无缝包裹，微塑料与人体、水体永久物理隔离。' }
+    ],
+    microDanger: '微塑料微粒在日光紫外线与海水盐雾长年侵蚀下形成微孔孔隙，极易吸附海水中富集的多环芳烃（PAHs）与多氯联苯（PCBs），随食物链不断向上蓄积。',
+    microscopeType: 'micro',
+    fundRatio: '20%',
+    fundContribution: '42.00 元定向拨付至深海声学微气泡滤网运维专项基金',
+    mapIndex: 5
+  },
+  {
+    id: 'prod-coastline',
+    slug: 'coastline',
+    dedicatedFile: 'product-coastline.html',
+    name: '「重塑海岸线」模块化肌理扩香石/装饰板',
+    englishName: 'RECLAIMED COASTLINE · MODULAR AROMA STONE & PANEL',
+    shortName: '重塑海岸线扩香石',
+    plasticName: '混合再生塑料 (rPET/PP) + 生态水泥/石膏',
+    resinCode: 3,
+    codeSymbol: '♳♵ HYBRID',
+    nfcChipId: 'CHIP-NFC-4421-COAST',
+    degradeYears: '自然降解约 400 年',
+    colorTheme: '#059669',
+    tagBg: '#d1fae5',
+    originLocation: '南海三亚近岸珊瑚暗礁带 (废弃聚酯饮料瓶与外卖PP餐盒混合物)',
+    salvageCoordinates: '18°12\'30"N, 109°31\'15"E',
+    salvageSeaArea: '中国南海 · 亚龙湾外缘近岸水域 04 治理区',
+    salvageVessel: 'AI-Diver 05 号近海清淤巡航艇',
+    sourceForm: '近岸撕裂沉底的 rPET 瓶片与硬质 PP 打包盒残体',
+    processFlow: '多级超声除盐去藻 ➔ 低温机械撕碎成 2~5mm 粗骨料 ➔ 结合超细生态水泥真空浇筑 ➔ CNC 数控雕刻等高线微流道 ➔ 嵌合 NFC 感应模块',
+    tokenHash: '0x4421b8f031c59918ad4e',
+    certDate: '2026.10.22',
+    passId: 'BS-PASS-442103',
+    rescueIndex: '消减近海 850g 塑料硬质沉积物，解救 45 只底栖贝类生境',
+    carbonSaved: '3.20 kg CO₂e',
+    cleanArea: '160 m² 珊瑚海滩净化',
+    dimensions: '单块 120mm × 120mm × 22mm · 净重约 320g · 支持磁吸/无痕胶壁挂',
+    composition: '40% 海洋回收塑料骨料 (rPET/PP) + 55% 生态矿物石膏/低碳硅酸盐水泥 + 5% 天然矿物颜料',
+    safetyCert: '十环认证绿色建材标准 · GB 18580 室内装饰无有害释放 · 不含苯系挥发物与甲醛',
+    chipType: 'NTAG213 耐潮湿硅胶封装 NFC 芯片 (埋设于等高线“原点”标记下方)',
+    tagline: '让深海的等高起伏在空间呼吸，精油流淌的每一道微海沟都在讲述重生的故事。',
+    designStory: '海洋中的废弃塑料碎片在波浪与沙石冲刷下，会呈现类似风化岩石的钝角质感。我们将这一特征转化为空间设计的结构语言，以海洋等高线为母题，将 rPET 与 PP 碎屑融于生态水泥中。精油滴入宛如海水潮汐涌入峡谷，在室内空间营造视觉、嗅觉与数字触碰三重沉浸体验。',
+    features: [
+      { title: '微海沟毛细导流挥发', desc: '精准数控微等高线沟槽，利用表面张力与微孔毛细结构让香氛精油缓慢流淌并自然散香。' },
+      { title: '模块化无限空间拼贴', desc: '几何边缘互锁卡扣结构，既可作为单件桌面扩香器，亦可拼装拼接为大型环保肌理艺术背景墙。' },
+      { title: '环保水泥与塑料共生', desc: '回收塑料作为轻质骨料替代天然砂石开采，减重 35% 的同时固化锁闭塑料废弃物。' }
+    ],
+    microDanger: '混合塑料碎片在水下沉积物中与海砂混合，阻止底栖附着生物固着，并在长波紫外线与波浪摩擦下持续脱落次生微米颗粒。',
+    microscopeType: 'pp',
+    fundRatio: '20%',
+    fundContribution: '52.00 元定向拨付至南海近岸珊瑚礁与滩涂生态修护',
+    mapIndex: 6
+  },
+  {
+    id: 'prod-paracord',
+    slug: 'paracord',
+    dedicatedFile: 'product-paracord.html',
+    name: '「洋流轨迹」机能风伞绳/相机背带',
+    englishName: 'OCEAN CURRENT TRACE · TECHNICAL PARACORD STRAP',
+    shortName: '洋流轨迹伞绳背带',
+    plasticName: 'Recycled Nylon (废弃渔网/深海拖网)',
+    resinCode: 7,
+    codeSymbol: '♹ PA-NYLON',
+    nfcChipId: 'CHIP-NFC-3389-NYLON',
+    degradeYears: '自然降解约 600 年',
+    colorTheme: '#0284c7',
+    tagBg: '#e0f2fe',
+    originLocation: '东海北部济州海峡渔场 (沉底绝户网与深海风化尼龙拖网)',
+    salvageCoordinates: '32°45\'10"N, 126°10\'20"E',
+    salvageSeaArea: '东海与黄海交界洋流区 · 07 号废弃幽灵渔网打捞点',
+    salvageVessel: 'AI-NetBreaker 01 号重型拖网拦截回收船',
+    sourceForm: '沉没海床的破损高强度尼龙渔网、缆绳与防浪网结',
+    processFlow: '高压淡水除盐脱藻 ➔ 机械分级破丝 ➔ 深度脱聚再生PA6切片 ➔ 纳米抗老化复配拉丝 ➔ 7芯求生伞绳手工编织 ➔ 金属机能扣装配',
+    tokenHash: '0x3389ff7142ea802bc519',
+    certDate: '2026.10.25',
+    passId: 'BS-PASS-338907',
+    rescueIndex: '消减 1.2kg 高危缠绕尼龙拖网，解除对 12 只海豹与海豚幼体的致命威胁',
+    carbonSaved: '5.60 kg CO₂e',
+    cleanArea: '380 m² 幽灵渔网清理区',
+    dimensions: '总长 115cm~145cm 可调节 · 绳径 10mm (双股编织) · 净重约 165g',
+    composition: '100% 海洋回收再生尼龙 (Econyl/PA6) 伞绳 + 航空级高强度铝锌合金快拆扣',
+    safetyCert: 'OEKO-TEX 生态纺织认证 · GRS 全球回收标准认证 · 国家纺织品安全技术规范 A类',
+    chipType: 'NTAG213 超薄柔性热压防水织唛芯片 (植入于背带皮质连接处的保护封套内)',
+    tagline: '斩断幽灵渔网的无声杀戮，编织成挂载于你肩头的坚不可摧之索。',
+    designStory: '散落大洋的“幽灵渔网”是海龟、海豹和鲸豚最为致命的梦魇，数百年不会腐烂。我们将这些充满破坏力的深海尼龙拖网回收并重新拉丝成坚不可摧的 7 芯机能伞绳，搭配工业感十足的重工金属扣具。它不仅是一条强韧的相机背带，更是将海洋中致命的禁锢解构成年轻机能生活方式的宣言。',
+    features: [
+      { title: '极致拉力与军工级耐磨', desc: '单根伞绳静载承重超 250kg，无惧雨水、汗液与海水盐雾侵蚀，经久耐磨不松散。' },
+      { title: '求生编织工艺与快拆机能', desc: '经典眼镜蛇/金刚结编织，配备重工锌合金快拆卡扣与三点定位防晃绳，快拆换装一秒搞定。' },
+      { title: '一绳多用潮流互联模块', desc: '既能作为专业单反相机背带，也可拆卸为随身手机斜挎绳，或挂载于「涌浪之间」机能挎包作为强化负重带。' }
+    ],
+    microDanger: '尼龙拖网在海流长期拉扯下断裂为数以万计的尼龙超细单丝与纳米微纤维，缠绕海洋鱼鳃并进入生物消化道，造成不可逆的内脏器官划伤。',
+    microscopeType: 'pet',
+    fundRatio: '20%',
+    fundContribution: '62.00 元定向拨付至东海幽灵渔网清网专项基金',
+    mapIndex: 7
+  },
+  {
+    id: 'prod-core',
+    slug: 'core',
+    dedicatedFile: 'product-core.html',
+    name: '「深蓝档案」海洋沉积物微缩柱体标本',
+    englishName: 'DEEP BLUE ARCHIVE · OCEAN SEDIMENT CORE SPECIMEN',
+    shortName: '深蓝档案微缩标本',
+    plasticName: '全品类混合废弃物 (LDPE/PP/HDPE/MICRO)',
+    resinCode: 7,
+    codeSymbol: '♳-♹ ALL-PLASTIC',
+    nfcChipId: 'CHIP-NFC-1092-CORE',
+    degradeYears: '分层递进 100~500+ 年',
+    colorTheme: '#0f3a60',
+    tagBg: '#e0f2fe',
+    originLocation: '西太平洋马里亚纳海沟周边水域 (从海面漂浮层至沉降层立体取样)',
+    salvageCoordinates: '11°21\'00"N, 142°12\'00"E',
+    salvageSeaArea: '西太平洋盆地边缘 · 08 号深海立体取样监测井',
+    salvageVessel: 'AI-Challenger 01 号全海深沉积物巡航勘探艇',
+    sourceForm: '表层漂浮 LDPE 撕裂薄膜 + 中层悬浮 PP/HDPE 破损硬质碎块 + 底层高密沉水级微塑料微粒',
+    processFlow: '立体多深层分选打捞 ➔ 表面脱毒无害化清洗 ➔ 按密度与沉积动力学梯度精准分层 ➔ 航天级高纯亚克力柱真空惰性气体封注 ➔ 底座嵌入 NFC 交互芯片',
+    tokenHash: '0x1092a7c499e03d528b7a',
+    certDate: '2026.10.28',
+    passId: 'BS-PASS-109207',
+    rescueIndex: '采样封存 210,000+ 粒全深度塑料残骸，为海洋科研提供完整标本档案',
+    carbonSaved: '4.50 kg CO₂e',
+    cleanArea: '450 m² 立体水体勘测区',
+    dimensions: '高 240mm × 柱体直径 50mm · 铝合金底座 75mm × 75mm · 净重约 580g',
+    composition: '真实海洋全层位回收塑料样本 + 99.5% 高透抗紫外亚克力密封柱 + 航空级喷砂氧化铝底座',
+    safetyCert: '全密封物理隔离认证 · RoHS 环保检测 · 阻燃抗跌落实验室安全标准',
+    chipType: 'NTAG215 大容量高频 NFC 芯片 (嵌于铝合金底座中央聚合物射频透窗)',
+    tagline: '这不是一件普通的标本，而是一部切开深海、封存人类文明碳基痕迹的立体地质史书。',
+    designStory: '地质学家通过冰芯与岩芯洞察百万年地球气候，而未来的地质学家将通过“塑料岩层”定义人类纪。我们将不同密度的回收海洋塑料依据沉降物理学在亚克力柱中层层固化——表层是漂浮数十年的阳光暴晒 LDPE 残片，中层是悬浮的 PP 与 HDPE 碎裂齿痕，底层则是沉入海渊的超细微塑料。触碰基座，向每个人直观呈现海洋真实的沉重。',
+    features: [
+      { title: '全海深地质柱状取芯设计', desc: '采用科研级地质勘探柱规制，精准还原表层漂浮物、中层中性悬浮物与深海沉积物的三维分布。' },
+      { title: '工业风桌面科普数据模型', desc: '极具未来科幻实验室美感的桌面摆件，柱身激光雕刻深度刻度与年代降解推演标尺。' },
+      { title: 'NFC 触碰解锁沉浸式数字大屏', desc: '手机碰击亚克力柱基座，即刻唤醒全三维水体污染演进模拟器与打捞全景纪录。' }
+    ],
+    microDanger: '海洋微塑料不仅存在于表层，随着生物絮团（海洋雪）沉降，微塑料正向数千米乃至万米海底全面渗透，成为永久性人类地质沉积层的一部分。',
+    microscopeType: 'micro',
+    fundRatio: '20%',
+    fundContribution: '78.00 元定向拨付至西太平洋全海深微塑料环境监测项目',
+    mapIndex: 8
+  },
+  {
+    id: 'prod-conch',
+    slug: 'conch',
+    dedicatedFile: 'product-conch.html',
+    name: '「共振海螺」无源声学手机扩音底座',
+    englishName: 'RESONANT CONCH · PASSIVE ACOUSTIC PHONE DOCK',
+    shortName: '共振海螺扩音座',
+    plasticName: 'HDPE (高密度聚乙烯)',
+    resinCode: 2,
+    codeSymbol: '♴ HDPE',
+    nfcChipId: 'CHIP-NFC-5188-CONCH',
+    degradeYears: '自然降解约 500 年',
+    colorTheme: '#0284c7',
+    tagBg: '#e0f2fe',
+    originLocation: '东海北部海岛暗礁冲刷带 (废弃硬质浮筒与耐压渔箱)',
+    salvageCoordinates: '29°40\'15"N, 122°28\'35"E',
+    salvageSeaArea: '中国东海中北部 · 韭山列岛海鸟自然保护区近岸',
+    salvageVessel: 'AI-Orca 08 号近海清塑巡航艇',
+    sourceForm: '风化破损的高韧性工业浮箱与抗撞击硬质托盘',
+    processFlow: '高能无损超声去藻 ➔ 破碎并保留天然色彩大理石流纹 ➔ 高精度 3D 打印流线型螺旋声学腔体 ➔ 表面手工打磨抛光 ➔ 底部注模内嵌 NFC',
+    tokenHash: '0x5188d3e904bc12693fa7',
+    certDate: '2026.11.01',
+    passId: 'BS-PASS-518802',
+    rescueIndex: '清剿 1.5kg 硬质塑料残片，消除 25 巢海鸟幼雏被缠绕误食危机',
+    carbonSaved: '2.95 kg CO₂e',
+    cleanArea: '140 m² 海鸟保护区水域',
+    dimensions: '长 150mm × 宽 110mm × 高 95mm · 净重约 310g · 手机槽宽 88mm 深度 14mm',
+    composition: '100% 海洋打捞回收高密度聚乙烯 (HDPE) + 防滑硅胶脚垫',
+    safetyCert: '无重金属析出 · 欧盟 RoHS 环保认证 · 食品接触级安全原料纯化标准',
+    chipType: 'NTAG213 触控快速感应芯片 (封装于手机插槽底部减震胶垫正下方)',
+    tagline: '无需一度电，以来自大海的号角，重新放大浪潮击石的纯粹回响。',
+    designStory: '海洋软体动物历经亿万年演化出的螺旋海螺壳，是自然界最完美的无源声学扩音腔。而人类倾倒在海里的 HDPE 工业塑料因其高密度和优异的声波反射率，恰好是绝佳的声学材料。我们将打捞的 HDPE 重新熔融，以仿生参数化 3D 建模打印成双螺旋海螺。把手机放入槽位，手机扬声器的声音被放大延展，仿佛在耳边捧起了一整片喧腾的海。',
+    features: [
+      { title: '仿生海螺双螺旋无源声学腔', desc: '依据声学号角方程计算流线腔体，无需电源即可实现物理扩音 +12dB，声音饱满自然。' },
+      { title: '中低频自然共鸣声学优化', desc: '针对 120Hz~500Hz 海浪与人声频段进行物理共振阻抗匹配，音质温润醇厚。' },
+      { title: '手机插入即触碰 NFC 联动', desc: '手机插槽底端内置 NFC 感应标签，插入即刻弹窗启动“蔚蓝深海潮汐原声电台”。' }
+    ],
+    microDanger: '废弃 HDPE 硬质塑料在海岛礁石冲撞下持续脱落厘米至毫米级硬质尖锐碎屑，容易堵塞海鸟和海龟咽喉，阻碍消化吸收。',
+    microscopeType: 'hdpe',
+    fundRatio: '20%',
+    fundContribution: '46.50 元定向拨付至东海韭山列岛海鸟栖息地保护项目',
+    mapIndex: 9
   }
 ];
 
@@ -238,7 +453,81 @@ function getProductNfcUrl(productId, customBaseUrl) {
 }
 
 // 辅助方法：生成各产品手绘简笔画图标 SVG
-function getProductDoodleSvgCode(resinCode) {
+function getProductDoodleSvgCode(resinCode, slugOrId) {
+  const key = (slugOrId || '').toLowerCase();
+
+  // 1. 优先按产品特征匹配独有专属图标
+  if (key.includes('conch')) {
+    // 共振海螺无源扩音座
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <path d="M 24,56 C 18,44 26,28 42,24 C 58,20 66,34 62,48 C 58,60 44,62 34,60 C 26,58 24,56 24,56 Z" fill="#bae6fd" stroke="#091e3a" stroke-width="2.5" />
+        <path d="M 34,34 C 42,30 52,34 50,44 C 48,52 38,54 34,50" fill="none" stroke="#0284c7" stroke-width="2" />
+        <rect x="28" y="16" width="24" height="20" rx="3" fill="#ffffff" stroke="#091e3a" stroke-width="2" />
+        <line x1="36" y1="32" x2="44" y2="32" stroke="#091e3a" stroke-width="2" stroke-linecap="round" />
+        <path d="M 64,36 Q 70,42 66,48" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" />
+        <path d="M 68,32 Q 76,42 70,52" fill="none" stroke="#091e3a" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    `;
+  } else if (key.includes('keycap')) {
+    // 深渊之晶透光树脂定制键帽
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <polygon points="26,30 54,30 62,58 18,58" fill="#e0e7ff" stroke="#091e3a" stroke-width="2.5" />
+        <polygon points="30,34 50,34 56,54 24,54" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" />
+        <circle cx="34" cy="42" r="2.5" fill="#ef4444" />
+        <circle cx="46" cy="40" r="2" fill="#3b82f6" />
+        <circle cx="40" cy="48" r="3" fill="#10b981" />
+        <circle cx="48" cy="47" r="1.5" fill="#f59e0b" />
+        <path d="M 36,22 Q 40,18 44,22" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" />
+        <path d="M 32,18 Q 40,12 48,18" fill="none" stroke="#091e3a" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    `;
+  } else if (key.includes('coastline')) {
+    // 重塑海岸线模块化扩香石/装饰板
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <rect x="20" y="24" width="40" height="40" rx="6" fill="#f1f5f9" stroke="#091e3a" stroke-width="2.5" />
+        <path d="M 24,36 Q 34,30 44,38 T 60,34" fill="none" stroke="#10b981" stroke-width="2" />
+        <path d="M 20,46 Q 32,42 42,48 T 60,44" fill="none" stroke="#0284c7" stroke-width="2.5" />
+        <path d="M 24,56 Q 36,52 48,56 T 58,54" fill="none" stroke="#091e3a" stroke-width="1.5" />
+        <path d="M 42,20 C 42,20 46,26 46,28 A 4,4 0 0,1 38,28 C 38,26 42,20 42,20 Z" fill="#059669" stroke="#091e3a" stroke-width="1.5" />
+      </svg>
+    `;
+  } else if (key.includes('paracord')) {
+    // 洋流轨迹机能风伞绳相机背带
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <path d="M 24,20 Q 40,14 56,20 L 52,48 Q 40,56 28,48 Z" fill="#bae6fd" stroke="#091e3a" stroke-width="2.5" />
+        <line x1="28" y1="26" x2="48" y2="40" stroke="#0284c7" stroke-width="2" stroke-linecap="round" />
+        <line x1="48" y1="26" x2="28" y2="40" stroke="#0284c7" stroke-width="2" stroke-linecap="round" />
+        <line x1="30" y1="36" x2="50" y2="50" stroke="#0284c7" stroke-width="2" stroke-linecap="round" />
+        <line x1="50" y1="36" x2="30" y2="50" stroke="#0284c7" stroke-width="2" stroke-linecap="round" />
+        <rect x="32" y="52" width="16" height="18" rx="3" fill="#334155" stroke="#091e3a" stroke-width="2" />
+        <circle cx="40" cy="61" r="3" fill="#ffffff" />
+      </svg>
+    `;
+  } else if (key.includes('core')) {
+    // 深蓝档案海洋沉积物柱体标本
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <rect x="30" y="16" width="20" height="48" rx="4" fill="#ffffff" stroke="#091e3a" stroke-width="2.5" />
+        <rect x="32" y="18" width="16" height="10" fill="#bae6fd" />
+        <line x1="30" y1="28" x2="50" y2="28" stroke="#091e3a" stroke-width="1" stroke-dasharray="2 2" />
+        <rect x="32" y="28" width="16" height="16" fill="#38bdf8" />
+        <circle cx="37" cy="36" r="1.5" fill="#091e3a" />
+        <circle cx="43" cy="38" r="1.5" fill="#091e3a" />
+        <line x1="30" y1="44" x2="50" y2="44" stroke="#091e3a" stroke-width="1" stroke-dasharray="2 2" />
+        <rect x="32" y="44" width="16" height="18" fill="#0f3a60" />
+        <circle cx="36" cy="50" r="1" fill="#ef4444" />
+        <circle cx="44" cy="53" r="1" fill="#f59e0b" />
+        <circle cx="38" cy="58" r="1" fill="#10b981" />
+        <rect x="22" y="64" width="36" height="6" rx="2" fill="#cbd5e1" stroke="#091e3a" stroke-width="2" />
+      </svg>
+    `;
+  }
+
+  // 2. 经典 5 款按 resinCode 回退
   if (resinCode === 2) {
     // 潮玩公仔 (HDPE)
     return `

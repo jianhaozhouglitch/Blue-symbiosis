@@ -129,6 +129,136 @@ var PRODUCTS_DATA = (typeof window !== 'undefined' && window.PRODUCTS_DATA) ? wi
     certDate: '2026.10.12',
     mapIndex: 4,
     colorTheme: '#0284c7'
+  },
+  {
+    id: 'prod-keycap',
+    slug: 'keycap',
+    name: '「深渊之晶」透光树脂定制键帽',
+    shortName: '深渊之晶键帽',
+    plasticName: 'MICRO (微塑料微粒) + 环氧树脂',
+    resinCode: 7,
+    codeSymbol: '♹ MICRO',
+    nfcChipId: 'CHIP-NFC-6618-KEYCAP',
+    degradeYears: '人类时间尺度内不可自然降解',
+    originLocation: '东海北部冷水洋流带 (AI船高密纳米滤网捕集彩斑微粒)',
+    sourceForm: '色彩斑斓的风化微塑料颗粒（破碎硬胶碎屑与彩色发泡胶微珠）',
+    processFlow: '微气泡声学悬浮聚拢 ➔ 级联微米离心筛分 ➔ 航天级高透环氧树脂真空脱泡灌封 ➔ 嵌入微型抗电磁 NFC 芯片',
+    features: [
+      { title: '深海海洋雪透光特效', desc: 'RGB 轴体灯光透过微塑料悬浮阵列，折射出波光粼粼的幽蓝深海漫反射光效。' },
+      { title: '微型抗干扰 NFC 嵌合', desc: '采用特制超小抗金属抗电磁线圈芯片，即便置于机械键盘金属定位板上也能敏锐感应。' }
+    ],
+    microDanger: '微塑料微粒在日光紫外线与海水盐雾长年侵蚀下形成微孔孔隙，极易吸附海水中富集的多环芳烃（PAHs）与多氯联苯（PCBs），随食物链不断向上蓄积。',
+    rescueIndex: '永久封存 65,000+ 颗微塑料，切断浮游生物链中毒链条',
+    carbonSaved: '1.85 kg CO₂e',
+    cleanArea: '180 m² 深海滤水面积',
+    tokenHash: '0x6618...74AD',
+    certDate: '2026.10.18',
+    mapIndex: 5,
+    colorTheme: '#6366f1'
+  },
+  {
+    id: 'prod-coastline',
+    slug: 'coastline',
+    name: '「重塑海岸线」模块化肌理扩香石/装饰板',
+    shortName: '重塑海岸线扩香石',
+    plasticName: '混合再生塑料 (rPET/PP) + 生态水泥/石膏',
+    resinCode: 3,
+    codeSymbol: '♳♵ HYBRID',
+    nfcChipId: 'CHIP-NFC-4421-COAST',
+    degradeYears: '自然降解约 400 年',
+    originLocation: '南海三亚近岸珊瑚暗礁带 (废弃聚酯饮料瓶与外卖PP餐盒混合物)',
+    sourceForm: '近岸撕裂沉底的 rPET 瓶片与硬质 PP 打包盒残体',
+    processFlow: '多级超声除盐去藻 ➔ 低温机械撕碎成 2~5mm 粗骨料 ➔ 结合超细生态水泥真空浇筑 ➔ CNC 数控雕刻等高线微流道 ➔ 嵌合 NFC 感应模块',
+    features: [
+      { title: '微海沟毛细导流挥发', desc: '精准数控微等高线沟槽，利用表面张力与微孔毛细结构让香氛精油缓慢流淌并自然散香。' },
+      { title: '模块化无限空间拼贴', desc: '几何边缘互锁卡扣结构，既可作为单件桌面扩香器，亦可拼装拼接为大型环保肌理艺术背景墙。' }
+    ],
+    microDanger: '混合塑料碎片在水下沉积物中与海砂混合，阻止底栖附着生物固着，并在长波紫外线与波浪摩擦下持续脱落次生微米颗粒。',
+    rescueIndex: '消减近海 850g 塑料硬质沉积物，解救 45 只底栖贝类生境',
+    carbonSaved: '3.20 kg CO₂e',
+    cleanArea: '160 m² 珊瑚海滩净化',
+    tokenHash: '0x4421...AD4E',
+    certDate: '2026.10.22',
+    mapIndex: 6,
+    colorTheme: '#059669'
+  },
+  {
+    id: 'prod-paracord',
+    slug: 'paracord',
+    name: '「洋流轨迹」机能风伞绳/相机背带',
+    shortName: '洋流轨迹伞绳背带',
+    plasticName: 'Recycled Nylon (废弃渔网/深海拖网)',
+    resinCode: 7,
+    codeSymbol: '♹ PA-NYLON',
+    nfcChipId: 'CHIP-NFC-3389-NYLON',
+    degradeYears: '自然降解约 600 年',
+    originLocation: '东海北部济州海峡渔场 (沉底绝户网与深海风化尼龙拖网)',
+    sourceForm: '沉没海床的破损高强度尼龙渔网、缆绳与防浪网结',
+    processFlow: '高压淡水除盐脱藻 ➔ 机械分级破丝 ➔ 深度脱聚再生PA6切片 ➔ 纳米抗老化复配拉丝 ➔ 7芯求生伞绳手工编织 ➔ 金属机能扣装配',
+    features: [
+      { title: '极致拉力与军工级耐磨', desc: '单根伞绳静载承重超 250kg，无惧雨水、汗液与海水盐雾侵蚀，经久耐磨不松散。' },
+      { title: '求生编织工艺与快拆机能', desc: '经典眼镜蛇/金刚结编织，配备重工锌合金快拆卡扣与三点定位防晃绳，快拆换装一秒搞定。' }
+    ],
+    microDanger: '尼龙拖网在海流长期拉扯下断裂为数以万计的尼龙超细单丝与纳米微纤维，缠绕海洋鱼鳃并进入生物消化道，造成不可逆的内脏器官划伤。',
+    rescueIndex: '消减 1.2kg 高危缠绕尼龙拖网，解除对 12 只海豹与海豚幼体的致命威胁',
+    carbonSaved: '5.60 kg CO₂e',
+    cleanArea: '380 m² 幽灵渔网清理区',
+    tokenHash: '0x3389...C519',
+    certDate: '2026.10.25',
+    mapIndex: 7,
+    colorTheme: '#0284c7'
+  },
+  {
+    id: 'prod-core',
+    slug: 'core',
+    name: '「深蓝档案」海洋沉积物微缩柱体标本',
+    shortName: '深蓝档案微缩标本',
+    plasticName: '全品类混合废弃物 (LDPE/PP/HDPE/MICRO)',
+    resinCode: 7,
+    codeSymbol: '♳-♹ ALL-PLASTIC',
+    nfcChipId: 'CHIP-NFC-1092-CORE',
+    degradeYears: '分层递进 100~500+ 年',
+    originLocation: '西太平洋马里亚纳海沟周边水域 (从海面漂浮层至沉降层立体取样)',
+    sourceForm: '表层漂浮 LDPE 撕裂薄膜 + 中层悬浮 PP/HDPE 破损硬质碎块 + 底层高密沉水级微塑料微粒',
+    processFlow: '立体多深层分选打捞 ➔ 表面脱毒无害化清洗 ➔ 按密度与沉积动力学梯度精准分层 ➔ 航天级高纯亚克力柱真空惰性气体封注 ➔ 底座嵌入 NFC 交互芯片',
+    features: [
+      { title: '全海深地质柱状取芯设计', desc: '采用科研级地质勘探柱规制，精准还原表层漂浮物、中层中性悬浮物与深海沉积物的三维分布。' },
+      { title: '工业风桌面科普数据模型', desc: '极具未来科幻实验室美感的桌面摆件，柱身激光雕刻深度刻度与年代降解推演标尺。' }
+    ],
+    microDanger: '海洋微塑料不仅存在于表层，随着生物絮团（海洋雪）沉降，微塑料正向数千米乃至万米海底全面渗透，成为永久性人类地质沉积层的一部分。',
+    rescueIndex: '采样封存 210,000+ 粒全深度塑料残骸，为海洋科研提供完整标本档案',
+    carbonSaved: '4.50 kg CO₂e',
+    cleanArea: '450 m² 立体水体勘测区',
+    tokenHash: '0x1092...8B7A',
+    certDate: '2026.10.28',
+    mapIndex: 8,
+    colorTheme: '#0f3a60'
+  },
+  {
+    id: 'prod-conch',
+    slug: 'conch',
+    name: '「共振海螺」无源声学手机扩音底座',
+    shortName: '共振海螺扩音座',
+    plasticName: 'HDPE (高密度聚乙烯)',
+    resinCode: 2,
+    codeSymbol: '♴ HDPE',
+    nfcChipId: 'CHIP-NFC-5188-CONCH',
+    degradeYears: '自然降解约 500 年',
+    originLocation: '东海北部海岛暗礁冲刷带 (废弃硬质浮筒与耐压渔箱)',
+    sourceForm: '风化破损的高韧性工业浮箱与抗撞击硬质托盘',
+    processFlow: '高能无损超声去藻 ➔ 破碎并保留天然色彩大理石流纹 ➔ 高精度 3D 打印流线型螺旋声学腔体 ➔ 表面手工打磨抛光 ➔ 底部注模内嵌 NFC',
+    features: [
+      { title: '仿生海螺双螺旋无源声学腔', desc: '依据声学号角方程计算流线腔体，无需电源即可实现物理扩音 +12dB，声音饱满自然。' },
+      { title: '中低频自然共鸣声学优化', desc: '针对 120Hz~500Hz 海浪与人声频段进行物理共振阻抗匹配，音质温润醇厚。' }
+    ],
+    microDanger: '废弃 HDPE 硬质塑料在海岛礁石冲撞下持续脱落厘米至毫米级硬质尖锐碎屑，容易堵塞海鸟和海龟咽喉，阻碍消化吸收。',
+    rescueIndex: '清剿 1.5kg 硬质塑料残片，消除 25 巢海鸟幼雏被缠绕误食危机',
+    carbonSaved: '2.95 kg CO₂e',
+    cleanArea: '140 m² 海鸟保护区水域',
+    tokenHash: '0x5188...3FA7',
+    certDate: '2026.11.01',
+    mapIndex: 9,
+    colorTheme: '#0284c7'
   }
 ];
 
@@ -151,7 +281,7 @@ class AppManager {
     this.updateProductView(0);
   }
 
-  // 渲染 5 种文创产品列表（点击整个卡片区域直达专有 2 级介绍页）
+  // 渲染文创产品列表（点击整个卡片区域直达专有 2 级介绍页）
   renderProductsList() {
     const container = document.getElementById('productsScrollGrid');
     if (!container) return;
@@ -161,7 +291,7 @@ class AppManager {
     container.innerHTML = data.map((item, idx) => `
       <a href="product.html?id=${item.id}" class="product-item-card ${idx === 0 ? 'active' : ''}" data-idx="${idx}" id="prodCard-${idx}" title="点击直达「${item.name}」专有 2 级介绍页">
         <div class="product-thumb-box">
-          ${this.getProductDoodleSvg(item.resinCode)}
+          ${this.getProductDoodleSvg(item.resinCode, item.slug || item.id)}
           <div class="plastic-code-sticker">${item.codeSymbol}</div>
         </div>
         <div class="product-name">${item.name}</div>
@@ -185,7 +315,10 @@ class AppManager {
   }
 
   // 手绘简笔画文创产品图标 SVG
-  getProductDoodleSvg(resinCode) {
+  getProductDoodleSvg(resinCode, slugOrId) {
+    if (typeof window !== 'undefined' && window.getProductDoodleSvgCode) {
+      return window.getProductDoodleSvgCode(resinCode, slugOrId);
+    }
     if (resinCode === 2) {
       // 潮玩公仔 (HDPE)
       return `
