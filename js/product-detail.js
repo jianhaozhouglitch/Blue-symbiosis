@@ -1,6 +1,6 @@
 /* ==========================================================================
    蔚蓝共生计划 (Blue Symbiosis) - 文创专有 2 级页面核心控制器
-   处理 NFC 芯片认证、3D护照翻转、显微镜仿真、证书海报生成与 NFC 标签烧录
+   处理 NFC 芯片认证、3D护照翻转、显微镜仿真与证书海报生成
    ========================================================================== */
 
 class ProductDetailController {
@@ -191,7 +191,6 @@ class ProductDetailController {
     // 11. 重新绘制显微镜和海报
     this.drawMicroscope();
     this.drawCertificate();
-    this.updateNfcUrlInput();
   }
 
   // 更新 3D 护照正反面
