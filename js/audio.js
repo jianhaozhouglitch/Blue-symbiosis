@@ -14,16 +14,23 @@ class BlueSymbiosisAudio {
   init() {
     if (!this.ctx) {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) {
+        console.warn('Web Audio API is not supported in this browser.');
+        return false;
+      }
       this.ctx = new AudioContext();
     }
     if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
+      this.ctx.resume().catch((error) => {
+        console.warn('Unable to resume audio context:', error);
+      });
     }
+    return this.ctx.state !== 'closed';
   }
 
   // 切换全局静音/海浪声
   toggleMute() {
-    this.init();
+    if (!this.init()) return false;
     this.isMuted = !this.isMuted;
     if (!this.isMuted) {
       this.startOceanAmbient();
@@ -72,7 +79,7 @@ class BlueSymbiosisAudio {
       lfoGain.connect(filter.frequency);
 
       this.ambientGain = this.ctx.createGain();
-      this.ambientGain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+      this.ambientGain.gain.setValueAtTime(0.5, this.ctx.currentTime);
 
       this.noiseSource.connect(filter);
       filter.connect(this.ambientGain);
@@ -194,3 +201,4 @@ class BlueSymbiosisAudio {
 }
 
 window.blueAudio = new BlueSymbiosisAudio();
+window.BlueSymbiosisAudio = BlueSymbiosisAudio;
