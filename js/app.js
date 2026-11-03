@@ -620,7 +620,7 @@ class AppManager {
     if (btnAudioToggle) {
       btnAudioToggle.addEventListener('click', () => {
         const isPlaying = window.blueAudio.toggleMute();
-        btnAudioToggle.innerHTML = isPlaying ? '<span>🔊 海浪原声</span>' : '<span>🔇 静音模式</span>';
+        btnAudioToggle.innerHTML = isPlaying ? '<span>🔊</span>' : '<span>🔇</span>';
       });
     }
 

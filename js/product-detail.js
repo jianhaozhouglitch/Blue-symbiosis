@@ -268,12 +268,12 @@ class ProductDetailController {
     const btnAudioToggle = document.getElementById('btnToggleAudio');
     if (btnAudioToggle) {
       btnAudioToggle.textContent = this.audio && !this.audio.isMuted
-        ? '🔊 海浪环境声已开启'
-        : '🔈 开启深海环境音效';
+        ? '🔊'
+        : '🔈';
       btnAudioToggle.addEventListener('click', () => {
         if (this.audio) {
           const isPlaying = this.audio.toggleMute();
-          btnAudioToggle.textContent = isPlaying ? '🔊 海浪环境声已开启' : '🔈 开启深海环境音效';
+          btnAudioToggle.textContent = isPlaying ? '🔊' : '🔈';
           btnAudioToggle.classList.toggle('btn-nav-primary', isPlaying);
         }
       });
