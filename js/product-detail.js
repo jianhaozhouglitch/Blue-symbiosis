@@ -109,9 +109,12 @@ class ProductDetailController {
       const stageBox = elVisualStage.closest('.hero-visual-stage');
       if (prod.model3dIframeUrl) {
         if (stageBox) stageBox.classList.add('has-3d-model');
+        const modelUrl = new URL(prod.model3dIframeUrl);
+        modelUrl.searchParams.set('autoRotate', 'true');
+        modelUrl.searchParams.set('zoom', '1.15');
         elVisualStage.innerHTML = `
           <iframe 
-            src="${prod.model3dIframeUrl}" 
+            src="${modelUrl.toString()}" 
             class="model-3d-iframe" 
             title="${prod.name} 3D交互模型"
             frameborder="0" 
