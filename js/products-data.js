@@ -532,6 +532,94 @@ var PRODUCTS_DATA = [
     fundRatio: '20%',
     fundContribution: '36.00 元定向支持北太平洋幽灵渔网清理与海龟救助',
     mapIndex: 11
+  },
+  {
+    id: 'prod-turtle-bookmark',
+    slug: 'turtle-bookmark',
+    dedicatedFile: 'product-turtle-bookmark.html',
+    model3dIframeUrl: 'https://3d.hunyuan.tencent.com/share?shareId=2cfc0bf9-b0d3-49ec-82f4-1213d3ad3d00',
+    name: '废塑再生好运龟背书叶子挂饰',
+    englishName: 'LUCKY TURTLE LEAF CHARM · RECYCLED PLASTIC BOOKMARK',
+    shortName: '好运龟背叶子挂饰',
+    plasticName: 'rPET (再生聚对苯二甲酸乙二醇酯)',
+    resinCode: 1,
+    codeSymbol: '♳ PET',
+    nfcChipId: 'CHIP-NFC-5738-TURTLE',
+    degradeYears: '自然降解约 450 年',
+    colorTheme: '#10b981',
+    tagBg: '#d1fae5',
+    originLocation: '南海北部近岸漂浮垃圾回收带 (废弃饮料瓶与透明包装片)',
+    salvageCoordinates: '21°28\'16"N, 112°44\'09"E',
+    salvageSeaArea: '中国南海 · 珠江口近岸清塑区',
+    salvageVessel: 'Blue-Turtle 03 号海岸清塑巡航艇',
+    sourceForm: '海水浸泡褪色的饮料瓶片与薄型包装塑料',
+    processFlow: '近岸打捞 ➔ 光谱分选 ➔ 超声除盐 ➔ 低温压片 ➔ 龟背纹理热压成型',
+    tokenHash: '0x5738a2c91e0b4f7d2c61',
+    certDate: '2026.11.14',
+    passId: 'BS-PASS-573804',
+    rescueIndex: '减少 42g 海洋塑料碎片进入海龟觅食水域',
+    carbonSaved: '0.86 kg CO₂e',
+    cleanArea: '38 m² 近岸海草区净化',
+    dimensions: '长 95mm × 宽 42mm × 厚 5mm · 净重约 12g',
+    composition: '85% 海洋回收 rPET + 15% 生物基柔韧增强剂',
+    safetyCert: '无重金属析出 · RoHS 环保认证 · 圆角无锐边设计',
+    chipType: 'NTAG213 超薄芯片 (封装于叶片挂饰夹层)',
+    tagline: '把海龟背上的好运，夹进每一次阅读，也带进每一段旅程。',
+    designStory: '好运龟背书叶子挂饰将海龟背甲的六边形纹理与叶片舒展的轮廓结合。回收的海洋饮料瓶片经过清洁、压片与热压塑形，成为可以夹在书页或挂在包上的轻巧纪念物，让被海浪带走的塑料重新守护每一次阅读与出发。',
+    features: [
+      { title: '龟背纹理轻巧耐用', desc: '六边形龟甲纹理提升片材抗弯性能，轻薄不易折裂，适合长期夹在书页之间。' },
+      { title: '书签与挂饰二合一', desc: '叶片造型兼容书签孔与挂绳连接，可在阅读、旅行和日常收纳场景间自由切换。' },
+      { title: '每件都有海洋档案', desc: '内置数字身份芯片，记录回收来源与再生批次，让好运挂饰也成为海洋治理的可追溯见证。' }
+    ],
+    microDanger: '废弃饮料瓶片在海岸带风化后会破碎成细小塑料颗粒，容易被海龟和海鸟误食，并长期滞留在近岸食物链中。',
+    microscopeType: 'pet',
+    fundRatio: '20%',
+    fundContribution: '18.00 元定向支持珠江口海龟巡护与海草床修复',
+    mapIndex: 12
+  },
+  {
+    id: 'prod-recycled-luggage-tag',
+    slug: 'recycled-luggage-tag',
+    dedicatedFile: 'product-recycled-luggage-tag.html',
+    model3dIframeUrl: 'https://3d.hunyuan.tencent.com/share?shareId=3d640174-b96f-47c5-9a08-5fd18ffebcf8',
+    name: '塑料再生环保胸卡套行李牌',
+    englishName: 'RECYCLED ID & LUGGAGE TAG · OCEAN PLASTIC ACCESSORY',
+    shortName: '环保胸卡套行李牌',
+    plasticName: 'rHDPE + rPET (混合再生塑料)',
+    resinCode: 7,
+    codeSymbol: '♹ HYBRID',
+    nfcChipId: 'CHIP-NFC-6824-TAG',
+    degradeYears: '自然降解约 500 年',
+    colorTheme: '#0f766e',
+    tagBg: '#ccfbf1',
+    originLocation: '东海与黄海交汇漂浮垃圾治理带 (废弃包装片与箱包塑料)',
+    salvageCoordinates: '32°06\'31"N, 122°58\'44"E',
+    salvageSeaArea: '中国东海 · 黄海交汇漂浮垃圾拦截区',
+    salvageVessel: 'Tide-Loop 06 号海洋塑料回收船',
+    sourceForm: '风化包装片、废旧箱包塑料片与瓶盖混合回收料',
+    processFlow: '漂浮物拦截 ➔ 材质分选 ➔ 脱盐清洗 ➔ 再生板材压制 ➔ 激光标识与扣件装配',
+    tokenHash: '0x6824c7e15a0d93b8f441',
+    certDate: '2026.11.16',
+    passId: 'BS-PASS-682406',
+    rescueIndex: '拦截 68g 混合塑料残片，减少海鸟误食与缠绕风险',
+    carbonSaved: '1.42 kg CO₂e',
+    cleanArea: '61 m² 远岸漂浮带净化',
+    dimensions: '长 105mm × 宽 68mm × 厚 4mm · 净重约 24g · 挂带宽度 15mm',
+    composition: '50% 海洋回收 rHDPE + 35% 回收 rPET + 15% 再生尼龙挂带',
+    safetyCert: '无重金属析出 · RoHS / REACH 环保认证 · 边缘圆角防刮设计',
+    chipType: 'NTAG213 防潮芯片 (封装于卡套背面夹层)',
+    tagline: '一张胸卡，一件行李，也可以成为海洋塑料重获新生的证明。',
+    designStory: '环保胸卡套行李牌以可替换的信息窗口连接工作、出行与循环再生。我们将海上回收的硬质塑料压制成耐磨牌体，并配合再生尼龙挂带，让一块被遗忘的包装残片重新承担身份识别与行李标记的日常功能。',
+    features: [
+      { title: '双场景识别设计', desc: '可作为胸卡套或行李牌使用，透明信息窗口方便更换证件与联系方式。' },
+      { title: '耐磨防泼水牌体', desc: '再生复合板材具有稳定的抗弯与耐磨性能，适合通勤、差旅和户外活动。' },
+      { title: '可替换结构延长寿命', desc: '牌体、窗口和挂带均可拆换维护，减少一次性配件消耗并延长整体使用周期。' }
+    ],
+    microDanger: '混合包装塑料和箱包塑料在海上长期磨损后会释放微塑料颗粒，并可能缠绕海鸟、海龟等海洋生物。',
+    microscopeType: 'micro',
+    fundRatio: '20%',
+    fundContribution: '24.00 元定向支持东海漂浮垃圾拦截与海鸟救助',
+    mapIndex: 13
   }
 ];
 
@@ -555,7 +643,28 @@ function getProductDoodleSvgCode(resinCode, slugOrId) {
   const key = (slugOrId || '').toLowerCase();
 
   // 1. 优先按产品特征匹配独有专属图标
-  if (key.includes('conch')) {
+  if (key.includes('turtle')) {
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <path d="M 40,20 C 51,20 60,29 60,41 C 60,54 50,62 40,62 C 30,62 20,54 20,41 C 20,29 29,20 40,20 Z" fill="#bbf7d0" stroke="#091e3a" stroke-width="2.5" />
+        <path d="M 40,24 L 40,58 M 24,40 L 56,40 M 29,29 L 51,51 M 51,29 L 29,51" fill="none" stroke="#059669" stroke-width="1.8" />
+        <circle cx="40" cy="12" r="7" fill="#d1fae5" stroke="#091e3a" stroke-width="2" />
+        <path d="M 27,27 L 18,21 M 53,27 L 62,21 M 27,53 L 18,59 M 53,53 L 62,59" stroke="#091e3a" stroke-width="3" stroke-linecap="round" />
+        <path d="M 40,62 L 40,70" stroke="#091e3a" stroke-width="2.5" stroke-linecap="round" />
+      </svg>
+    `;
+  } else if (key.includes('luggage-tag')) {
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <path d="M 25,22 L 52,22 L 62,32 L 62,62 L 25,62 Z" fill="#ccfbf1" stroke="#091e3a" stroke-width="2.5" />
+        <path d="M 52,22 L 52,32 L 62,32" fill="#99f6e4" stroke="#091e3a" stroke-width="2" />
+        <circle cx="34" cy="32" r="3" fill="#ffffff" stroke="#0f766e" stroke-width="1.5" />
+        <rect x="33" y="42" width="21" height="3" rx="1.5" fill="#0f766e" />
+        <rect x="33" y="49" width="15" height="3" rx="1.5" fill="#5eead4" />
+        <path d="M 25,26 C 16,18 10,25 15,33" fill="none" stroke="#091e3a" stroke-width="2.5" stroke-linecap="round" />
+      </svg>
+    `;
+  } else if (key.includes('conch')) {
     // 共振海螺无源扩音座
     return `
       <svg class="product-icon-doodle" viewBox="0 0 80 80">
