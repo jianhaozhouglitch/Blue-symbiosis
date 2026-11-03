@@ -238,19 +238,6 @@ class ProductDetailController {
       });
     }
 
-    // 翻转按钮
-    const btnFlip = document.getElementById('btnFlipPassport');
-    if (btnFlip) {
-      btnFlip.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (flipper) {
-          this.isPassportFlipped = !this.isPassportFlipped;
-          flipper.classList.toggle('is-flipped', this.isPassportFlipped);
-          if (this.audio) this.audio.playFlipPassportSound();
-        }
-      });
-    }
-
     // 显微镜倍率切换
     const zoomBtns = document.querySelectorAll('.btn-micro-zoom');
     zoomBtns.forEach(btn => {
