@@ -309,6 +309,7 @@ class AppManager {
     if (!container) return;
 
     const data = (window.PRODUCTS_DATA && window.PRODUCTS_DATA.length) ? window.PRODUCTS_DATA : PRODUCTS_DATA;
+    const moreButton = document.getElementById('productsMoreButton');
     const featuredProductIds = [
       'prod-buckle-reef',
       'prod-buckle-current',
@@ -324,7 +325,7 @@ class AppManager {
       return aPriority - bPriority;
     });
 
-    container.innerHTML = data.map((item, idx) => `
+    const renderCards = (items) => items.map((item, idx) => `
       <a href="product.html?id=${item.id}" class="product-item-card ${idx === 0 ? 'active' : ''}" data-idx="${idx}" id="prodCard-${idx}" title="点击直达「${item.name}」专有 2 级介绍页">
         <div class="product-thumb-box">
           ${this.getProductDoodleSvg(item.resinCode, item.slug || item.id)}
@@ -341,13 +342,27 @@ class AppManager {
       </a>
     `).join('');
 
-    // 绑定卡片点击音效
-    const cards = container.querySelectorAll('.product-item-card');
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        window.blueAudio && window.blueAudio.playTapSound();
+    const renderVisibleCards = (showAll) => {
+      container.innerHTML = renderCards(showAll ? data : data.slice(0, 4));
+      container.querySelectorAll('.product-item-card').forEach(card => {
+        card.addEventListener('click', () => {
+          window.blueAudio && window.blueAudio.playTapSound();
+        });
       });
-    });
+    };
+
+    renderVisibleCards(false);
+
+    if (moreButton) {
+      moreButton.hidden = data.length <= 4;
+      moreButton.addEventListener('click', () => {
+        const expanded = moreButton.getAttribute('aria-expanded') === 'true';
+        renderVisibleCards(!expanded);
+        moreButton.setAttribute('aria-expanded', String(!expanded));
+        moreButton.querySelector('span').textContent = expanded ? '查看更多' : '收起产品';
+        moreButton.querySelectorAll('span')[1].textContent = expanded ? '⌄' : '⌃';
+      });
+    }
   }
 
   // 手绘简笔画文创产品图标 SVG

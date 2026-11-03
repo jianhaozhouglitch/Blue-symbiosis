@@ -32,12 +32,18 @@ class BlueSymbiosisAudio {
   startDefaultAmbient() {
     if (this.isMuted || !this.init()) return;
 
-    this.startOceanAmbient();
-    if (this.ctx.state === 'suspended' && !this.ambientUnlockBound) {
+    if (this.ctx.state === 'running') {
+      this.startOceanAmbient();
+      return;
+    }
+
+    if (!this.ambientUnlockBound) {
       this.ambientUnlockBound = true;
       const resumeAmbient = () => {
         this.ctx.resume().then(() => {
-          this.startOceanAmbient();
+          if (this.ctx.state === 'running') {
+            this.startOceanAmbient();
+          }
         }).catch((error) => {
           console.warn('Unable to resume default ambient audio:', error);
         });
@@ -98,7 +104,7 @@ class BlueSymbiosisAudio {
       lfoGain.connect(filter.frequency);
 
       this.ambientGain = this.ctx.createGain();
-      this.ambientGain.gain.setValueAtTime(0.5, this.ctx.currentTime);
+      this.ambientGain.gain.setValueAtTime(0.75, this.ctx.currentTime);
 
       this.noiseSource.connect(filter);
       filter.connect(this.ambientGain);

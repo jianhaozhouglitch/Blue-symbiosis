@@ -598,6 +598,37 @@ body.mobile-frame-mode .nfc-floating-bar {
   gap: 16px;
 }
 
+.products-more-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px auto 0;
+  padding: 4px 16px;
+  background: var(--c-ice-blue);
+  color: var(--c-deep-blue);
+  border: 2px solid var(--c-dark-navy);
+  border-radius: var(--sketch-radius-pill);
+  box-shadow: 2px 2px 0px var(--c-dark-navy);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.products-more-button:hover {
+  background: var(--c-sky-blue);
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0px var(--c-dark-navy);
+}
+
+.products-more-button:active {
+  transform: translateY(1px);
+  box-shadow: var(--doodle-shadow-hover);
+}
+
 .product-item-card {
   background: var(--c-pure-white);
   border: var(--doodle-border);
