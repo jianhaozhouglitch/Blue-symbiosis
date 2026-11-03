@@ -630,7 +630,7 @@ class AppManager {
       btnMobileModeToggle.addEventListener('click', () => {
         document.body.classList.toggle('mobile-frame-mode');
         const isMobile = document.body.classList.contains('mobile-frame-mode');
-        btnMobileModeToggle.innerHTML = isMobile ? '<span>💻 宽屏视图</span>' : '<span>📱 手机模拟</span>';
+        btnMobileModeToggle.innerHTML = isMobile ? '<span>💻</span>' : '<span>📱</span>';
       });
     }
 
