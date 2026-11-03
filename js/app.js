@@ -290,6 +290,20 @@ class AppManager {
     if (!container) return;
 
     const data = (window.PRODUCTS_DATA && window.PRODUCTS_DATA.length) ? window.PRODUCTS_DATA : PRODUCTS_DATA;
+    const featuredProductIds = [
+      'prod-buckle-reef',
+      'prod-buckle-current',
+      'prod-turtle-bookmark',
+      'prod-recycled-luggage-tag'
+    ];
+    data.sort((a, b) => {
+      const aPriority = featuredProductIds.indexOf(a.id);
+      const bPriority = featuredProductIds.indexOf(b.id);
+      if (aPriority === -1 && bPriority === -1) return 0;
+      if (aPriority === -1) return 1;
+      if (bPriority === -1) return -1;
+      return aPriority - bPriority;
+    });
 
     container.innerHTML = data.map((item, idx) => `
       <a href="product.html?id=${item.id}" class="product-item-card ${idx === 0 ? 'active' : ''}" data-idx="${idx}" id="prodCard-${idx}" title="点击直达「${item.name}」专有 2 级介绍页">
