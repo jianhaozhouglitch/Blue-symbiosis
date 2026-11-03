@@ -602,20 +602,9 @@ class AppManager {
     }
   }
 
-  // 绑定全局点击、弹窗与 NFC 模拟
+  // 绑定全局点击与弹窗
   bindGlobalEvents() {
-    // 1. NFC 碰一碰模拟按钮
-    const btnSimulateNfc = document.getElementById('btnSimulateNfc');
-    if (btnSimulateNfc) {
-      btnSimulateNfc.addEventListener('click', () => {
-        // 随机或下一个产品模拟碰一碰
-        const nextIdx = (this.currentProductIndex + 1) % PRODUCTS_DATA.length;
-        this.selectProduct(nextIdx);
-        this.showNfcToast(PRODUCTS_DATA[nextIdx]);
-      });
-    }
-
-    // 2. 音频切换按钮
+    // 1. 音频切换按钮
     const btnAudioToggle = document.getElementById('btnAudioToggle');
     if (btnAudioToggle) {
       btnAudioToggle.addEventListener('click', () => {
