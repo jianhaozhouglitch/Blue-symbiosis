@@ -29,15 +29,11 @@
   <header class="nfc-floating-bar" id="nfcTopBar">
     <div class="nfc-status-pill">
       <span class="nfc-pulse-dot"></span>
-      <span id="nfcStatusText">NFC芯片已触碰识别</span>
-      <span class="nfc-chip-id" id="currentNfcChipId">CHIP-NFC-8849-HDPE</span>
+      <span id="nfcStatusText">请触碰产品NFC感应区自动跳转到详情页</span>
     </div>
     <div class="quick-tools">
       <button class="tool-icon-btn" id="btnAudioToggle" title="切换海浪背景原声" aria-label="音频切换">
-        <span>🔇</span>
-      </button>
-      <button class="tool-icon-btn" id="btnMobileModeToggle" title="切换手机模拟模式" aria-label="手机模拟切换">
-        <span>📱</span>
+        <span>🔊</span>
       </button>
     </div>
   </header>
@@ -106,30 +102,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         模块 1: NFC碰一碰产品体验区 (Interactive NFC Tap & Product Switcher)
-         ========================================================================== -->
-    <section class="nfc-simulator-box" id="nfcSelectorSection">
-      <div class="nfc-tap-action-header">
-        <div class="nfc-tip-badge">
-          <svg class="nfc-wave-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M6 8a6 6 0 0 1 12 0" />
-            <path d="M3 6a10 10 0 0 1 18 0" />
-            <path d="M9 10a2 2 0 0 1 6 0" />
-          </svg>
-          <div>
-            <strong>碰一碰感应区：</strong>
-            <span>点击下方任意文创卡片，即可直达其专有 2 级物联介绍页面（手机识别 NFC 标签后亦自动直达）</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 文创产品列表 (10款全系列) -->
-      <div class="products-scroll-grid" id="productsScrollGrid">
-        <!-- 由 JavaScript 动态填充 -->
       </div>
     </section>
 
@@ -707,6 +679,44 @@
         </div>
       </div>
     </section>
+
+    <!-- ==========================================================================
+         产品区：文创产品列表
+         ========================================================================== -->
+    <section class="nfc-simulator-box" id="nfcSelectorSection">
+      <div class="nfc-tap-action-header">
+        <div class="nfc-tip-badge">
+          <svg class="nfc-wave-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 8a6 6 0 0 1 12 0" />
+            <path d="M3 6a10 10 0 0 1 18 0" />
+            <path d="M9 10a2 2 0 0 1 6 0" />
+          </svg>
+          <div>
+            <strong>碰一碰感应区：</strong>
+            <span>点击下方任意文创卡片，即可直达其专有 2 级物联介绍页面（手机识别 NFC 标签后亦自动直达）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-scroll-grid" id="productsScrollGrid">
+        <!-- 由 JavaScript 动态填充 -->
+      </div>
+    </section>
+
+    <script>
+      const mainContent = document.querySelector('.main-wrapper');
+      const materialHeader = document.getElementById('materialSectionHeader');
+      const materialDetails = document.getElementById('materialDetailContainer');
+      const productSection = document.getElementById('nfcSelectorSection');
+      if (mainContent && materialHeader && materialDetails && productSection) {
+        productSection.after(materialHeader, materialDetails);
+      }
+      const passportSection = document.getElementById('passportSection');
+      const perksHeader = document.getElementById('perksSectionHeader');
+      if (passportSection && perksHeader) {
+        perksHeader.before(passportSection);
+      }
+    </script>
 
     <!-- ==========================================================================
          模块 8: 生态特权中心 (Offline Multi-Sensory Art Exhibition & Eco-Lab Booking)

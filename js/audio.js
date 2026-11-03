@@ -9,6 +9,7 @@ class BlueSymbiosisAudio {
     this.isMuted = false;
     this.ambientGain = null;
     this.ambientRunning = false;
+    this.ambientUnlockBound = false;
   }
 
   init() {
@@ -29,8 +30,20 @@ class BlueSymbiosisAudio {
   }
 
   startDefaultAmbient() {
-    if (!this.isMuted && this.init()) {
-      this.startOceanAmbient();
+    if (this.isMuted || !this.init()) return;
+
+    this.startOceanAmbient();
+    if (this.ctx.state === 'suspended' && !this.ambientUnlockBound) {
+      this.ambientUnlockBound = true;
+      const resumeAmbient = () => {
+        this.ctx.resume().then(() => {
+          this.startOceanAmbient();
+        }).catch((error) => {
+          console.warn('Unable to resume default ambient audio:', error);
+        });
+      };
+      window.addEventListener('pointerdown', resumeAmbient, { once: true });
+      window.addEventListener('keydown', resumeAmbient, { once: true });
     }
   }
 

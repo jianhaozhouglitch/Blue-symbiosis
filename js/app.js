@@ -272,6 +272,9 @@ class AppManager {
   }
 
   init() {
+    if (window.blueAudio) {
+      window.blueAudio.startDefaultAmbient();
+    }
     this.renderProductsList();
     this.bindGlobalEvents();
     this.initMicroscope();
@@ -404,11 +407,7 @@ class AppManager {
     const prod = PRODUCTS_DATA[idx];
     if (!prod) return;
 
-    // 1. 顶部悬浮栏 NFC 芯片 ID
-    const elChipId = document.getElementById('currentNfcChipId');
-    if (elChipId) elChipId.textContent = prod.nfcChipId;
-
-    // 2. 材质档案卡片
+    // 1. 材质档案卡片
     const elBadgeNum = document.getElementById('plasticBadgeNum');
     const elBadgeSymbol = document.getElementById('plasticBadgeSymbol');
     const elPlasticTitle = document.getElementById('plasticTitle');
@@ -613,17 +612,7 @@ class AppManager {
       });
     }
 
-    // 3. 手机框架模式切换按钮
-    const btnMobileModeToggle = document.getElementById('btnMobileModeToggle');
-    if (btnMobileModeToggle) {
-      btnMobileModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('mobile-frame-mode');
-        const isMobile = document.body.classList.contains('mobile-frame-mode');
-        btnMobileModeToggle.innerHTML = isMobile ? '<span>💻</span>' : '<span>📱</span>';
-      });
-    }
-
-    // 4. 3D 护照翻转
+    // 3. 3D 护照翻转
     const passportCard = document.getElementById('passportCardInner');
     const btnFlipPassport = document.getElementById('btnFlipPassport');
     if (passportCard) {
