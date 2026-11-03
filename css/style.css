@@ -376,15 +376,22 @@ body.mobile-frame-mode .nfc-floating-bar {
   box-shadow: var(--doodle-shadow);
   overflow: hidden;
   padding: 6px;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-3d-iframe {
-  width: 100%;
+  width: 150%;
   height: 440px;
+  max-width: none;
   border: none;
   border-radius: 12px;
   display: block;
   background: #18191c;
+  margin: 0 -25%;
+  flex: 0 0 150%;
+  transform: translateX(-13%);
+  box-sizing: border-box;
 }
 
 @media (max-width: 900px) {

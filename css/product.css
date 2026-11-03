@@ -228,14 +228,6 @@
   margin-top: 3px;
 }
 
-.nfc-banner-tools {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 1;
-  flex-shrink: 0;
-}
-
 /* ==========================================================================
    产品主展示区 (Product Hero & 3D Passport)
    ========================================================================== */
@@ -341,17 +333,23 @@
 
 #heroVisualDoodle {
   width: 100%;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .hero-visual-stage iframe.model-3d-iframe {
-  width: 100%;
+  width: 150%;
   height: 380px;
+  max-width: none;
   border: none;
   border-radius: 14px;
   display: block;
+  margin: 0 -25%;
+  flex: 0 0 150%;
+  transform: translateX(-13%);
+  box-sizing: border-box;
 }
 
 .hero-visual-stage .hero-main-doodle {
@@ -1079,120 +1077,7 @@
 }
 
 /* ==========================================================================
-   模块 5: 物理 NFC 标签烧录与写入教学工具箱 (NFC Tag Writer Modal & Drawer)
-   ========================================================================== */
-.nfc-writer-panel {
-  background: linear-gradient(135deg, #fefce8 0%, #ffffff 100%);
-  border: var(--doodle-border-thick);
-  border-radius: 24px;
-  padding: 32px;
-  box-shadow: var(--doodle-shadow-lg);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.nfc-writer-step-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.nfc-step-box {
-  background: #ffffff;
-  border: var(--doodle-border);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 3px 3px 0px var(--c-dark-navy);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.nfc-step-num {
-  font-family: var(--font-doodle-en);
-  font-size: 1.25rem;
-  font-weight: 900;
-  color: #b45309;
-}
-
-.nfc-step-box h4 {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: var(--c-dark-navy);
-}
-
-.nfc-step-box p {
-  font-size: 0.8rem;
-  color: #64748b;
-  line-height: 1.45;
-}
-
-.nfc-write-interactive-card {
-  background: #ffffff;
-  border: 2px dashed #f59e0b;
-  border-radius: 16px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.nfc-qr-test-box {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.nfc-qr-canvas-holder {
-  background: #ffffff;
-  border: 2px solid var(--c-dark-navy);
-  border-radius: 10px;
-  padding: 8px;
-  box-shadow: 2px 2px 0px var(--c-dark-navy);
-  width: 90px;
-  height: 90px;
-  flex-shrink: 0;
-}
-
-.nfc-qr-canvas-holder canvas {
-  width: 100%;
-  height: 100%;
-}
-
-.nfc-custom-domain-setter {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-  min-width: 280px;
-}
-
-.nfc-custom-domain-setter label {
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: #78350f;
-}
-
-.custom-domain-row {
-  display: flex;
-  gap: 8px;
-}
-
-.custom-domain-row input {
-  flex: 1;
-  background: #f8fafc;
-  border: 1.5px solid var(--c-dark-navy);
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 0.82rem;
-  outline: none;
-}
-
-/* ==========================================================================
-   模块 6: 浏览其他 4 款文创卡片列 (Other Products Carousel)
+   模块 5: 浏览其他 4 款文创卡片列 (Other Products Carousel)
    ========================================================================== */
 .other-products-grid {
   display: grid;
@@ -1336,10 +1221,6 @@
   .nfc-tap-banner {
     flex-direction: column;
     align-items: flex-start;
-  }
-  .nfc-banner-tools {
-    width: 100%;
-    justify-content: flex-end;
   }
   .product-hero-card {
     padding: 20px;

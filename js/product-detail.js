@@ -9,7 +9,6 @@ class ProductDetailController {
     this.isPassportFlipped = false;
     this.microZoom = 400; // 100, 400, 1000
     this.audio = null;
-    this.customHost = '';
   }
 
   init() {
@@ -32,13 +31,10 @@ class ProductDetailController {
     // 5. 初始化荣誉证书生成器
     this.initCertificateGenerator();
 
-    // 6. 初始化 NFC 链接工具
-    this.initNfcTool();
-
-    // 7. 渲染其他文创导航卡片
+    // 6. 渲染其他文创导航卡片
     this.renderOtherProducts();
 
-    // 8. 触发入场 NFC 感应提示音与动效
+    // 7. 触发入场 NFC 感应提示音与动效
     setTimeout(() => {
       this.triggerNfcWelcome();
     }, 600);
@@ -278,38 +274,6 @@ class ProductDetailController {
       });
     }
 
-    // 复制当前产品专属 NFC 链接
-    const btnCopyUrl = document.getElementById('btnCopyNfcUrl');
-    if (btnCopyUrl) {
-      btnCopyUrl.addEventListener('click', () => {
-        this.copyNfcUrl();
-      });
-    }
-
-    const btnCopyHeader = document.getElementById('btnHeaderCopyNfc');
-    if (btnCopyHeader) {
-      btnCopyHeader.addEventListener('click', () => {
-        this.copyNfcUrl();
-      });
-    }
-
-    // 自定义域名/IP 修改
-    const customHostInput = document.getElementById('customHostInput');
-    if (customHostInput) {
-      customHostInput.addEventListener('input', (e) => {
-        this.customHost = e.target.value.trim();
-        this.updateNfcUrlInput();
-      });
-    }
-
-    // Web NFC 原生写入 (仅支持 Android Chrome)
-    const btnWebNfcWrite = document.getElementById('btnWebNfcWrite');
-    if (btnWebNfcWrite) {
-      btnWebNfcWrite.addEventListener('click', () => {
-        this.handleWebNfcWrite();
-      });
-    }
-
     // 顶部音效切换
     const btnAudioToggle = document.getElementById('btnToggleAudio');
     if (btnAudioToggle) {
@@ -352,142 +316,6 @@ class ProductDetailController {
         <div class="other-prod-resin">${p.codeSymbol} · ${p.degradeYears}</div>
       </a>
     `).join('');
-  }
-
-  // ==========================================================================
-  // NFC 链接生成与复制
-  // ==========================================================================
-  getEffectiveNfcUrl() {
-    const base = this.customHost ? this.customHost.replace(/\/+$/, '') : window.location.origin;
-    // 包含当前选中的产品 ID
-    return `${base}/product.html?id=${this.currentProduct.id}`;
-  }
-
-  updateNfcUrlInput() {
-    const url = this.getEffectiveNfcUrl();
-    const input = document.getElementById('nfcTargetUrlInput');
-    if (input) input.value = url;
-
-    const preview = document.getElementById('nfcUrlPreviewText');
-    if (preview) preview.textContent = url;
-
-    // 更新二维码
-    this.drawQrCode(url);
-  }
-
-  copyNfcUrl() {
-    const url = this.getEffectiveNfcUrl();
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(() => {
-        this.showToast(`✅ 已复制专属链接！可在 NFC Tools 中直接写入标签：\n${url}`);
-        if (this.audio) this.audio.playSuccessChime();
-      }).catch(() => {
-        this.fallbackCopy(url);
-      });
-    } else {
-      this.fallbackCopy(url);
-    }
-  }
-
-  fallbackCopy(text) {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand('copy');
-      this.showToast(`✅ 已复制专属链接！可在 NFC Tools 中写入标签：\n${text}`);
-      if (this.audio) this.audio.playSuccessChime();
-    } catch (e) {
-      alert(`请手动复制专属链接：\n${text}`);
-    }
-    document.body.removeChild(ta);
-  }
-
-  // 简易二维码绘制 (用 Canvas 绘制美观的定位点与阵列)
-  drawQrCode(text) {
-    const canvas = document.getElementById('nfcQrCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const size = 160;
-    canvas.width = size;
-    canvas.height = size;
-
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, size, size);
-
-    // 绘制标准定位图案 (三大角)
-    const drawEye = (x, y) => {
-      ctx.fillStyle = '#091e3a';
-      ctx.fillRect(x, y, 35, 35);
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(x + 5, y + 5, 25, 25);
-      ctx.fillStyle = '#0284c7';
-      ctx.fillRect(x + 10, y + 10, 15, 15);
-    };
-
-    drawEye(10, 10);
-    drawEye(size - 45, 10);
-    drawEye(10, size - 45);
-
-    // 根据字符串生成确定性伪随机矩阵点
-    ctx.fillStyle = '#091e3a';
-    let seed = 0;
-    for (let i = 0; i < text.length; i++) {
-      seed = (seed * 31 + text.charCodeAt(i)) & 0xffffffff;
-    }
-
-    const dotSize = 5;
-    const cols = (size - 20) / dotSize;
-    for (let r = 0; r < cols; r++) {
-      for (let c = 0; c < cols; c++) {
-        // 避开三个角
-        if ((r < 8 && c < 8) || (r < 8 && c >= cols - 8) || (r >= cols - 8 && c < 8)) continue;
-        seed = (seed * 16807 + 12345) & 0x7fffffff;
-        if ((seed % 100) < 48) {
-          ctx.fillRect(10 + c * dotSize, 10 + r * dotSize, dotSize - 1, dotSize - 1);
-        }
-      }
-    }
-
-    // 中心小 NFC 标志
-    ctx.fillStyle = '#0284c7';
-    ctx.beginPath();
-    ctx.arc(size / 2, size / 2, 14, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 9px monospace';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('NFC', size / 2, size / 2);
-  }
-
-  // 原生 Web NFC 写入
-  async handleWebNfcWrite() {
-    if (!('NDEFReader' in window)) {
-      alert('📱 提示：您的浏览器当前不支持原生 Web NFC 写入（通常需要 Android 版 Chrome）。\n\n建议使用通用的【NFC Tools】免费 App，复制上方专属链接后 3 秒即可完成写入！');
-      return;
-    }
-
-    try {
-      const ndef = new NDEFReader();
-      const targetUrl = this.getEffectiveNfcUrl();
-      this.showToast('📡 请将手机背部靠近文创产品的 NFC 标签进行烧录...');
-      
-      await ndef.write({
-        records: [{ recordType: 'url', data: targetUrl }]
-      });
-
-      this.showToast('🎉 恭喜！专属链接已成功写入文创 NFC 芯片！');
-      if (this.audio) this.audio.playSuccessChime();
-    } catch (err) {
-      console.error(err);
-      alert(`NFC 写入未完成：${err.message || '请确保手机已开启 NFC 功能并重新贴近标签。'}`);
-    }
   }
 
   // ==========================================================================

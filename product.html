@@ -95,9 +95,6 @@
           </p>
         </div>
       </div>
-      <div class="nfc-banner-tools">
-        <a href="#nfcWriterToolbox" class="btn-nav-action" style="background: #fef08a;">🏷️ NFC 烧录教程</a>
-      </div>
     </section>
 
     <!-- ==========================================================================
@@ -287,69 +284,6 @@
           🔄 翻转数字护照卡片
         </button>
       </aside>
-    </section>
-
-    <!-- ==========================================================================
-         模块 3: 物理 NFC 标签写入与操作工具箱 (NFC Tag Programmer Toolbox)
-         ========================================================================== -->
-    <section class="nfc-writer-panel" id="nfcWriterToolbox">
-      <div class="panel-header-badge">
-        <h2>
-          <span>🏷️ 如何将本页面链接写入文创产品的 NFC 标签？</span>
-        </h2>
-        <span class="panel-en-tag">PHYSICAL NFC TAG PROGRAMMING GUIDE</span>
-      </div>
-
-      <div class="nfc-writer-step-grid">
-        <div class="nfc-step-box">
-          <div class="nfc-step-num">STEP 01</div>
-          <h4>下载 NFC Tools 应用</h4>
-          <p>在手机应用商店（App Store 或 安卓各大应用市场）免费搜索下载<strong>「NFC Tools」</strong>。</p>
-        </div>
-        <div class="nfc-step-box">
-          <div class="nfc-step-num">STEP 02</div>
-          <h4>添加网址写入记录</h4>
-          <p>打开 App，点击<strong>「写 (Write)」➔「添加记录」➔ 选择「网址 / URL」</strong>选项。</p>
-        </div>
-        <div class="nfc-step-box">
-          <div class="nfc-step-num">STEP 03</div>
-          <h4>粘贴专属产品链接</h4>
-          <p>点击下方按钮复制本产品的专属链接，直接粘贴到 App 输入框中并保存。</p>
-        </div>
-        <div class="nfc-step-box">
-          <div class="nfc-step-num">STEP 04</div>
-          <h4>手机贴近标签烧录</h4>
-          <p>点击「写入」，将手机背部 NFC 感应区紧贴文创产品的 NFC 芯片，提示成功即完成！</p>
-        </div>
-      </div>
-
-      <!-- 交互式链接生成与扫码测试区 -->
-      <div class="nfc-write-interactive-card">
-        <div class="nfc-qr-test-box">
-          <div class="nfc-qr-canvas-holder">
-            <canvas id="nfcQrCanvas"></canvas>
-          </div>
-          <div>
-            <h4 style="font-size: 0.95rem; font-weight: 800; color: #78350f;">手机扫码直达测试</h4>
-            <p style="font-size: 0.8rem; color: #92400e; margin-top: 2px;">
-              还未烧录标签？可直接使用手机相机扫描左侧二维码，立即预览手机端碰一碰效果！
-            </p>
-          </div>
-        </div>
-
-        <div class="nfc-custom-domain-setter">
-          <label for="customHostInput">
-            ⚙️ 如需在局域网真机调试或已上线域名，可在下方自定义域名/IP：
-          </label>
-          <div class="custom-domain-row">
-            <input type="text" id="customHostInput" placeholder="例如：http://192.168.1.100:3000 或 https://your-domain.com">
-            <button class="btn-copy-nfc-url" id="btnWebNfcWrite" title="仅限部分安卓Chrome浏览器">⚡ 原生烧录</button>
-          </div>
-          <div style="font-size: 0.75rem; color: #64748b;">
-            当前生成的 NFC 写入目标完整网址：<span id="nfcUrlPreviewText" style="font-family: monospace; color: #0284c7;"></span>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- ==========================================================================
