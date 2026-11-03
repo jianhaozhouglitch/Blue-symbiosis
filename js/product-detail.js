@@ -16,6 +16,7 @@ class ProductDetailController {
     if (window.BlueSymbiosisAudio) {
       this.audio = new window.BlueSymbiosisAudio();
       window.blueAudio = this.audio;
+      this.audio.startDefaultAmbient();
     }
 
     // 2. 解析 URL 参数或 Hash 获取产品 ID
@@ -266,6 +267,9 @@ class ProductDetailController {
     // 顶部音效切换
     const btnAudioToggle = document.getElementById('btnToggleAudio');
     if (btnAudioToggle) {
+      btnAudioToggle.textContent = this.audio && !this.audio.isMuted
+        ? '🔊 海浪环境声已开启'
+        : '🔈 开启深海环境音效';
       btnAudioToggle.addEventListener('click', () => {
         if (this.audio) {
           const isPlaying = this.audio.toggleMute();

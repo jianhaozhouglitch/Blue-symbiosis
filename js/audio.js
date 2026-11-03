@@ -6,7 +6,7 @@
 class BlueSymbiosisAudio {
   constructor() {
     this.ctx = null;
-    this.isMuted = true;
+    this.isMuted = false;
     this.ambientGain = null;
     this.ambientRunning = false;
   }
@@ -26,6 +26,12 @@ class BlueSymbiosisAudio {
       });
     }
     return this.ctx.state !== 'closed';
+  }
+
+  startDefaultAmbient() {
+    if (!this.isMuted && this.init()) {
+      this.startOceanAmbient();
+    }
   }
 
   // 切换全局静音/海浪声
