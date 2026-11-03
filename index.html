@@ -684,39 +684,20 @@
          产品区：文创产品列表
          ========================================================================== -->
     <section class="nfc-simulator-box" id="nfcSelectorSection">
-      <div class="nfc-tap-action-header">
-        <div class="nfc-tip-badge">
-          <svg class="nfc-wave-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M6 8a6 6 0 0 1 12 0" />
-            <path d="M3 6a10 10 0 0 1 18 0" />
-            <path d="M9 10a2 2 0 0 1 6 0" />
+      <div class="section-header" style="margin-bottom: 20px;">
+        <span class="section-tag">PRODUCT COLLECTION</span>
+        <h2 class="section-title">
+          蔚蓝共生：海洋微塑料回收再制造文创产品
+          <svg class="doodle-underline" viewBox="0 0 200 12" fill="none">
+            <path d="M 2 8 Q 50 2 100 8 T 198 8" stroke="#0284c7" stroke-width="3" stroke-linecap="round" />
           </svg>
-          <div>
-            <strong>碰一碰感应区：</strong>
-            <span>点击下方任意文创卡片，即可直达其专有 2 级物联介绍页面（手机识别 NFC 标签后亦自动直达）</span>
-          </div>
-        </div>
+        </h2>
       </div>
 
       <div class="products-scroll-grid" id="productsScrollGrid">
         <!-- 由 JavaScript 动态填充 -->
       </div>
     </section>
-
-    <script>
-      const mainContent = document.querySelector('.main-wrapper');
-      const materialHeader = document.getElementById('materialSectionHeader');
-      const materialDetails = document.getElementById('materialDetailContainer');
-      const productSection = document.getElementById('nfcSelectorSection');
-      if (mainContent && materialHeader && materialDetails && productSection) {
-        productSection.after(materialHeader, materialDetails);
-      }
-      const passportSection = document.getElementById('passportSection');
-      const perksHeader = document.getElementById('perksSectionHeader');
-      if (passportSection && perksHeader) {
-        perksHeader.before(passportSection);
-      }
-    </script>
 
     <!-- ==========================================================================
          模块 8: 生态特权中心 (Offline Multi-Sensory Art Exhibition & Eco-Lab Booking)
@@ -763,6 +744,21 @@
     </div>
 
   </main>
+
+  <script>
+    const mainContent = document.querySelector('.main-wrapper');
+    const materialHeader = document.getElementById('materialSectionHeader');
+    const materialDetails = document.getElementById('materialDetailContainer');
+    const productSection = document.getElementById('nfcSelectorSection');
+    if (mainContent && materialHeader && materialDetails && productSection) {
+      productSection.after(materialHeader, materialDetails);
+    }
+    const passportSection = document.getElementById('passportSection');
+    const perksHeader = document.getElementById('perksSectionHeader');
+    if (passportSection && perksHeader) {
+      perksHeader.before(passportSection);
+    }
+  </script>
 
   <!-- ==========================================================================
        页脚简笔画海浪与致谢
