@@ -272,6 +272,7 @@ class AppManager {
   }
 
   init() {
+    this.initNfcPromptVisibility();
     if (window.blueAudio) {
       window.blueAudio.startDefaultAmbient();
     }
@@ -282,6 +283,24 @@ class AppManager {
     this.initGame();
     this.initFundCalculator();
     this.updateProductView(0);
+  }
+
+  // 电脑端横屏不显示 NFC 提示，手机端始终保留提示
+  initNfcPromptVisibility() {
+    const nfcBar = document.getElementById('nfcTopBar');
+    if (!nfcBar) return;
+
+    const userAgent = navigator.userAgent || '';
+    const isMobileDevice = /Android|iPhone|iPad|iPod|Windows Phone/i.test(userAgent)
+      || (/Macintosh/i.test(userAgent) && navigator.maxTouchPoints > 1);
+    const updateVisibility = () => {
+      const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+      nfcBar.classList.toggle('is-desktop-landscape', !isMobileDevice && isLandscape);
+    };
+
+    updateVisibility();
+    window.addEventListener('resize', updateVisibility);
+    window.addEventListener('orientationchange', updateVisibility);
   }
 
   // 渲染文创产品列表（点击整个卡片区域直达专有 2 级介绍页）

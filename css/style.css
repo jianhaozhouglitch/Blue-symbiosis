@@ -119,6 +119,10 @@ body {
   box-shadow: var(--doodle-shadow-lg);
 }
 
+.nfc-floating-bar.is-desktop-landscape {
+  display: none;
+}
+
 .nfc-status-pill {
   display: flex;
   align-items: center;
