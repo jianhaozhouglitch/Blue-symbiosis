@@ -444,6 +444,94 @@ var PRODUCTS_DATA = [
     fundRatio: '20%',
     fundContribution: '46.50 元定向拨付至东海韭山列岛海鸟栖息地保护项目',
     mapIndex: 9
+  },
+  {
+    id: 'prod-buckle-reef',
+    slug: 'buckle-reef',
+    dedicatedFile: 'product-buckle-reef.html',
+    model3dIframeUrl: 'https://3d.hunyuan.tencent.com/share?shareId=4becfee9-9795-4381-9e56-25ddb9d2db5a',
+    name: '「潮汐扣」再生海洋塑料行李箱扣',
+    englishName: 'TIDAL BUCKLE · RECYCLED OCEAN PLASTIC LUGGAGE CLASP',
+    shortName: '潮汐扣行李箱扣',
+    plasticName: 'rHDPE (再生高密度聚乙烯)',
+    resinCode: 2,
+    codeSymbol: '♴ HDPE',
+    nfcChipId: 'CHIP-NFC-7342-BUCKLE',
+    degradeYears: '自然降解约 500 年',
+    colorTheme: '#0284c7',
+    tagBg: '#e0f2fe',
+    originLocation: '东海舟山外海废弃浮标回收带 (耐候浮筒与行李箱外壳)',
+    salvageCoordinates: '30°08\'42"N, 122°16\'20"E',
+    salvageSeaArea: '中国东海 · 舟山群岛外缘近岸回收区',
+    salvageVessel: 'AI-Orca 09 号近海清塑巡航艇',
+    sourceForm: '海水浸泡风化的硬质浮标与废旧箱体扣件',
+    processFlow: '智能分拣 ➔ 超声除盐去藻 ➔ 低温造粒 ➔ 精密注塑成型 ➔ 防腐弹簧组装',
+    tokenHash: '0x7342b8a10e5c4d9912f6',
+    certDate: '2026.11.08',
+    passId: 'BS-PASS-734202',
+    rescueIndex: '减少 180g 海洋硬质塑料残片进入近岸礁区',
+    carbonSaved: '1.86 kg CO₂e',
+    cleanArea: '72 m² 近岸礁区净化',
+    dimensions: '长 78mm × 宽 42mm × 厚 18mm · 净重约 38g · 适配 20~25mm 箱带',
+    composition: '70% 海洋回收 rHDPE + 30% 生物基增强填料 + 不锈钢弹簧',
+    safetyCert: '无重金属析出 · RoHS 环保认证 · 通过箱包五金耐久测试',
+    chipType: 'NTAG213 柔性芯片 (嵌入扣体内侧隐藏槽)',
+    tagline: '把漂流海面的坚韧塑料，扣紧每一次出发，也扣紧一片更清澈的海。',
+    designStory: '潮汐扣的圆润外形取自海浪反复冲刷后的礁石。我们将东海回收的耐候硬质塑料重新纯化，制成轻巧可靠的行李箱扣，让旅途中的每一次扣合都成为海洋循环材料重新进入日常生活的证据。',
+    features: [
+      { title: '轻量高强抗冲击', desc: '高韧性再生 rHDPE 扣体可承受频繁开合与行李搬运冲击，适合长途旅行。' },
+      { title: '一键快拆稳固锁止', desc: '宽带槽与圆角导向结构兼顾快速安装和稳定扣合，适配常见行李箱束带。' },
+      { title: '隐藏式数字身份芯片', desc: '扣体内侧保留数字档案识别位，记录每件再生材料的海洋回收来源。' }
+    ],
+    microDanger: '废弃硬质塑料扣件在海岸带长期磨蚀后会形成尖锐碎片，可能被海鸟误食或嵌入潮间带生物栖息地。',
+    microscopeType: 'hdpe',
+    fundRatio: '20%',
+    fundContribution: '32.00 元定向支持舟山群岛近岸塑料拦截与海鸟保护',
+    mapIndex: 10
+  },
+  {
+    id: 'prod-buckle-current',
+    slug: 'buckle-current',
+    dedicatedFile: 'product-buckle-current.html',
+    model3dIframeUrl: 'https://3d.hunyuan.tencent.com/share?shareId=49d7baf4-1b95-4813-b13c-a20d93ff9cfc',
+    name: '「洋流环」机能旅行行李箱扣',
+    englishName: 'CURRENT LOOP · TECHNICAL TRAVEL LUGGAGE CLASP',
+    shortName: '洋流环行李箱扣',
+    plasticName: 'rPET + 再生尼龙复合材料',
+    resinCode: 7,
+    codeSymbol: '♹ HYBRID',
+    nfcChipId: 'CHIP-NFC-8461-BUCKLE',
+    degradeYears: '自然降解约 600 年',
+    colorTheme: '#0ea5e9',
+    tagBg: '#e0f2fe',
+    originLocation: '北太平洋漂浮垃圾带 (废弃渔网与饮料瓶复合回收物)',
+    salvageCoordinates: '31°12\'08"N, 153°40\'26"W',
+    salvageSeaArea: '北太平洋亚热带环流区 · 04 号拦截阵列',
+    salvageVessel: 'Ocean-Cleaner 05 号远洋拦截母舰',
+    sourceForm: '海上废弃渔网、瓶盖与箱包塑料配件复合残片',
+    processFlow: '远洋拦截 ➔ 光谱分选 ➔ 纤维增强改性 ➔ 精密注塑 ➔ 低摩擦扣轴装配',
+    tokenHash: '0x8461d4e72a0c9f188b35',
+    certDate: '2026.11.10',
+    passId: 'BS-PASS-846105',
+    rescueIndex: '拦截 260g 渔网复合塑料，降低海龟误食与缠绕风险',
+    carbonSaved: '2.24 kg CO₂e',
+    cleanArea: '96 m² 远洋漂浮带净化',
+    dimensions: '长 82mm × 宽 46mm × 厚 20mm · 净重约 44g · 适配 25~30mm 箱带',
+    composition: '55% 海洋回收 rPET + 30% 再生尼龙 + 15% 生物基增韧剂',
+    safetyCert: '无卤阻燃 · RoHS / REACH 环保认证 · 通过 10,000 次开合耐久测试',
+    chipType: 'NTAG213 防潮芯片 (隐藏于扣环底部复合层)',
+    tagline: '让穿越洋流的渔网与瓶盖，成为下一段旅程可靠的连接点。',
+    designStory: '洋流环以远洋拦截的渔网轨迹为结构灵感，将高强度再生尼龙与回收 rPET 复合，打造适合旅行装备的轻量扣具。扣环的每一次开启与锁止，都是海洋废弃物完成一次循环再生的微小回声。',
+    features: [
+      { title: '纤维增强耐拉扯', desc: '再生尼龙复合结构提升抗拉和抗疲劳性能，适合登机、托运和户外旅行场景。' },
+      { title: '低摩擦顺滑扣合', desc: '优化扣轴与导向面，单手即可完成扣合，减少箱带扭结和误脱风险。' },
+      { title: '模块化可替换设计', desc: '扣体与箱带分离，便于维护和更换，延长旅行用品的使用周期。' }
+    ],
+    microDanger: '废弃渔网与复合塑料在海洋中会持续缠绕海龟、海鸟和鱼类，并在磨损后释放难以回收的微塑料纤维。',
+    microscopeType: 'micro',
+    fundRatio: '20%',
+    fundContribution: '36.00 元定向支持北太平洋幽灵渔网清理与海龟救助',
+    mapIndex: 11
   }
 ];
 
@@ -533,6 +621,16 @@ function getProductDoodleSvgCode(resinCode, slugOrId) {
         <circle cx="44" cy="53" r="1" fill="#f59e0b" />
         <circle cx="38" cy="58" r="1" fill="#10b981" />
         <rect x="22" y="64" width="36" height="6" rx="2" fill="#cbd5e1" stroke="#091e3a" stroke-width="2" />
+      </svg>
+    `;
+  } else if (key.includes('buckle')) {
+    const isCurrent = key.includes('current');
+    return `
+      <svg class="product-icon-doodle" viewBox="0 0 80 80">
+        <rect x="22" y="24" width="36" height="32" rx="8" fill="${isCurrent ? '#bae6fd' : '#e0f2fe'}" stroke="#091e3a" stroke-width="2.5" />
+        <rect x="30" y="31" width="20" height="18" rx="4" fill="#ffffff" stroke="${isCurrent ? '#0284c7' : '#0f3a60'}" stroke-width="2" />
+        <path d="M 40,18 L 40,25 M 40,55 L 40,64" stroke="#091e3a" stroke-width="3" stroke-linecap="round" />
+        <path d="M 34,40 L 46,40" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round" />
       </svg>
     `;
   }
