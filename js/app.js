@@ -510,8 +510,8 @@ class AppManager {
   // 绘制微观显微镜画面 (显示海洋微塑料降解裂纹与重塑分子链)
   drawMicroscope(focusX, focusY) {
     if (!this.microCtx || !this.microCanvas) return;
-    const w = this.microCanvas.width = 380;
-    const h = this.microCanvas.height = 220;
+    const w = this.microCanvas.width = Math.max(1, Math.round(this.microCanvas.clientWidth || 380));
+    const h = this.microCanvas.height = Math.max(1, Math.round(this.microCanvas.clientHeight || 220));
     const ctx = this.microCtx;
     const prod = PRODUCTS_DATA[this.currentProductIndex];
 
