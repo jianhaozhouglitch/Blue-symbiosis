@@ -326,7 +326,7 @@ class AppManager {
     });
 
     const renderCards = (items) => items.map((item, idx) => `
-      <a href="product.html?id=${item.id}" class="product-item-card ${idx === 0 ? 'active' : ''}" data-idx="${idx}" id="prodCard-${idx}" title="点击直达「${item.name}」专有 2 级介绍页">
+      <a href="product.html?id=${item.id}" class="product-item-card" data-idx="${idx}" id="prodCard-${idx}" title="点击直达「${item.name}」专有 2 级介绍页">
         <div class="product-thumb-box">
           ${this.getProductDoodleSvg(item.resinCode, item.slug || item.id)}
           <div class="plastic-code-sticker">${item.codeSymbol}</div>
@@ -434,13 +434,6 @@ class AppManager {
     
     // 触发 NFC 扫描音效
     window.blueAudio && window.blueAudio.playNfcScanSound();
-
-    // 更新产品卡片的高亮
-    const cards = document.querySelectorAll('.product-item-card');
-    cards.forEach((card, i) => {
-      if (i === idx) card.classList.add('active');
-      else card.classList.remove('active');
-    });
 
     this.updateProductView(idx);
 

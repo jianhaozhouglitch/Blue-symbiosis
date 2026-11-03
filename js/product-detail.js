@@ -141,7 +141,41 @@ class ProductDetailController {
     if (elSpecSafe) elSpecSafe.textContent = prod.safetyCert;
     if (elSpecChip) elSpecChip.textContent = prod.chipType;
 
-    // 5. 3D 护照内容
+    // 5. 产品专属海洋塑料材质档案
+    const elMaterialIntro = document.getElementById('materialProductIntro');
+    const elMaterialCode = document.getElementById('materialResinCode');
+    const elMaterialSymbol = document.getElementById('materialCodeSymbol');
+    const elMaterialTitle = document.getElementById('materialProductTitle');
+    const elMaterialSource = document.getElementById('materialProductSource');
+    const elMaterialSourceForm = document.getElementById('materialSourceForm');
+    const elMaterialProcess = document.getElementById('materialProcessFlow');
+    const elMaterialComposition = document.getElementById('materialComposition');
+    const elMaterialDegrade = document.getElementById('materialDegradeYears');
+    const elMaterialFeatures = document.getElementById('materialFeatureList');
+    const elMaterialDanger = document.getElementById('materialDanger');
+
+    if (elMaterialIntro) {
+      elMaterialIntro.textContent = `${prod.name} 选用${prod.plasticName}，原料来自${prod.originLocation}，经过分选、纯化与再制造后完成本次产品成型。`;
+    }
+    if (elMaterialCode) elMaterialCode.textContent = prod.resinCode;
+    if (elMaterialSymbol) elMaterialSymbol.textContent = prod.codeSymbol.replace(/^\S+\s*/, '');
+    if (elMaterialTitle) elMaterialTitle.textContent = prod.plasticName;
+    if (elMaterialSource) elMaterialSource.textContent = `海洋回收聚合物 · ${prod.codeSymbol}`;
+    if (elMaterialSourceForm) elMaterialSourceForm.textContent = prod.sourceForm;
+    if (elMaterialProcess) elMaterialProcess.textContent = prod.processFlow;
+    if (elMaterialComposition) elMaterialComposition.textContent = prod.composition;
+    if (elMaterialDegrade) elMaterialDegrade.textContent = prod.degradeYears;
+    if (elMaterialFeatures) {
+      elMaterialFeatures.innerHTML = prod.features.map(feature => `
+        <div class="product-material-feature">
+          <h3>✦ ${feature.title}</h3>
+          <p>${feature.desc}</p>
+        </div>
+      `).join('');
+    }
+    if (elMaterialDanger) elMaterialDanger.textContent = prod.microDanger;
+
+    // 6. 3D 护照内容
     this.updatePassportView(prod);
 
     // 6. 蜕变溯源时间轴

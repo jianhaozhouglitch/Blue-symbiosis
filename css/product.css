@@ -652,6 +652,142 @@
   gap: 24px;
 }
 
+.product-material-archive {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+}
+
+.product-material-intro {
+  margin: 18px 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.product-material-summary {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.product-material-identity,
+.product-material-facts,
+.product-material-feature,
+.product-material-warning {
+  border: 2px solid #091e3a;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.product-material-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+}
+
+.product-material-badge {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  border: 3px solid #091e3a;
+  border-radius: 50%;
+  background: #e0f2fe;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 3px 0 #091e3a;
+  font-weight: 900;
+  color: #0284c7;
+}
+
+.product-material-badge .num {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: #091e3a;
+}
+
+.product-material-identity h3 {
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.product-material-identity p {
+  margin-top: 4px;
+  color: #0284c7;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.product-material-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+
+.product-material-facts div {
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.product-material-facts span {
+  display: block;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.product-material-facts strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.product-material-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.product-material-feature {
+  padding: 14px;
+}
+
+.product-material-feature h3 {
+  color: #0f3a60;
+  font-size: 0.9rem;
+}
+
+.product-material-feature p {
+  margin-top: 6px;
+  color: #475569;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.product-material-warning {
+  margin-top: 18px;
+  padding: 14px;
+  border-color: #fda4af;
+  background: #fff1f2;
+}
+
+.product-material-warning h3 {
+  color: #be123c;
+  font-size: 0.9rem;
+}
+
+.product-material-warning p {
+  margin-top: 4px;
+  color: #881337;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .panel-header-badge {
   display: flex;
   align-items: center;
@@ -1145,6 +1281,12 @@
   .product-hero-grid {
     grid-template-columns: 1fr;
   }
+  .product-material-summary {
+    grid-template-columns: 1fr;
+  }
+  .product-material-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .hero-visual-stage.has-3d-model {
     margin-bottom: 0;
   }
@@ -1180,6 +1322,10 @@
     font-size: 1.55rem;
   }
   .product-specs-quick-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-material-facts,
+  .product-material-features {
     grid-template-columns: 1fr;
   }
   .transformation-flow-grid {
