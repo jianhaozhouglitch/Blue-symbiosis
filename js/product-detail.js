@@ -110,9 +110,25 @@ class ProductDetailController {
     if (elOriginFloating) elOriginFloating.textContent = `📍 ${prod.originLocation.split('(')[0]}`;
 
     if (elVisualStage) {
-      elVisualStage.innerHTML = window.getProductDoodleSvgCode(prod.resinCode, prod.slug || prod.id);
-      const svg = elVisualStage.querySelector('svg');
-      if (svg) svg.classList.add('hero-main-doodle');
+      const stageBox = elVisualStage.closest('.hero-visual-stage');
+      if (prod.model3dIframeUrl) {
+        if (stageBox) stageBox.classList.add('has-3d-model');
+        elVisualStage.innerHTML = `
+          <iframe 
+            src="${prod.model3dIframeUrl}" 
+            class="model-3d-iframe" 
+            title="${prod.name} 3D交互模型"
+            frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        `;
+      } else {
+        if (stageBox) stageBox.classList.remove('has-3d-model');
+        elVisualStage.innerHTML = window.getProductDoodleSvgCode(prod.resinCode, prod.slug || prod.id);
+        const svg = elVisualStage.querySelector('svg');
+        if (svg) svg.classList.add('hero-main-doodle');
+      }
     }
 
     // 4. 规格网格

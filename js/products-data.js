@@ -9,6 +9,7 @@ var PRODUCTS_DATA = [
     id: 'prod-hdpe',
     slug: 'hdpe',
     dedicatedFile: 'product-hdpe.html',
+    model3dIframeUrl: 'https://3d.hunyuan.tencent.com/share?shareId=d89b5d68-f274-4911-b7ec-ab326755dfb8',
     name: '「深海漫游者」机能潮玩公仔',
     englishName: 'DEEP SEA WANDERER · MECHA ART TOY',
     shortName: '深海漫游者潮玩',

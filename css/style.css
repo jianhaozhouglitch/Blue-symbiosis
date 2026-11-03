@@ -378,6 +378,27 @@ body.mobile-frame-mode .nfc-floating-bar {
   padding: 6px;
 }
 
+.hero-3d-iframe {
+  width: 100%;
+  height: 440px;
+  border: none;
+  border-radius: 12px;
+  display: block;
+  background: #18191c;
+}
+
+@media (max-width: 900px) {
+  .hero-3d-iframe {
+    height: 360px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-3d-iframe {
+    height: 300px;
+  }
+}
+
 .hero-sketch-img {
   width: 100%;
   height: auto;
@@ -405,6 +426,8 @@ body.mobile-frame-mode .nfc-floating-bar {
   font-size: 1.1rem;
   color: var(--c-navy);
   box-shadow: 2px 2px 8px rgba(0,0,0,0.06);
+  pointer-events: none;
+  z-index: 5;
 }
 
 .hero-manifesto-card {
