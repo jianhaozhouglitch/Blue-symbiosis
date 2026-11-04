@@ -33,6 +33,12 @@
   letter-spacing: 1.5px;
 }
 
+.about-topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .about-page {
   position: relative;
   z-index: 10;
