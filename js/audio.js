@@ -10,6 +10,7 @@ class BlueSymbiosisAudio {
     this.ambientGain = null;
     this.ambientRunning = false;
     this.ambientUnlockBound = false;
+    this.ambientUnlockHandler = null;
   }
 
   init() {
@@ -32,26 +33,48 @@ class BlueSymbiosisAudio {
   startDefaultAmbient() {
     if (this.isMuted || !this.init()) return;
 
-    // Build the graph before waiting for autoplay permission. A suspended
-    // AudioContext keeps scheduled sources ready, so playback starts as soon
-    // as the browser unlocks the context instead of after resume() resolves.
     this.startOceanAmbient();
     if (this.ctx.state === 'running') return;
 
-    if (!this.ambientUnlockBound) {
-      this.ambientUnlockBound = true;
-      const resumeAmbient = () => {
-        this.ctx.resume().then(() => {
-          if (this.ctx.state === 'running' && !this.ambientRunning) {
-            this.startOceanAmbient();
-          }
-        }).catch((error) => {
-          console.warn('Unable to resume default ambient audio:', error);
-        });
-      };
-      window.addEventListener('pointerdown', resumeAmbient, { once: true });
-      window.addEventListener('keydown', resumeAmbient, { once: true });
-    }
+    this.bindAmbientUnlock();
+  }
+
+  bindAmbientUnlock() {
+    if (this.ambientUnlockBound) return;
+
+    this.ambientUnlockBound = true;
+    this.ambientUnlockHandler = () => {
+      if (!this.ctx || this.ctx.state === 'closed') return;
+
+      this.ctx.resume().then(() => {
+        if (this.ctx.state === 'running') {
+          this.unbindAmbientUnlock();
+        }
+      }).catch((error) => {
+        // Keep listening: a browser may reject one gesture while allowing a later one.
+        console.warn('Unable to resume default ambient audio:', error);
+      });
+    };
+
+    // Listen on the document so any first interaction can unlock audio, not only
+    // a specific control. The listeners are removed once the context is running.
+    const options = { capture: true, passive: true };
+    document.addEventListener('pointerdown', this.ambientUnlockHandler, options);
+    document.addEventListener('touchstart', this.ambientUnlockHandler, options);
+    document.addEventListener('mousedown', this.ambientUnlockHandler, options);
+    document.addEventListener('keydown', this.ambientUnlockHandler, options);
+  }
+
+  unbindAmbientUnlock() {
+    if (!this.ambientUnlockBound || !this.ambientUnlockHandler) return;
+
+    const options = { capture: true };
+    document.removeEventListener('pointerdown', this.ambientUnlockHandler, options);
+    document.removeEventListener('touchstart', this.ambientUnlockHandler, options);
+    document.removeEventListener('mousedown', this.ambientUnlockHandler, options);
+    document.removeEventListener('keydown', this.ambientUnlockHandler, options);
+    this.ambientUnlockBound = false;
+    this.ambientUnlockHandler = null;
   }
 
   // 切换全局静音/海浪声
