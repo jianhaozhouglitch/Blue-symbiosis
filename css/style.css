@@ -182,15 +182,6 @@ body {
   color: var(--c-dark-navy);
 }
 
-.nfc-scan-btn {
-  white-space: nowrap;
-}
-
-.nfc-scan-btn.is-scanning {
-  background: var(--c-eco-green);
-  color: var(--c-pure-white);
-}
-
 #nfcStatusText[data-state="scanning"] {
   color: var(--c-ocean-blue);
 }
@@ -224,14 +215,6 @@ body {
     white-space: nowrap;
   }
 
-  .nfc-floating-bar .nfc-scan-btn {
-    width: auto;
-    padding: 0 8px;
-  }
-
-  .nfc-floating-bar .nfc-scan-btn span {
-    display: none;
-  }
 }
 
 /* 容器与页面布局 */
