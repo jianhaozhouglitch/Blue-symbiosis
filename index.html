@@ -32,6 +32,9 @@
       <span id="nfcStatusText">请触碰产品NFC感应区自动跳转到详情页</span>
     </div>
     <div class="quick-tools">
+      <button class="tool-icon-btn nfc-scan-btn" id="btnNfcScan" title="启动网页 NFC 自动识别" aria-label="启动网页 NFC 自动识别">
+        📡 <span>启动 NFC</span>
+      </button>
       <button class="tool-icon-btn" id="btnAudioToggle" title="切换海浪背景原声" aria-label="音频切换">
         <span>🔊</span>
       </button>
@@ -904,6 +907,7 @@
 
   <!-- 脚本引入 -->
   <script src="js/products-data.js"></script>
+  <script src="js/nfc-scanner.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/game.js"></script>
   <script src="js/map.js"></script>

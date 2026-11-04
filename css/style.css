@@ -182,10 +182,56 @@ body {
   color: var(--c-dark-navy);
 }
 
+.nfc-scan-btn {
+  white-space: nowrap;
+}
+
+.nfc-scan-btn.is-scanning {
+  background: var(--c-eco-green);
+  color: var(--c-pure-white);
+}
+
+#nfcStatusText[data-state="scanning"] {
+  color: var(--c-ocean-blue);
+}
+
+#nfcStatusText[data-state="success"] {
+  color: var(--c-eco-green);
+}
+
+#nfcStatusText[data-state="error"] {
+  color: var(--c-coral);
+}
+
 .tool-icon-btn:hover {
   background: var(--c-sky-blue);
   transform: translateY(-2px);
   box-shadow: 2px 2px 0px var(--c-dark-navy);
+}
+
+@media (max-width: 600px) {
+  .nfc-floating-bar {
+    max-width: calc(100% - 20px);
+  }
+
+  .nfc-status-pill {
+    min-width: 0;
+  }
+
+  #nfcStatusText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nfc-floating-bar .nfc-scan-btn {
+    width: auto;
+    padding: 0 8px;
+  }
+
+  .nfc-floating-bar .nfc-scan-btn span {
+    display: none;
+  }
 }
 
 /* 容器与页面布局 */
