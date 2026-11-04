@@ -1982,6 +1982,24 @@ body.mobile-frame-mode .strategy-pillars-grid {
   font-weight: 500;
 }
 
+.footer-about-link {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--c-deep-blue);
+  font-size: 1.05rem;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: var(--c-ocean-blue);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-about-link:hover {
+  color: var(--c-ocean-blue);
+  transform: translateY(-2px);
+}
+
 .copyright-text {
   font-size: 0.8rem;
   color: #64748b;
