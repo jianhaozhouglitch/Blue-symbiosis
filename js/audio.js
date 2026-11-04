@@ -32,16 +32,17 @@ class BlueSymbiosisAudio {
   startDefaultAmbient() {
     if (this.isMuted || !this.init()) return;
 
-    if (this.ctx.state === 'running') {
-      this.startOceanAmbient();
-      return;
-    }
+    // Build the graph before waiting for autoplay permission. A suspended
+    // AudioContext keeps scheduled sources ready, so playback starts as soon
+    // as the browser unlocks the context instead of after resume() resolves.
+    this.startOceanAmbient();
+    if (this.ctx.state === 'running') return;
 
     if (!this.ambientUnlockBound) {
       this.ambientUnlockBound = true;
       const resumeAmbient = () => {
         this.ctx.resume().then(() => {
-          if (this.ctx.state === 'running') {
+          if (this.ctx.state === 'running' && !this.ambientRunning) {
             this.startOceanAmbient();
           }
         }).catch((error) => {
