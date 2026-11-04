@@ -1651,6 +1651,48 @@ body.mobile-frame-mode .strategy-pillars-grid {
   box-shadow: var(--doodle-shadow);
 }
 
+/* 海报产品选择 */
+.poster-product-options {
+  display: grid;
+  gap: 10px;
+  max-height: 52vh;
+  overflow-y: auto;
+  padding: 2px 4px 4px 2px;
+}
+
+.poster-product-option {
+  width: 100%;
+  background: var(--c-pure-white);
+  color: var(--c-dark-navy);
+  border: 2px solid #bae6fd;
+  border-radius: 14px;
+  padding: 12px 14px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: all 0.2s ease;
+}
+
+.poster-product-option:hover,
+.poster-product-option.is-selected {
+  border-color: var(--c-ocean-blue);
+  background: #edf8fd;
+  box-shadow: 3px 3px 0 var(--c-ocean-blue);
+  transform: translate(-1px, -1px);
+}
+
+.poster-product-option-name {
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.poster-product-option-meta {
+  color: #64748b;
+  font-size: 0.78rem;
+}
+
 /* ==========================================================================
    模块 6: AI打捞船声波护渔互动小游戏 (Interactive Sonar Mini-Game)
    ========================================================================== */

@@ -530,6 +530,10 @@
           </div>
 
           <div class="action-buttons-group">
+            <button class="btn-doodle-secondary" id="btnSelectPosterProduct" type="button">
+              <span>▣ 选择产品生成打卡海报</span>
+            </button>
+
             <button class="btn-doodle-primary" id="btnSharePoster">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <circle cx="18" cy="5" r="3" />
@@ -853,6 +857,23 @@
         onclick="alert('📸 海报已生成，可直接截屏分享至朋友圈！')">
         <span>📸 点击一键保存打卡海报</span>
       </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       通用弹窗：选择数字护照产品
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalSelectPosterProduct">
+    <div class="modal-content-box">
+      <button class="btn-close-modal" aria-label="关闭弹窗">×</button>
+
+      <div style="text-align: center; margin-bottom: 16px;">
+        <span class="section-tag">CHOOSE YOUR PRODUCT</span>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: #091e3a;">选择要生成海报的产品</h3>
+        <p style="font-size: 0.85rem; color: #64748b;">选择后会同步更新 NFT 数字护照和打卡海报</p>
+      </div>
+
+      <div class="poster-product-options" id="posterProductOptions" role="list"></div>
     </div>
   </div>
 

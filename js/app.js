@@ -680,7 +680,42 @@ class AppManager {
       });
     }
 
-    // 6. 特权预约模态框
+    // 6. 选择生成海报的产品
+    const btnSelectPosterProduct = document.getElementById('btnSelectPosterProduct');
+    const modalSelectPosterProduct = document.getElementById('modalSelectPosterProduct');
+    const posterProductOptions = document.getElementById('posterProductOptions');
+    if (btnSelectPosterProduct && modalSelectPosterProduct && posterProductOptions) {
+      const products = (window.PRODUCTS_DATA && window.PRODUCTS_DATA.length)
+        ? window.PRODUCTS_DATA
+        : PRODUCTS_DATA;
+
+      posterProductOptions.innerHTML = products.map((prod, idx) => `
+        <button class="poster-product-option" type="button" data-product-id="${prod.id}" data-product-index="${idx}" role="listitem">
+          <span class="poster-product-option-name">${prod.name}</span>
+          <span class="poster-product-option-meta">${prod.codeSymbol} · ${prod.shortName}</span>
+        </button>
+      `).join('');
+
+      btnSelectPosterProduct.addEventListener('click', () => {
+        this.updatePosterProductOptions();
+        modalSelectPosterProduct.classList.add('active');
+        window.blueAudio && window.blueAudio.playTapSound();
+      });
+
+      posterProductOptions.addEventListener('click', (event) => {
+        const option = event.target.closest('.poster-product-option');
+        if (!option) return;
+
+        const indexedProduct = products[Number(option.dataset.productIndex)];
+        const productId = option.dataset.productId || (indexedProduct && indexedProduct.id);
+        if (!productId) return;
+
+        this.selectProductById(productId);
+        modalSelectPosterProduct.classList.remove('active');
+      });
+    }
+
+    // 7. 特权预约模态框
     const btnBookExhibition = document.getElementById('btnBookExhibition');
     const btnBookLab = document.getElementById('btnBookLab');
     const modalBooking = document.getElementById('modalBooking');
@@ -715,6 +750,27 @@ class AppManager {
         modalBooking.classList.remove('active');
       });
     }
+  }
+
+  // 标记当前用于生成海报的产品
+  updatePosterProductOptions() {
+    const currentProduct = PRODUCTS_DATA[this.currentProductIndex];
+    const options = document.querySelectorAll('#posterProductOptions .poster-product-option');
+    options.forEach(option => {
+      const indexedProduct = PRODUCTS_DATA[Number(option.dataset.productIndex)];
+      const optionProductId = option.dataset.productId || (indexedProduct && indexedProduct.id);
+      const isSelected = optionProductId === (currentProduct && currentProduct.id);
+      option.classList.toggle('is-selected', isSelected);
+      option.setAttribute('aria-pressed', String(isSelected));
+    });
+  }
+
+  // 按稳定的产品 ID 选择，避免产品排序后使用数组下标导致错位
+  selectProductById(productId) {
+    if (!productId) return;
+    const productIndex = PRODUCTS_DATA.findIndex(product => product.id === productId);
+    if (productIndex === -1) return;
+    this.selectProduct(productIndex);
   }
 
   // 弹出轻提示：NFC 碰一碰识别
