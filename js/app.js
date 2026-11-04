@@ -265,6 +265,7 @@ var PRODUCTS_DATA = (typeof window !== 'undefined' && window.PRODUCTS_DATA) ? wi
 class AppManager {
   constructor() {
     this.currentProductIndex = 0;
+    this.currentProductId = null;
     this.zoomLevel = 1;
     this.isPassportFlipped = false;
     this.oceanMap = null;
@@ -430,7 +431,11 @@ class AppManager {
   // 选中特定产品并更新所有模块
   selectProduct(idx) {
     if (idx < 0 || idx >= PRODUCTS_DATA.length) return;
+    const prod = PRODUCTS_DATA[idx];
+    if (!prod) return;
+
     this.currentProductIndex = idx;
+    this.currentProductId = prod.id;
     
     // 触发 NFC 扫描音效
     window.blueAudio && window.blueAudio.playNfcScanSound();
@@ -438,15 +443,18 @@ class AppManager {
     this.updateProductView(idx);
 
     // 同步地图定位
-    if (this.oceanMap) {
-      this.oceanMap.selectByProductIndex(idx);
+    if (this.oceanMap && Number.isInteger(prod.mapIndex)) {
+      this.oceanMap.selectByProductIndex(prod.mapIndex);
     }
   }
 
   // 更新整个页面的所有数据视图
   updateProductView(idx) {
-    const prod = PRODUCTS_DATA[idx];
+    const selectedProductId = this.currentProductId || (PRODUCTS_DATA[idx] && PRODUCTS_DATA[idx].id);
+    const prod = PRODUCTS_DATA.find(product => product.id === selectedProductId);
     if (!prod) return;
+    this.currentProductId = prod.id;
+    this.currentProductIndex = PRODUCTS_DATA.indexOf(prod);
 
     // 1. 材质档案卡片
     const elBadgeNum = document.getElementById('plasticBadgeNum');
@@ -540,7 +548,7 @@ class AppManager {
     const w = this.microCanvas.width = Math.max(1, Math.round(this.microCanvas.clientWidth || 380));
     const h = this.microCanvas.height = Math.max(1, Math.round(this.microCanvas.clientHeight || 220));
     const ctx = this.microCtx;
-    const prod = PRODUCTS_DATA[this.currentProductIndex];
+    const prod = this.getCurrentProduct();
 
     ctx.clearRect(0, 0, w, h);
 
@@ -754,7 +762,7 @@ class AppManager {
 
   // 标记当前用于生成海报的产品
   updatePosterProductOptions() {
-    const currentProduct = PRODUCTS_DATA[this.currentProductIndex];
+    const currentProduct = this.getCurrentProduct();
     const options = document.querySelectorAll('#posterProductOptions .poster-product-option');
     options.forEach(option => {
       const indexedProduct = PRODUCTS_DATA[Number(option.dataset.productIndex)];
@@ -771,6 +779,11 @@ class AppManager {
     const productIndex = PRODUCTS_DATA.findIndex(product => product.id === productId);
     if (productIndex === -1) return;
     this.selectProduct(productIndex);
+  }
+
+  getCurrentProduct() {
+    return PRODUCTS_DATA.find(product => product.id === this.currentProductId)
+      || PRODUCTS_DATA[this.currentProductIndex];
   }
 
   // 弹出轻提示：NFC 碰一碰识别
@@ -805,7 +818,7 @@ class AppManager {
   // 打开海报分享弹窗
   openSharePosterModal() {
     const modal = document.getElementById('modalSharePoster');
-    const prod = PRODUCTS_DATA[this.currentProductIndex];
+    const prod = this.getCurrentProduct();
     if (!modal || !prod) return;
 
     const elName = document.getElementById('posterProdName');
