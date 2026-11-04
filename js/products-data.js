@@ -581,7 +581,7 @@ var PRODUCTS_DATA = [
     id: 'prod-recycled-luggage-tag',
     slug: 'recycled-luggage-tag',
     dedicatedFile: 'product-recycled-luggage-tag.html',
-    model3dIframeUrl: 'https://3d.hunyuan.tencent.com/share?shareId=3d640174-b96f-47c5-9a08-5fd18ffebcf8',
+    model3dIframeUrl: 'https://3d.hunyuan.tencent.com/share?shareId=70cd09b6-d87d-454b-8d73-6cc3d1bd54c0',
     name: '塑料再生环保胸卡套行李牌',
     englishName: 'RECYCLED ID & LUGGAGE TAG · OCEAN PLASTIC ACCESSORY',
     shortName: '环保胸卡套行李牌',

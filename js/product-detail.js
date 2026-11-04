@@ -112,7 +112,7 @@ class ProductDetailController {
         if (stageBox) stageBox.classList.add('has-3d-model');
         const modelUrl = new URL(prod.model3dIframeUrl);
         modelUrl.searchParams.set('autoRotate', 'true');
-        modelUrl.searchParams.set('zoom', '1.15');
+        modelUrl.searchParams.set('zoom', '2.5875');
         elVisualStage.innerHTML = `
           <iframe 
             src="${modelUrl.toString()}" 
