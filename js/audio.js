@@ -1,6 +1,7 @@
 /* ==========================================================================
    蔚蓝共生计划 - Web Audio API 音效与环境声音合成器
    无需任何外部音频文件，使用浏览器底层声学合成器生成纯净海洋氛围与交互音效
+   支持全自动首屏唤醒、全事件感知解锁（鼠标移动/滚轮/触屏/悬停/键盘任意交互即刻播音）
    ========================================================================== */
 
 class BlueSymbiosisAudio {
@@ -8,9 +9,12 @@ class BlueSymbiosisAudio {
     this.ctx = null;
     this.isMuted = false;
     this.ambientGain = null;
+    this.noiseSource = null;
+    this.lfo = null;
     this.ambientRunning = false;
     this.ambientUnlockBound = false;
     this.ambientUnlockHandler = null;
+    this.registeredEvents = [];
   }
 
   init() {
@@ -22,71 +26,160 @@ class BlueSymbiosisAudio {
       }
       this.ctx = new AudioContext();
     }
+
     if (this.ctx.state === 'suspended') {
-      this.ctx.resume().catch((error) => {
-        console.warn('Unable to resume audio context:', error);
+      this.ctx.resume().then(() => {
+        if (this.ctx.state === 'running') {
+          if (!this.ambientRunning && !this.isMuted) {
+            this.startOceanAmbient();
+          }
+          this.unbindAmbientUnlock();
+          this.notifyStateChange(true);
+        }
+      }).catch(() => {
+        // 等待首次用户轻量交互唤醒
       });
     }
     return this.ctx.state !== 'closed';
+  }
+
+  // 通知前端UI音频播放状态变化
+  notifyStateChange(isPlaying) {
+    const isActuallyPlaying = Boolean(isPlaying && !this.isMuted && this.ctx && this.ctx.state === 'running');
+    try {
+      window.dispatchEvent(new CustomEvent('blue-audio-state', {
+        detail: {
+          isPlaying: isActuallyPlaying,
+          isMuted: this.isMuted,
+          ctxState: this.ctx ? this.ctx.state : 'uninitialized'
+        }
+      }));
+    } catch (e) {}
   }
 
   startDefaultAmbient() {
     if (this.isMuted || !this.init()) return;
 
     this.startOceanAmbient();
-    if (this.ctx.state === 'running') return;
+    if (this.ctx.state === 'running') {
+      this.notifyStateChange(true);
+      return;
+    }
+
+    // 页面加载完成后多阶段尝试自动唤醒（部分浏览器在文档就绪时放行音频）
+    [100, 300, 600, 1200].forEach(delay => {
+      setTimeout(() => {
+        if (this.ctx && this.ctx.state === 'suspended' && !this.isMuted) {
+          this.ctx.resume().then(() => {
+            if (this.ctx.state === 'running') {
+              if (!this.ambientRunning) this.startOceanAmbient();
+              this.unbindAmbientUnlock();
+              this.notifyStateChange(true);
+            }
+          }).catch(() => {});
+        }
+      }, delay);
+    });
 
     this.bindAmbientUnlock();
   }
 
   bindAmbientUnlock() {
     if (this.ambientUnlockBound) return;
-
     this.ambientUnlockBound = true;
+
     this.ambientUnlockHandler = () => {
       if (!this.ctx || this.ctx.state === 'closed') return;
 
       this.ctx.resume().then(() => {
         if (this.ctx.state === 'running') {
+          if (!this.ambientRunning && !this.isMuted) {
+            this.startOceanAmbient();
+          }
           this.unbindAmbientUnlock();
+          this.notifyStateChange(true);
         }
-      }).catch((error) => {
-        // Keep listening: a browser may reject one gesture while allowing a later one.
-        console.warn('Unable to resume default ambient audio:', error);
+      }).catch(() => {
+        // 浏览器暂未放行，保持监听下一次动作
       });
     };
 
-    // Listen on the document so any first interaction can unlock audio, not only
-    // a specific control. The listeners are removed once the context is running.
+    // 监听所有可能的用户交互事件（无需特意点击：鼠标移动、滚轮滚动、触控轻滑、键盘轻按均可立即解锁）
+    const unlockEvents = [
+      'pointermove', 'mousemove', 'wheel', 'scroll',
+      'touchstart', 'touchmove', 'touchend',
+      'pointerdown', 'mousedown', 'mouseup', 'click',
+      'keydown', 'keyup', 'mouseover', 'mouseenter',
+      'focus', 'blur', 'visibilitychange'
+    ];
+
     const options = { capture: true, passive: true };
-    document.addEventListener('pointerdown', this.ambientUnlockHandler, options);
-    document.addEventListener('touchstart', this.ambientUnlockHandler, options);
-    document.addEventListener('mousedown', this.ambientUnlockHandler, options);
-    document.addEventListener('keydown', this.ambientUnlockHandler, options);
+    this.registeredEvents = [];
+
+    unlockEvents.forEach(evt => {
+      try {
+        window.addEventListener(evt, this.ambientUnlockHandler, options);
+        document.addEventListener(evt, this.ambientUnlockHandler, options);
+        this.registeredEvents.push(evt);
+      } catch (e) {}
+    });
   }
 
   unbindAmbientUnlock() {
     if (!this.ambientUnlockBound || !this.ambientUnlockHandler) return;
 
     const options = { capture: true };
-    document.removeEventListener('pointerdown', this.ambientUnlockHandler, options);
-    document.removeEventListener('touchstart', this.ambientUnlockHandler, options);
-    document.removeEventListener('mousedown', this.ambientUnlockHandler, options);
-    document.removeEventListener('keydown', this.ambientUnlockHandler, options);
+    if (this.registeredEvents) {
+      this.registeredEvents.forEach(evt => {
+        try {
+          window.removeEventListener(evt, this.ambientUnlockHandler, options);
+          document.removeEventListener(evt, this.ambientUnlockHandler, options);
+        } catch (e) {}
+      });
+    }
     this.ambientUnlockBound = false;
     this.ambientUnlockHandler = null;
+    this.registeredEvents = [];
   }
 
   // 切换全局静音/海浪声
   toggleMute() {
     if (!this.init()) return false;
+
+    // 若当前因策略挂起或未启动，用户点击按钮属于“开启声音”意愿，直接唤醒而非反向静音
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.isMuted = false;
+      this.ctx.resume().then(() => {
+        this.startOceanAmbient();
+        this.playTapSound();
+        this.notifyStateChange(true);
+      });
+      return true;
+    }
+
+    if (!this.ambientRunning) {
+      this.isMuted = false;
+      if (this.ctx && this.ctx.state === 'suspended') {
+        this.ctx.resume();
+      }
+      this.startOceanAmbient();
+      this.playTapSound();
+      this.notifyStateChange(true);
+      return true;
+    }
+
+    // 已经在正常播放，则在静音与开启之间切换
     this.isMuted = !this.isMuted;
     if (!this.isMuted) {
+      if (this.ctx && this.ctx.state === 'suspended') {
+        this.ctx.resume();
+      }
       this.startOceanAmbient();
       this.playTapSound();
     } else {
       this.stopOceanAmbient();
     }
+    this.notifyStateChange(!this.isMuted);
     return !this.isMuted;
   }
 
@@ -120,22 +213,25 @@ class BlueSymbiosisAudio {
       filter.frequency.setValueAtTime(320, this.ctx.currentTime);
 
       // 海浪周期起伏调制
-      const lfo = this.ctx.createOscillator();
-      lfo.frequency.setValueAtTime(0.12, this.ctx.currentTime); // 约8秒一次海浪
+      this.lfo = this.ctx.createOscillator();
+      this.lfo.frequency.setValueAtTime(0.12, this.ctx.currentTime); // 约8秒一次海浪
       const lfoGain = this.ctx.createGain();
       lfoGain.gain.setValueAtTime(220, this.ctx.currentTime);
-      lfo.connect(lfoGain);
+      this.lfo.connect(lfoGain);
       lfoGain.connect(filter.frequency);
 
       this.ambientGain = this.ctx.createGain();
-      this.ambientGain.gain.setValueAtTime(0.75, this.ctx.currentTime);
+      // 平滑淡入（0.001 -> 0.75），声音优雅过渡
+      const now = this.ctx.currentTime;
+      this.ambientGain.gain.setValueAtTime(0.001, now);
+      this.ambientGain.gain.exponentialRampToValueAtTime(0.75, now + 1.2);
 
       this.noiseSource.connect(filter);
       filter.connect(this.ambientGain);
       this.ambientGain.connect(this.ctx.destination);
 
       this.noiseSource.start();
-      lfo.start();
+      this.lfo.start();
       this.ambientRunning = true;
     } catch (e) {
       console.warn("Ambient audio init error:", e);
@@ -144,13 +240,19 @@ class BlueSymbiosisAudio {
 
   stopOceanAmbient() {
     if (this.ambientGain && this.ctx) {
-      this.ambientGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.3);
+      const now = this.ctx.currentTime;
+      this.ambientGain.gain.setTargetAtTime(0.001, now, 0.2);
       setTimeout(() => {
         if (this.noiseSource) {
           try { this.noiseSource.stop(); } catch(e){}
+          this.noiseSource = null;
+        }
+        if (this.lfo) {
+          try { this.lfo.stop(); } catch(e){}
+          this.lfo = null;
         }
         this.ambientRunning = false;
-      }, 400);
+      }, 300);
     }
   }
 
@@ -246,6 +348,61 @@ class BlueSymbiosisAudio {
     gain.connect(this.ctx.destination);
     osc.start(now);
     osc.stop(now + 0.08);
+  }
+
+  // 护照翻页纸张质感轻快音效
+  playFlipPassportSound() {
+    if (this.isMuted) return;
+    this.init();
+    try {
+      const now = this.ctx.currentTime;
+      const bufferSize = Math.floor(this.ctx.sampleRate * 0.12);
+      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.28));
+      }
+      const noise = this.ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1400, now);
+      filter.frequency.exponentialRampToValueAtTime(700, now + 0.1);
+      const gain = this.ctx.createGain();
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.ctx.destination);
+      noise.start(now);
+    } catch (e) {
+      this.playTapSound();
+    }
+  }
+
+  // 荣誉证书/成就生成清脆和弦铃声 (Sparkle Chime)
+  playSuccessChime() {
+    if (this.isMuted) return;
+    this.init();
+    try {
+      const now = this.ctx.currentTime;
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        const noteStart = now + idx * 0.08;
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, noteStart);
+        gain.gain.setValueAtTime(0.12, noteStart);
+        gain.gain.exponentialRampToValueAtTime(0.001, noteStart + 0.38);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(noteStart);
+        osc.stop(noteStart + 0.4);
+      });
+    } catch (e) {
+      this.playTapSound();
+    }
   }
 }
 

@@ -13,7 +13,10 @@ class ProductDetailController {
 
   init() {
     // 1. 初始化音效
-    if (window.BlueSymbiosisAudio) {
+    if (window.blueAudio) {
+      this.audio = window.blueAudio;
+      this.audio.startDefaultAmbient();
+    } else if (window.BlueSymbiosisAudio) {
       this.audio = new window.BlueSymbiosisAudio();
       window.blueAudio = this.audio;
       this.audio.startDefaultAmbient();
@@ -301,16 +304,38 @@ class ProductDetailController {
     // 顶部音效切换
     const btnAudioToggle = document.getElementById('btnToggleAudio');
     if (btnAudioToggle) {
-      btnAudioToggle.textContent = this.audio && !this.audio.isMuted
-        ? '🔊'
-        : '🔈';
-      btnAudioToggle.addEventListener('click', () => {
+      const updateAudioButton = (isPlaying) => {
+        const isMuted = this.audio ? this.audio.isMuted : false;
+        if (isMuted) {
+          btnAudioToggle.textContent = '🔈';
+          btnAudioToggle.classList.remove('btn-nav-primary');
+          btnAudioToggle.title = '开启深海氛围音效';
+        } else if (isPlaying) {
+          btnAudioToggle.textContent = '🔊';
+          btnAudioToggle.classList.add('btn-nav-primary');
+          btnAudioToggle.title = '关闭深海氛围音效';
+        } else {
+          btnAudioToggle.textContent = '🔊';
+          btnAudioToggle.classList.remove('btn-nav-primary');
+          btnAudioToggle.title = '深海原声（移动鼠标或滑动自动播放）';
+        }
+      };
+
+      btnAudioToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (this.audio) {
           const isPlaying = this.audio.toggleMute();
-          btnAudioToggle.textContent = isPlaying ? '🔊' : '🔈';
-          btnAudioToggle.classList.toggle('btn-nav-primary', isPlaying);
+          updateAudioButton(isPlaying);
         }
       });
+
+      window.addEventListener('blue-audio-state', (e) => {
+        updateAudioButton(e.detail.isPlaying);
+      });
+
+      if (this.audio && this.audio.ctx) {
+        updateAudioButton(this.audio.ctx.state === 'running' && !this.audio.isMuted);
+      }
     }
   }
 

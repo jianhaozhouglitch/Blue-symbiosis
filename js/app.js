@@ -655,10 +655,41 @@ class AppManager {
     // 1. 音频切换按钮
     const btnAudioToggle = document.getElementById('btnAudioToggle');
     if (btnAudioToggle) {
-      btnAudioToggle.addEventListener('click', () => {
-        const isPlaying = window.blueAudio.toggleMute();
-        btnAudioToggle.innerHTML = isPlaying ? '<span>🔊</span>' : '<span>🔇</span>';
+      const updateAudioButton = (isPlaying) => {
+        const isMuted = window.blueAudio ? window.blueAudio.isMuted : false;
+        if (isMuted) {
+          btnAudioToggle.innerHTML = '<span>🔇</span>';
+          btnAudioToggle.classList.remove('is-playing');
+          btnAudioToggle.setAttribute('aria-pressed', 'false');
+          btnAudioToggle.title = '点击开启海浪背景原声';
+        } else if (isPlaying) {
+          btnAudioToggle.innerHTML = '<span>🔊</span>';
+          btnAudioToggle.classList.add('is-playing');
+          btnAudioToggle.setAttribute('aria-pressed', 'true');
+          btnAudioToggle.title = '点击静音海浪背景原声';
+        } else {
+          btnAudioToggle.innerHTML = '<span>🔊</span>';
+          btnAudioToggle.classList.remove('is-playing');
+          btnAudioToggle.setAttribute('aria-pressed', 'false');
+          btnAudioToggle.title = '海浪原声（移动鼠标或滑动即可自动播放）';
+        }
+      };
+
+      btnAudioToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (window.blueAudio) {
+          const isPlaying = window.blueAudio.toggleMute();
+          updateAudioButton(isPlaying);
+        }
       });
+
+      window.addEventListener('blue-audio-state', (e) => {
+        updateAudioButton(e.detail.isPlaying);
+      });
+
+      if (window.blueAudio && window.blueAudio.ctx) {
+        updateAudioButton(window.blueAudio.ctx.state === 'running' && !window.blueAudio.isMuted);
+      }
     }
 
     // 3. 3D 护照翻转

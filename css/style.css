@@ -200,6 +200,12 @@ body {
   box-shadow: 2px 2px 0px var(--c-dark-navy);
 }
 
+.tool-icon-btn.is-playing {
+  background: #e0f2fe;
+  border-color: var(--c-ocean-blue);
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.45);
+}
+
 @media (max-width: 600px) {
   .nfc-floating-bar {
     max-width: calc(100% - 20px);

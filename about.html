@@ -132,14 +132,41 @@
   <script>
     const aboutAudioToggle = document.getElementById('aboutAudioToggle');
     const updateAboutAudioButton = (isPlaying) => {
-      aboutAudioToggle.textContent = isPlaying ? '🔊' : '🔈';
-      aboutAudioToggle.setAttribute('aria-pressed', String(isPlaying));
-      aboutAudioToggle.title = isPlaying ? '关闭海浪背景原声' : '开启海浪背景原声';
+      const isMuted = window.blueAudio ? window.blueAudio.isMuted : false;
+      if (isMuted) {
+        aboutAudioToggle.textContent = '🔈';
+        aboutAudioToggle.setAttribute('aria-pressed', 'false');
+        aboutAudioToggle.title = '开启海浪背景原声';
+        aboutAudioToggle.classList.remove('is-playing');
+      } else if (isPlaying) {
+        aboutAudioToggle.textContent = '🔊';
+        aboutAudioToggle.setAttribute('aria-pressed', 'true');
+        aboutAudioToggle.title = '关闭海浪背景原声';
+        aboutAudioToggle.classList.add('is-playing');
+      } else {
+        aboutAudioToggle.textContent = '🔊';
+        aboutAudioToggle.setAttribute('aria-pressed', 'false');
+        aboutAudioToggle.title = '海浪原声（移动鼠标或滑动自动播放）';
+        aboutAudioToggle.classList.remove('is-playing');
+      }
     };
 
-    window.blueAudio.startDefaultAmbient();
-    aboutAudioToggle.addEventListener('click', () => {
-      updateAboutAudioButton(window.blueAudio.toggleMute());
+    window.addEventListener('blue-audio-state', (e) => {
+      updateAboutAudioButton(e.detail.isPlaying);
+    });
+
+    if (window.blueAudio) {
+      window.blueAudio.startDefaultAmbient();
+      if (window.blueAudio.ctx) {
+        updateAboutAudioButton(window.blueAudio.ctx.state === 'running' && !window.blueAudio.isMuted);
+      }
+    }
+
+    aboutAudioToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.blueAudio) {
+        updateAboutAudioButton(window.blueAudio.toggleMute());
+      }
     });
   </script>
 </body>
